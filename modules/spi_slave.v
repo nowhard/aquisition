@@ -1,4 +1,4 @@
-module spi_slave(
+module spi_slave#(parameter DATA_WIDTH = 16 ,BIT_CNT_WIDTH = 4)(
     input clk,
     input rst,
     input ss,
@@ -6,20 +6,19 @@ module spi_slave(
     output miso,
     input sck,
     output done,
-    input [15:0] din,
-    output [15:0] dout
+    input [DATA_WIDTH-1:0] din,
+    output [DATA_WIDTH-1:0] dout
   );
   
-  parameter data_width    = 16;
    
   reg mosi_d, mosi_q;
   reg ss_d, ss_q;
   reg sck_d, sck_q;
   reg sck_old_d, sck_old_q;
-  reg [data_width-1:0] data_d, data_q;
+  reg [DATA_WIDTH-1:0] data_d, data_q;
   reg done_d, done_q;
-  reg [3:0] bit_ct_d, bit_ct_q;
-  reg [data_width-1:0] dout_d, dout_q;
+  reg [BIT_CNT_WIDTH-1:0] bit_ct_d, bit_ct_q;
+  reg [DATA_WIDTH-1:0] dout_d, dout_q;
   reg miso_d, miso_q;
    
   assign miso = miso_q;
@@ -37,21 +36,33 @@ module spi_slave(
     bit_ct_d = bit_ct_q;
     dout_d = dout_q;
      
-    if (ss_q) begin                           // if slave select is high (deselcted)
-      bit_ct_d = 4'b0;                        // reset bit counter
+    if (ss_q) 
+	 begin                           // if slave select is high (deselcted)
+      bit_ct_d = {BIT_CNT_WIDTH{1'b0}};                        // reset bit counter
       data_d = din;                           // read in data
-      miso_d = data_q[data_width-1];                     // output MSB
-    end else begin                            // else slave select is low (selected)
-      if (!sck_old_q && sck_q) begin          // rising edge
-        data_d = {data_q[data_width-2:0], mosi_q};       // read data in and shift
-        bit_ct_d = bit_ct_q + 1'b1;           // increment the bit counter
-        if (bit_ct_q == 4'b1111) begin         // if we are on the last bit
-          dout_d = {data_q[data_width-2:0], mosi_q};     // output the byte
+      miso_d = data_q[DATA_WIDTH-1];                     // output MSB
+    end 
+	 
+	 else 
+	 
+	 begin                            // else slave select is low (selected)
+      if (!sck_old_q && sck_q) 
+		begin          // rising edge
+        data_d = {data_q[DATA_WIDTH-2:0], mosi_q};       // read data in and shift
+        bit_ct_d = bit_ct_q + 1'b1;           				// increment the bit counter
+		  
+        if (bit_ct_q == {BIT_CNT_WIDTH{1'b1}} ) // if we are on the last bit
+		  begin         												
+          dout_d = {data_q[DATA_WIDTH-2:0], mosi_q};     // output the byte(word)
           done_d = 1'b1;                      // set transfer done flag
           data_d = din;                       // read in new byte
         end
-      end else if (sck_old_q && !sck_q) begin // falling edge
-        miso_d = data_q[data_width-1];                   // output MSB
+		  
+      end 
+		
+		else if (sck_old_q && !sck_q)// falling edge 	
+		begin 
+        miso_d = data_q[DATA_WIDTH-1];                   // output MSB
       end
     end
   end
@@ -59,8 +70,8 @@ module spi_slave(
   always @(posedge clk) begin
     if (rst) begin
       done_q <= 1'b0;
-      bit_ct_q <= 4'b0;
-      dout_q <= 16'b0;
+      bit_ct_q <= {BIT_CNT_WIDTH{1'b0}}; 
+      dout_q <= {DATA_WIDTH{1'b0}};
       miso_q <= 1'b1;
     end else begin
       done_q <= done_d;

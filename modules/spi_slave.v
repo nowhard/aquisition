@@ -110,14 +110,22 @@ module spi_slave_tb();
     reg [DATA_WIDTH-1:0] din;
     wire [DATA_WIDTH-1:0] dout;
 	 
-	 //spi_slave #(CLK_DIV,DATA_WIDTH,BIT_CNT_WIDTH) comm_spi_slave(.clk(clk),.rst(rst),.miso(miso),.mosi(mosi),.sck(sck),.start(start),.data_in(data_in),.data_out(data_out),.busy(busy),.new_data(new_data));
+	 reg [BIT_CNT_WIDTH-1:0] cnt;
+	 reg [DATA_WIDTH-1:0] data_test;
+	 
+	 spi_slave #(DATA_WIDTH,BIT_CNT_WIDTH) comm_spi_slave(.clk(clk),.rst(rst),.ss(ss),.miso(miso),.mosi(mosi),.sck(sck),.done(done),.din(din),.dout(dout));
 
 	 initial
 	 begin
-		clk=0;
-		rst=1;
+		clk<=0;
+		rst<=1;
+		cnt<=0;
+		data_test<=16'b0101010101010101;
 		#500
 		rst=0;
+		#500
+		ss=0;
+						
 //		data_in=0;
 //		data_out=0;
 //		busy=0;
@@ -130,7 +138,23 @@ module spi_slave_tb();
 		
 	 end
 	 
+	 always @(posedge sck) 
+	 begin
+	 
+		mosi=data_test[DATA_WIDTH-1];
+		data_test[DATA_WIDTH-1:0]={data_test[DATA_WIDTH-2:0], 1'b0}; 
+		cnt=cnt+1'b1;
+		
+		if(cnt == {BIT_CNT_WIDTH{1'b1}})
+		begin
+			data_test=16'b0101010101010101;
+		end
+	 end
+	 
 	 
 	 always 
 		#5  clk =  ! clk;    
+		
+	 always 
+		#50  sck =  ! sck;   
 endmodule

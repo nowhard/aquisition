@@ -153,7 +153,7 @@ module spi_master_tb();
 		
 	 end
 	 
-	   always @(posedge sck) 
+	   always @(negedge sck) 
 		begin
 			miso=slave_test_data[DATA_WIDTH-1];
 			slave_test_data={slave_test_data[DATA_WIDTH-2:0], 1'b0}; 

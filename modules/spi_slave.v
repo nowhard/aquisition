@@ -90,3 +90,47 @@ module spi_slave#(parameter DATA_WIDTH = 16 ,BIT_CNT_WIDTH = 4)(
    
 endmodule
 
+
+//-----------------------testbench----------------------------
+`timescale 1 ps/ 1 ps
+module spi_slave_tb();
+
+
+	 parameter DATA_WIDTH = 16;
+	 parameter BIT_CNT_WIDTH = 4;
+	 
+	 
+	 reg clk;
+    reg rst;
+    reg ss;
+    reg mosi;
+    wire miso;
+    reg sck;
+    wire done;
+    reg [DATA_WIDTH-1:0] din;
+    wire [DATA_WIDTH-1:0] dout;
+	 
+	 //spi_slave #(CLK_DIV,DATA_WIDTH,BIT_CNT_WIDTH) comm_spi_slave(.clk(clk),.rst(rst),.miso(miso),.mosi(mosi),.sck(sck),.start(start),.data_in(data_in),.data_out(data_out),.busy(busy),.new_data(new_data));
+
+	 initial
+	 begin
+		clk=0;
+		rst=1;
+		#500
+		rst=0;
+//		data_in=0;
+//		data_out=0;
+//		busy=0;
+//		new_data=0;
+		
+//		#500
+		//data_in=16'b0101010101010101;
+//		#500
+		//start=1;
+		
+	 end
+	 
+	 
+	 always 
+		#5  clk =  ! clk;    
+endmodule

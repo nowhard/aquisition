@@ -63,7 +63,8 @@ module spi_master #(parameter CLK_DIV = 2, DATA_WIDTH = 16 ,BIT_CNT_WIDTH = 4)(
 		
       TRANSFER: begin
         sck_d = sck_q + 1'b1;                           // increment clock counter
-        if (sck_q == 4'b0000) 
+       
+		  if (sck_q == 4'b0000) 
 		  begin                     								// if clock counter is 0
 			  mosi_d = data_q[DATA_WIDTH-1];                // output the MSB of data
 		  end 
@@ -73,8 +74,8 @@ module spi_master #(parameter CLK_DIV = 2, DATA_WIDTH = 16 ,BIT_CNT_WIDTH = 4)(
 			  data_d = {data_q[DATA_WIDTH-2:0], miso};                 // read in data (shift in)!!!
 		  end 
 		  
-		  else if (sck_q == {CLK_DIV{1'b1}}) 
-		  begin    // else if it's full (about to rise)
+		  else if (sck_q == {CLK_DIV{1'b1}}) // else if it's full (about to rise)
+		  begin    
 				 ctr_d = ctr_q + 1'b1;                         // increment bit counter
 				 if (ctr_q == {BIT_CNT_WIDTH{1'b1}}) 
 				 begin                    // if we are on the last bit
@@ -128,6 +129,10 @@ module spi_master_tb();
     wire busy;
     wire new_data;
 	 
+	 reg[DATA_WIDTH-1:0] slave_test_data;
+	 reg[BIT_CNT_WIDTH-1:0] slave_test_count;
+	 
+	 
 	 spi_master #(CLK_DIV,DATA_WIDTH,BIT_CNT_WIDTH) dac_spi_master(.clk(clk),.rst(rst),.miso(miso),.mosi(mosi),.sck(sck),.start(start),.data_in(data_in),.data_out(data_out),.busy(busy),.new_data(new_data));
 
 	 initial
@@ -137,18 +142,29 @@ module spi_master_tb();
 		rst=1;
 		#500
 		rst=0;
-//		data_in=0;
-//		data_out=0;
-//		busy=0;
-//		new_data=0;
-		
 		#500
+		
+		slave_test_data=16'b1111000011110000;
+		slave_test_count=4'b0;
+		
 		data_in=16'b0101010101010101;
 		#500
 		start=1;
 		
 	 end
 	 
+	   always @(posedge sck) 
+		begin
+			miso=slave_test_data[DATA_WIDTH-1];
+			slave_test_data={slave_test_data[DATA_WIDTH-2:0], 1'b0}; 
+			slave_test_count=slave_test_count+1'b1;
+			
+			if(slave_test_count == {BIT_CNT_WIDTH{1'b1}})
+			begin
+				slave_test_data=16'b1111000011110000;
+			end
+			
+		end
 	 
 	 always 
 		#5  clk =  ! clk;    

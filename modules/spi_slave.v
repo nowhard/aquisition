@@ -120,6 +120,7 @@ module spi_slave_tb();
 		clk<=0;
 		rst<=1;
 		cnt<=0;
+		sck<=0;
 		data_test<=16'b0101010101010101;
 		#500
 		rst=0;

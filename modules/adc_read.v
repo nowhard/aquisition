@@ -22,12 +22,16 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 	
 	reg 		[4:0]measure_count;*/
 	
-  reg [DATA_WIDTH-1:0] data_d, data_q;
-  reg [CLK_DIV-1:0] sck_d, sck_q;
-  reg mosi_d, mosi_q;
-  reg [BIT_CNT_WIDTH-1:0] ctr_d, ctr_q;
+
+  localparam STATE_SIZE = 3;
+  localparam MEASURE_COUNT_SIZE = 3;
+  
+  reg [STATE_SIZE-1:0] state_d, state_q;
+  reg 		start_d, start_q;
   reg new_data_d, new_data_q;
-  reg [DATA_WIDTH-1:0] data_out_d, data_out_q;
+  reg [DATA_WIDTH-1:0] data_out_1_d, data_out_1_q;
+  reg [DATA_WIDTH-1:0] data_out_2_d, data_out_2_q;
+  reg [MEASURE_COUNT_SIZE-1:0] measure_count_d, measure_count_q;
    
   assign mosi = mosi_q;
   assign sck = (~sck_q[CLK_DIV-1]) & (state_q == TRANSFER);

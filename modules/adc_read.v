@@ -15,129 +15,88 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 	parameter MEASURE_FOR_DIAP_PERIODS		=	2;
 	parameter MEASURE_FOR_RESULT_PERIODS	= 32;
 	parameter MEASURE_SAMPLES_IN_PERIOD		= 32;
-
-	/*reg		[2:0]state;
-	reg 		start;
-	reg 		new_data;
-	
-	reg 		[4:0]measure_count;*/
 	
 
   localparam STATE_SIZE = 3;
-  localparam MEASURE_COUNT_SIZE = 3;
+  localparam MEASURE_COUNT_WIDTH = 3;
   
   reg [STATE_SIZE-1:0] state_d, state_q;
-  reg 		start_d, start_q;
-  reg new_data_d, new_data_q;
+  reg start_d, start_q; 
+  reg diap_d, diap_q;
+  reg complete_d, complete_q;
   reg [DATA_WIDTH-1:0] data_out_1_d, data_out_1_q;
   reg [DATA_WIDTH-1:0] data_out_2_d, data_out_2_q;
-  reg [MEASURE_COUNT_SIZE-1:0] measure_count_d, measure_count_q;
+  reg [MEASURE_COUNT_WIDTH-1:0] measure_count_d, measure_count_q;
    
-  assign mosi = mosi_q;
-  assign sck = (~sck_q[CLK_DIV-1]) & (state_q == TRANSFER);
-  assign busy = state_q != IDLE;
-  assign data_out = data_out_q;
+
+ // assign busy = state_q != IDLE;
+  assign data_out_1 = data_out_1_q;
+  assign data_out_2 = data_out_2_q;
   assign new_data = new_data_q;
 
 	
 	
 	
-//FSM	
-	parameter 	IDLE 					= 0, 
-					START_CONV 			= 1,
-					READ_FOR_DIAP		= 2,
-					CALC_DIAP			= 3,	
-					READ_RESULT 		= 4, 
-					SHIFT_INTEGRATOR 	= 5;
+//FSM	one-hot state coding
+  localparam [5:0]  	
+				IDLE 					= 6'b000001, 
+				START_CONV 			= 6'b000010,
+				READ_FOR_DIAP		= 6'b000100,
+				CALC_DIAP			= 6'b001000,	
+				READ_RESULT 		= 6'b010000, 
+				SHIFT_INTEGRATOR 	= 6'b100000,
 	
-/*	// Output depends only on the state
-	always @ (state) begin
-		case (state)
-			IDLE:
-			begin
-				measure_count=4'b0;
-			end
-			
-			START_CONV:
-			begin
-				start=1'b1;
-			end
-			
-			READ_FOR_DIAP:
-			begin
-			//
-			end
-			
-			CALC_DIAP:
-			begin
-			//
-			end
-			
-			READ_RESULT:
-			begin
-			//
-			end
-			
-			SHIFT_INTEGRATOR:
-			begin
-			//
-			end
-			
-			default:
-			begin
-			//
-			end
-			
-		endcase
-	end*/
+
 	
 	// Determine the next state
 	always @ (posedge clk ) begin
-   /* sck_d = sck_q;
-    data_d = data_q;
-    mosi_d = mosi_q;
-    ctr_d = ctr_q;
-    new_data_d = 1'b0;
-    data_out_d = data_out_q;
-    state_d = state_q;*/
-			case (state)
+	 
+	 state_d=state_q;
+	 start_d=start_q;
+	 diap_d=diap_q;
+	 complete_d=complete_q;
+	 data_out_1_d=data_out_1_q;
+	 data_out_2_d=data_out_2_q;
+	 measure_count_d=measure_count_q;
+	 	 
+			case (state_q)
 			
 				IDLE:
 				begin
 					if(start_conv)
 					begin
-						state <= START_CONV;
+						state_d <= START_CONV;
 					end
 				end
 				
 				START_CONV:
 				begin
 					if ()
-						state <= S2;
+						//state <= S2;
 					else
-						state <= S1;
+						//state <= S1;
 				end
 				
 				READ_FOR_DIAP:
 					if (data_in)
-						state <= S3;
+						//state <= S3;
 					else
-						state <= S1;
+						//state <= S1;
 				CALC_DIAP:
 					if ()
-						state <= S2;
+						//state <= S2;
 					else
-						state <= S3;		
+						//state <= S3;		
 				READ_RESULT:
 					if ()
-						state <= S2;
+						//state <= S2;
 					else
-						state <= S3;
+						//state <= S3;
 				SHIFT_INTEGRATOR:
 					if ()
-						state <= S2;
+						//state <= S2;
 					else
-						state <= S3;						
+						//state <= S3;						
 			endcase
 	end
 	
@@ -150,14 +109,22 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
       state_q <= IDLE;
       data_out_q <= {DATA_WIDTH{1'b0}};
       new_data_q <= 1'b0;*/
+		
+		 state_q<=IDLE;
+		 start_q<=1'b0;
+		 diap_q<=;
+		 complete_q<=1'b0;
+		 data_out_1_q<={DATA_WIDTH{1'b0}};
+		 data_out_2_q<={DATA_WIDTH{1'b0}};
+		 measure_count_q<={MEASURE_COUNT_WIDTH{1'b0}};
     end else begin
-     /* ctr_q <= ctr_d;
-      data_q <= data_d;
-      sck_q <= sck_d;
-      mosi_q <= mosi_d;
-      state_q <= state_d;
-      data_out_q <= data_out_d;
-      new_data_q <= new_data_d;*/
+		 state_q<=state_d;
+		 start_q<=start_d;
+		 diap_q<=diap_d;
+		 complete_q<=complete_d;
+		 data_out_1_q<=data_out_1_d;
+		 data_out_2_q<=data_out_2_d;
+		 measure_count_q<=measure_count_d;
     end
   
   endmodule

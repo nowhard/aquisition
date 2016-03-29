@@ -5,8 +5,8 @@ module sin_gen(
 	input enable,
 	output reg [7:0]out,
 	output reg new_period,
-	output reg start_conv
-	output reg phaze;
+	output reg start_conv,
+	output reg phaze
 );
 
 reg [7:0]cnt;

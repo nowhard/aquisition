@@ -111,7 +111,7 @@ module spi_master #(parameter CLK_DIV = 2, DATA_WIDTH = 16 ,BIT_CNT_WIDTH = 4)(
 endmodule
 
 //-----------------------testbench----------------------------
-`timescale 1 ps/ 1 ps
+/*`timescale 1 ps/ 1 ps
 module spi_master_tb();
 
 	 parameter CLK_DIV = 2;
@@ -168,4 +168,4 @@ module spi_master_tb();
 	 
 	 always 
 		#5  clk =  ! clk;    
-endmodule
+endmodule*/

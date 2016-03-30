@@ -1,4 +1,4 @@
-`include "spi_master.v"
+//`include "spi_master.v"
 
 module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
     input clk,
@@ -11,12 +11,19 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
     output[DATA_WIDTH-1:0] data_out_1,
     output[DATA_WIDTH-1:0] data_out_2,
 	 output[DIAP_WIDTH-1:0] diap,
-	 output signal_cnv	 
+	 
+	 //---ADC SPI signals---
+	 output reg signal_cnv,	
+	 input  miso,
+    output mosi,
+    output sck,
+	 input  new_data
+	 //---------------------
   );
   
 
-  
-   parameter ADC_DATA_WIDTH    				= 36;
+   parameter CHANNEL_DATA_WIDTH				= 18;
+   parameter ADC_DATA_WIDTH    				= CHANNEL_DATA_WIDTH*2;	
 	parameter INTEGRATOR_WIDTH					= 24;
 	parameter MEASURE_FOR_DIAP_PERIODS		=	2;
 	parameter MEASURE_FOR_RESULT_PERIODS	= 32;
@@ -31,15 +38,15 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 	parameter RESULT_INTEGRATOR_WIDTH		= 28;
 	
 
-  localparam STATE_SIZE = 3;
+  localparam STATE_SIZE = 15;
   localparam MEASURE_COUNT_WIDTH = 3;
   
   reg [STATE_SIZE-1:0] state_d, state_q;
-  reg start_d, start_q; 
-  reg diap_d, diap_q;
-  reg complete_d, complete_q;
-  reg [DATA_WIDTH-1:0] data_out_1_d, data_out_1_q;
-  reg [DATA_WIDTH-1:0] data_out_2_d, data_out_2_q;
+ // reg start_d, start_q; 
+  //reg diap_d, diap_q;
+ // reg complete_d, complete_q;
+ // reg [DATA_WIDTH-1:0] data_out_1_d, data_out_1_q;
+  //reg [DATA_WIDTH-1:0] data_out_2_d, data_out_2_q;
   reg [MEASURE_COUNT_WIDTH-1:0] measure_count_d, measure_count_q;
   
 
@@ -52,18 +59,21 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
   reg [1:0] adc_busy_r;
   wire sig_adc_complete=(adc_busy_r[1]!=adc_busy_r[0])&adc_busy_r[0];
   
-  reg [MEASURE_RESULT_COUNT_WIDTH-1:0]result_sample_counter;
-  reg [MEASURE_DIAP_COUNT_WIDTH-1:0]diap_sample_counter;
+ // reg [MEASURE_RESULT_COUNT_WIDTH-1:0]result_sample_counter;
+ // reg [MEASURE_DIAP_COUNT_WIDTH-1:0]diap_sample_counter;
+ 
+  reg [MEASURE_RESULT_COUNT_WIDTH-1:0]result_sample_counter_d, result_sample_counter_q;
+  reg [MEASURE_DIAP_COUNT_WIDTH-1:0]diap_sample_counter_d, diap_sample_counter_q;
   
   reg[DIAP_INTEGRATOR_WIDTH-1:0] diap_integrator_d, diap_integrator_q;
-  reg[RESULT_INTEGRATOR_WIDTH-1:0] result_itegrator_d,result_itegrator_q;
+  reg[RESULT_INTEGRATOR_WIDTH-1:0] result_integrator_d,result_integrator_q;
    
 
   assign complete = state_q == IDLE;
-  assign data_out_1 = data_out_1_q;
-  assign data_out_2 = data_out_2_q;
-  assign new_data = new_data_q;
-  assign diap=diap_q;
+  //assign data_out_1 = data_out_1_q;
+  //assign data_out_2 = data_out_2_q;
+  //assign new_data = new_data_q;
+  //assign diap=diap_q;
 	
 	
 //FSM	one-hot state coding
@@ -75,7 +85,7 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 				START_READ_SPI_DIAPASON				= 15'b000000000010000,
 				WAIT_SPI_DIAPASON						= 15'b000000000100000,
 				SUMM_DIAPASON							= 15'b000000001000000,
-				DIAPASON_CHOISE						= 15'b000000010000000,
+				DIAPASON_CHOICE						= 15'b000000010000000,
 				START_READ_RESULT						= 15'b000000100000000,
 				START_READ_ADC_SAMPLE_RESULT		= 15'b000001000000000,
 				WAIT_ADC_SAMPLE_RESULT				= 15'b000010000000000,
@@ -86,17 +96,19 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 
 //------------------SPI---------------------------
 	 parameter SPI_ADC_CLK_DIV = 2;
-	 parameter SPI_ADC_DATA_WIDTH = 36;
+	 parameter SPI_ADC_DATA_WIDTH = ADC_DATA_WIDTH;
 	 parameter SPI_ADC_BIT_CNT_WIDTH = 4;
 	 
-    reg miso;
+/*    reg miso;
     wire mosi;
     wire sck;
+	 wire new_data;*/
+	 
     reg start;
     reg[DATA_WIDTH-1:0] data_in;
     wire[DATA_WIDTH-1:0] data_out;
     //wire adc_busy;
-    wire new_data; 
+    
 	 
 	 spi_master #(SPI_ADC_CLK_DIV,SPI_ADC_DATA_WIDTH,SPI_ADC_BIT_CNT_WIDTH) adc_spi_master(.clk(clk),.rst(rst),.miso(miso),.mosi(mosi),.sck(sck),.start(start),.data_in(data_in),.data_out(data_out),.busy(adc_busy),.new_data(new_data));
 
@@ -120,12 +132,13 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 	always @ (*) begin	//FSM
 	 
 	 state_d=state_q;
-	 start_d=start_q;
-	 diap_d=diap_q;
-	 complete_d=complete_q;
-	 data_out_1_d=data_out_1_q;
-	 data_out_2_d=data_out_2_q;
+//	 start_d=start_q;
+//	 diap_d=diap_q;
+	// complete_d=complete_q;
+	// data_out_1_d=data_out_1_q;
+	// data_out_2_d=data_out_2_q;
 	 measure_count_d=measure_count_q;
+	 
 	 	 
 		case (state_q)
 		
@@ -133,7 +146,7 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 			begin
 				if(start_cycle_conv_r)
 				begin
-					state_d <= START_CYCLE_CONV;
+					state_d <= START_READ_DIAPASON;
 				end
 			end
 			
@@ -199,7 +212,7 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 				end*/
 			end
 			
-			DIAPASON_CHOISE:
+			DIAPASON_CHOICE:
 			begin
 				/*if ()
 				begin
@@ -304,11 +317,11 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
     if (rst) begin
 
 		 state_q<=IDLE;
-		 start_q<=1'b0;
+		 //start_q<=1'b0;
 		 //diap_q<=;
-		 complete_q<=1'b0;
-		 data_out_1_q<={DATA_WIDTH{1'b0}};
-		 data_out_2_q<={DATA_WIDTH{1'b0}};
+		 //complete_q<=1'b0;
+		// data_out_1_q<={DATA_WIDTH{1'b0}};
+		 //data_out_2_q<={DATA_WIDTH{1'b0}};
 		 measure_count_q<={MEASURE_COUNT_WIDTH{1'b0}};
 		 diap_integrator_q<={DIAP_INTEGRATOR_WIDTH{1'b0}};
 		 result_integrator_q<={RESULT_INTEGRATOR_WIDTH{1'b0}};
@@ -317,11 +330,11 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 	 else 
 	 begin
 		 state_q<=state_d;
-		 start_q<=start_d;
-		 diap_q<=diap_d;
-		 complete_q<=complete_d;
-		 data_out_1_q<=data_out_1_d;
-		 data_out_2_q<=data_out_2_d;
+//		 start_q<=start_d;
+		 //diap_q<=diap_d;
+		// complete_q<=complete_d;
+		// data_out_1_q<=data_out_1_d;
+		// data_out_2_q<=data_out_2_d;
 		 measure_count_q<=measure_count_d;
 		 
 		 diap_integrator_q<=diap_integrator_d;
@@ -332,7 +345,42 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
   endmodule
   
   
- /* module adc_read_tb()
+  module adc_read_tb();
+		
+	 parameter DATA_WIDTH = 24;
+	 parameter DIAP_WIDTH = 2;
+	 
+    reg clk;
+    reg rst;
+    reg sample_adc;
+	 reg start_cycle_conv;
+	 reg  adc_busy;
+	 wire adc_cnv;
+    wire complete;
+    wire[DATA_WIDTH-1:0] data_out_1;
+    wire[DATA_WIDTH-1:0] data_out_2;
+	 wire[DIAP_WIDTH-1:0] diap;
+	 wire signal_cnv;	 
+	 
+	 adc_read #(DATA_WIDTH, DIAP_WIDTH) test_adc_read(.clk(clk),.rst(rst),.sample_adc(sample_adc),.start_cycle_conv(start_cycle_conv),.adc_busy(adc_busy),.adc_cnv(adc_cnv),.complete(complete),.data_out_1(data_out_1),.data_out_2(data_out_2),.diap(diap),.signal_cnv(signal_cnv));
   
-  endmodule*/
+		initial
+		begin
+			clk<=0;
+			sample_adc<=0;
+			rst=0;
+			#500
+			rst=1;	
+		end
+		
+		always 
+			#5  clk =  ! clk;  
+			
+		always 
+			#500  sample_adc =  ! sample_adc;  
+			
+		always
+			#1000 start_cycle_conv =! start_cycle_conv;
+  
+  endmodule
   

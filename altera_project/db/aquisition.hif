@@ -19,5 +19,101 @@ VHSM_ON
 -- End Library Paths --
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
+# entity
+spi_master
+# storage
+db|aquisition.(1).cnf
+db|aquisition.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+|projects|git_repository|verilog|aquisition|modules|spi_master.v
+d0a75746bfff696257b5b74c8b026d8
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+CLK_DIV
+2
+PARAMETER_SIGNED_DEC
+USR
+DATA_WIDTH
+36
+PARAMETER_SIGNED_DEC
+USR
+BIT_CNT_WIDTH
+4
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+spi_master:adc_spi_master
+}
+# macro_sequence
+
+# end
+# entity
+adc_read
+# storage
+db|aquisition.(0).cnf
+db|aquisition.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+|projects|git_repository|verilog|aquisition|modules|adc_read.v
+72349342cfd6fbc356ffbb803c6b
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+DATA_WIDTH
+24
+PARAMETER_SIGNED_DEC
+DEF
+DIAP_WIDTH
+2
+PARAMETER_SIGNED_DEC
+DEF
+}
+# hierarchies {
+|
+}
+# macro_sequence
+
+# end
 # complete
 

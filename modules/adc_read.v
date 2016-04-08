@@ -1,5 +1,16 @@
 //`include "spi_master.v"
 
+/*module adc_sample_read#(parameter DATA_WIDTH = 36)(
+	input clk,
+	input rst,
+	input start,
+	output done,
+	output[DATA_WIDTH-1:0] data,
+	);
+
+	
+endmodule*/
+
 module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
     input clk,
     input rst,
@@ -7,6 +18,8 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
     input sample_adc,
 	 //input new_period,//???
 	 input start_cycle_conv,
+	 
+	 input read_diapason,
 	 
     output complete,
     output[DATA_WIDTH-1:0] data_out_1,
@@ -31,7 +44,7 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 	parameter MEASURE_RESULT_COUNT_WIDTH	= 10;
 	parameter RESULT_INTEGRATOR_WIDTH		= 28;
 	
-  localparam STATE_SIZE = 15;
+  localparam STATE_SIZE = 4;
   localparam MEASURE_COUNT_WIDTH = 3;
   
   //----ADC regs----
@@ -41,8 +54,13 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
   wire  	spi_done;
   reg		spi_start;
   //----------------
+  
   reg [STATE_SIZE-1:0] state_d, state_q;
   reg [MEASURE_COUNT_WIDTH-1:0] measure_count_d, measure_count_q;
+  
+  reg [DATA_WIDTH-1:0] data_out_1_d,data_out_1_q;
+  reg [DATA_WIDTH-1:0] data_out_2_d,data_out_2_q
+  
   
   reg [1:0] sample_adc_r;  
   wire sig_start_conv=(sample_adc_r[1]!=sample_adc_r[0])&sample_adc_r[0];
@@ -57,22 +75,23 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
   wire sig_spi_done=(spi_done_r[1]!=spi_done_r[0])&spi_done_r[0];
   
   reg [MEASURE_RESULT_COUNT_WIDTH-1:0]sample_counter_d, sample_counter_q;  
-  reg[RESULT_INTEGRATOR_WIDTH-1:0] result_integrator_d,result_integrator_q;
+  reg[RESULT_INTEGRATOR_WIDTH-1:0] result_integrator;//_d,result_integrator_q;
    
-  assign complete = state_q == IDLE;
-
+  assign complete = (state_q == DONE);
 	
-	
-//FSM	one-hot state coding
-  localparam [14:0]  	
-				IDLE 										= 15'b000000000000001, 
-				START_READ								= 15'b000000100000000,
-				START_READ_ADC_SAMPLE				= 15'b000001000000000,
-				WAIT_ADC_SAMPLE						= 15'b000010000000000,
-				START_READ_SPI							= 15'b000100000000000,
-				WAIT_SPI									= 15'b001000000000000,
-				SUMM_RESULT								= 15'b010000000000000,
-				DONE										= 15'b100000000000000;
+  assign data_out_1 = data_out_1_q;
+  assign data_out_2 = data_out_2_q;
+  	
+//FSM	 state coding
+  localparam [4:0]  	
+				IDLE 										= 1, 
+				START_READ								= 2,
+				START_READ_ADC_SAMPLE				= 3,
+				WAIT_ADC_SAMPLE						= 4,
+				START_READ_SPI							= 5,
+				WAIT_SPI									= 6
+				SUMM_RESULT								= 7,
+				DONE										= 8;
 
 //------------------SPI---------------------------
 	 parameter SPI_ADC_CLK_DIV = 2;
@@ -125,6 +144,7 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 			START_READ:
 			begin
 				spi_start=1'b0;
+				result_integrator<={RESULT_INTEGRATOR_WIDTH{1'b0}};
 			end
 			
 			START_READ_ADC_SAMPLE:
@@ -151,14 +171,10 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 			WAIT_SPI:
 			begin
 			
-				/*if ()
+				if (sig_spi_done)
 				begin
-					
-				end
-				else
-				begin
-
-				end*/
+					state_d <= SUMM_RESULT;
+				end	
 			end
 			
 			SUMM_RESULT:
@@ -195,14 +211,14 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 	 begin
 		 state_q<=IDLE;
 		 measure_count_q<={MEASURE_COUNT_WIDTH{1'b0}};
-		 result_integrator_q<={RESULT_INTEGRATOR_WIDTH{1'b0}};
+		 result_integrator/*_q*/<={RESULT_INTEGRATOR_WIDTH{1'b0}};
 		 
     end 
 	 else 
 	 begin
 		 state_q<=state_d;
 		 measure_count_q<=measure_count_d;		 
-		 result_integrator_q<=result_integrator_d;
+		 //result_integrator_q<=result_integrator_d;
 		 
     end
 	end

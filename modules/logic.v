@@ -3,15 +3,21 @@ module logic(
 	input rst,
 	
 	
-	//---ADC signals---
+	//---ADC signals-------
 	output adc_cnv,
 	input  adc_busy,
-	//---SPI signals---	 	
+	//---ADC SPI signals---	 	
 	input  adc_miso,
 	output adc_sck	
+	//---DAC & comm SPI----
+	input  dac_reg_mosi,
+	output dac_reg_sck,
+	output cs1_dac,
+	output cs2_reg,
 	//---------------------
-	
-	output [2:0]analog_mux_chn
+	output [2:0]analog_mux_chn,
+	//
+	input enable
 
 );
 	 localparam STATE_SIZE = 4;
@@ -33,7 +39,25 @@ module logic(
 				MEASURE_MODE_4							= 7,
 				MEASURE_MODE_5							= 8,
 				DONE										= 9;
+
+// 
+	localparam [7:0]
+				REG_MODE_DIAP	=8'b00000001,
+				REG_MODE_1		=8'b00000001,
+				REG_MODE_2		=8'b00000001,
+				REG_MODE_3		=8'b00000001,
+				REG_MODE_4		=8'b00000001,
+				REG_MODE_5		=8'b00000001;
 				
+
+//---generator 5000 Hz--------------
+reg gen_sample_clk;	
+reg gen_out;		
+wire gen_new_period;
+wire gen_start_conv;	
+wire gen_enable=enable;
+sin_gen dev_sin_gen(.clk(clk),.sample_clk(gen_sample_clk),.rst(rst),.enable(gen_enable),.out(gen_out),.new_period(gen_new_period),.start_conv(gen_start_conv));				
+//----------------------------------
 				
 always @ (*) begin	//FSM
 	 
@@ -45,12 +69,15 @@ always @ (*) begin	//FSM
 		
 			IDLE:
 			begin
-
+				if(enable && gen_new_period)
+				begin
+					state_d <= START_CYCLE;
+				end
 			end
 						
 			START_CYCLE:
 			begin
-
+				
 			end
 			
 			MEASURE_MODE_DIAPASON:

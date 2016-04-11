@@ -1,16 +1,3 @@
-//`include "spi_master.v"
-
-/*module adc_sample_read#(parameter DATA_WIDTH = 36)(
-	input clk,
-	input rst,
-	input start,
-	output done,
-	output[DATA_WIDTH-1:0] data,
-	);
-
-	
-endmodule*/
-
 module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
     input clk,
     input rst,
@@ -39,8 +26,10 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
    parameter ADC_DATA_WIDTH    				= CHANNEL_DATA_WIDTH*2;	
 	parameter INTEGRATOR_WIDTH					= 24;
 	parameter MEASURE_FOR_RESULT_PERIODS	= 32;
+	parameter MEASURE_FOR_DIAP_PERIODS		=	2;
 	parameter MEASURE_SAMPLES_IN_PERIOD		= 32;
 	parameter MEASURE_RESULT_SAMPLES			= MEASURE_FOR_RESULT_PERIODS*MEASURE_SAMPLES_IN_PERIOD;	
+	parameter MEASURE_DIAP_SAMPLES			= MEASURE_FOR_DIAP_PERIODS*MEASURE_SAMPLES_IN_PERIOD;	
 	parameter MEASURE_RESULT_COUNT_WIDTH	= 10;
 	parameter RESULT_INTEGRATOR_WIDTH		= 28;
 	
@@ -61,7 +50,6 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
   reg [DATA_WIDTH-1:0] data_out_1_d,data_out_1_q;
   reg [DATA_WIDTH-1:0] data_out_2_d,data_out_2_q
   
-  
   reg [1:0] sample_adc_r;  
   wire sig_start_conv=(sample_adc_r[1]!=sample_adc_r[0])&sample_adc_r[0];
   
@@ -75,7 +63,7 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
   wire sig_spi_done=(spi_done_r[1]!=spi_done_r[0])&spi_done_r[0];
   
   reg [MEASURE_RESULT_COUNT_WIDTH-1:0]sample_counter_d, sample_counter_q;  
-  reg[RESULT_INTEGRATOR_WIDTH-1:0] result_integrator;//_d,result_integrator_q;
+  reg[RESULT_INTEGRATOR_WIDTH-1:0] result_integrator_1, result_integrator_2;//_d,result_integrator_q;
    
   assign complete = (state_q == DONE);
 	
@@ -91,7 +79,8 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 				START_READ_SPI							= 5,
 				WAIT_SPI									= 6
 				SUMM_RESULT								= 7,
-				DONE										= 8;
+				TEST_FOR_END_CYCLE					= 8,
+				DONE										= 9;
 
 //------------------SPI---------------------------
 	 parameter SPI_ADC_CLK_DIV = 2;
@@ -108,8 +97,7 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 	 spi_master #(SPI_ADC_CLK_DIV,SPI_ADC_DATA_WIDTH,SPI_ADC_BIT_CNT_WIDTH) adc_spi_master(.clk(clk),.rst(rst),.miso(miso),.mosi(mosi),.sck(sck),.start(start),.data_in(data_in),.data_out(data_out),.busy(spi_busy),.new_data(adc_done));
 
 //------------------------------------------------				
-				
-				
+							
 	 always @(posedge clk) begin //async signals
 		if (rst) 
 		begin
@@ -135,6 +123,7 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 		
 			IDLE:
 			begin
+				complete=1'b0;
 				if(start_cycle_conv_r)
 				begin
 					state_d <= START_READ;
@@ -145,12 +134,16 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 			begin
 				spi_start=1'b0;
 				result_integrator<={RESULT_INTEGRATOR_WIDTH{1'b0}};
+				state_d <= START_READ_ADC_SAMPLE;
 			end
 			
 			START_READ_ADC_SAMPLE:
 			begin
-				cnv<=1'b1;
-				state_d <= WAIT_ADC_SAMPLE;
+				if(sig_start_conv)
+				begin
+					cnv<=1'b1;
+					state_d <= WAIT_ADC_SAMPLE;
+				end
 			end
 			
 			WAIT_ADC_SAMPLE:
@@ -169,8 +162,7 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 			end
 			
 			WAIT_SPI:
-			begin
-			
+			begin			
 				if (sig_spi_done)
 				begin
 					state_d <= SUMM_RESULT;
@@ -179,30 +171,38 @@ module adc_read #(parameter DATA_WIDTH = 24, DIAP_WIDTH = 2)(
 			
 			SUMM_RESULT:
 			begin
-				/*if ()
+				measure_count_d<=measure_count_d+1;
+				result_integrator_1<=result_integrator_1+data_out[CHANNEL_DATA_WIDTH-1:0];
+				result_integrator_2<=result_integrator_2+data_out[ADC_DATA_WIDTH-1:CHANNEL_DATA_WIDTH];
+				state_d <= TEST_FOR_END_CYCLE;
+			end
+			
+			TEST_FOR_END_CYCLE:
+			begin
+				if ((read_diapason && (measure_count_d==MEASURE_DIAP_SAMPLES))||(!read_diapason && measure_count_d==MEASURE_RESULT_SAMPLES))
 				begin
-					
+					state_d <= DONE;
 				end
 				else
 				begin
-
-				end*/
+					state_d <= START_READ_ADC_SAMPLE;
+				end
 			end
 			
 			DONE:
 			begin
-				/*if ()
+				if(read_diapason)
 				begin
-					
+					data_out_1<=result_integrator_1[RESULT_INTEGRATOR_WIDTH-6:5];
+					data_out_2<=result_integrator_2[RESULT_INTEGRATOR_WIDTH-6:5];
 				end
 				else
 				begin
-
-				end*/
-			end
-			
-			
-			
+					data_out_1<=result_integrator_1[RESULT_INTEGRATOR_WIDTH-1:10];
+					data_out_2<=result_integrator_2[RESULT_INTEGRATOR_WIDTH-1:10];
+				end
+				complete=1'b1;
+			end		
 		endcase
 	end
 	

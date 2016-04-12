@@ -8,7 +8,7 @@ module logic(
 	input  adc_busy,
 	//---ADC SPI signals---	 	
 	input  adc_miso,
-	output adc_sck	
+	output adc_sck,	
 	//---DAC & comm SPI----
 	input  dac_reg_mosi,
 	output dac_reg_sck,

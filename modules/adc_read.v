@@ -6,8 +6,8 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 	 input start_cycle_conv,	 
 	 input read_diapason,	 
     output complete,
-    output reg [OUTPUT_DATA_WIDTH-1:0] data_out_1,
-    output reg [OUTPUT_DATA_WIDTH-1:0] data_out_2,	 
+    output  [OUTPUT_DATA_WIDTH-1:0] data_out_1,
+    output  [OUTPUT_DATA_WIDTH-1:0] data_out_2,	 
 	 //---ADC signals---
 	 output cnv,
 	 input  adc_busy,
@@ -38,7 +38,8 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 				SUMM_RESULT								= 7,
 				TEST_FOR_END_CYCLE					= 8,
 				RESULT_OUT								= 9,
-				DONE										= 10;
+				STROBE_OUT								= 10,
+				DONE										= 11;
 	
   localparam STATE_SIZE = 4;
   localparam MEASURE_COUNT_WIDTH = 11;
@@ -49,8 +50,9 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
   reg cnv_d,cnv_q;
   reg [MEASURE_COUNT_WIDTH-1:0] measure_count_d, measure_count_q;
   
-/*  reg [OUTPUT_DATA_WIDTH-1:0] data_out_1_d,data_out_1_q;
-  reg [OUTPUT_DATA_WIDTH-1:0] data_out_2_d,data_out_2_q;*/
+  reg [OUTPUT_DATA_WIDTH-1:0] data_out_1_d ,data_out_1_q;
+  reg [OUTPUT_DATA_WIDTH-1:0] data_out_2_d ,data_out_2_q;
+
   
   reg [1:0] sample_adc_r;  
   wire sig_start_conv=(sample_adc_r[1]!=sample_adc_r[0])&sample_adc_r[0];
@@ -69,8 +71,8 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
    
   assign complete = (state_q == DONE);
 	
-  /*assign data_out_1 = data_out_1_q;
-  assign data_out_2 = data_out_2_q;*/
+  assign data_out_1 = data_out_1_q;
+  assign data_out_2 = data_out_2_q;
   
   assign cnv=cnv_q;
   	
@@ -122,8 +124,8 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 	 cnv_d=cnv_q;
 	 result_integrator_1_d=result_integrator_1_q;
 	 result_integrator_2_d=result_integrator_2_q;
-    /*data_out_1_d<=data_out_1_q;
-	 data_out_2_d<=data_out_2_q;*/	 
+    data_out_1_d=data_out_1_q;
+	 data_out_2_d=data_out_2_q;	 
 		case (state_q)
 		
 			IDLE:
@@ -200,17 +202,22 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 			begin
 				if(read_diapason)
 				begin
-					data_out_1[CHANNEL_DATA_WIDTH-1:0]<=result_integrator_1_q[RESULT_INTEGRATOR_WIDTH-5:6];
-					data_out_2[CHANNEL_DATA_WIDTH-1:0]<=result_integrator_2_q[RESULT_INTEGRATOR_WIDTH-5:6];
+					data_out_1_d[CHANNEL_DATA_WIDTH-1:0]<=result_integrator_1_q[RESULT_INTEGRATOR_WIDTH-5:6];
+					data_out_2_d[CHANNEL_DATA_WIDTH-1:0]<=result_integrator_2_q[RESULT_INTEGRATOR_WIDTH-5:6];
 				end
 				else
 				begin
-					data_out_1[CHANNEL_DATA_WIDTH-1:0]<=result_integrator_1_q[RESULT_INTEGRATOR_WIDTH-1:10];
-					data_out_2[CHANNEL_DATA_WIDTH-1:0]<=result_integrator_2_q[RESULT_INTEGRATOR_WIDTH-1:10];
+					data_out_1_d[CHANNEL_DATA_WIDTH-1:0]<=result_integrator_1_q[RESULT_INTEGRATOR_WIDTH-1:10];
+					data_out_2_d[CHANNEL_DATA_WIDTH-1:0]<=result_integrator_2_q[RESULT_INTEGRATOR_WIDTH-1:10];
 				end
+				state_d <= STROBE_OUT;
+			end
+			
+			STROBE_OUT:
+			begin
 				state_d <= DONE;
-			end	
-		
+			end
+			
 			DONE:
 			begin
 				state_d <= IDLE;
@@ -227,8 +234,8 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 		 result_integrator_2_q<={RESULT_INTEGRATOR_WIDTH{1'b0}}; 
 		 cnv_q<=1'b0;	
 		 spi_start_q<=1'b0;
-		 data_out_1<={OUTPUT_DATA_WIDTH{1'b0}};
-		 data_out_2<={OUTPUT_DATA_WIDTH{1'b0}};		 
+		 data_out_1_q<={OUTPUT_DATA_WIDTH{1'b0}};
+		 data_out_2_q<={OUTPUT_DATA_WIDTH{1'b0}};		 
     end 
 	 else 
 	 begin
@@ -238,14 +245,14 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 		 spi_start_q<=spi_start_d;
 		 result_integrator_1_q<=result_integrator_1_d;
 		 result_integrator_2_q<=result_integrator_2_d;
-		 /*data_out_1_q<=data_out_1_d;
-		 data_out_2_q<=data_out_2_d;*/
+		 data_out_1_q<=data_out_1_d;
+		 data_out_2_q<=data_out_2_d;
     end
 	end
   endmodule
   
   
- `timescale 1 ns/ 1 ns 
+`timescale 1 ns/ 1 ns 
  module adc_read_tb();
 	
     parameter OUTPUT_DATA_WIDTH =24;
@@ -295,8 +302,7 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 		always 
 			#6250  sample_adc =  ! sample_adc;  
 			
-		/*always
-			#74600000 start_cycle_conv =! start_cycle_conv;*/
+
 			
 		
 		 always @(posedge clk) begin

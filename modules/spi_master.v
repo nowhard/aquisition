@@ -1,4 +1,4 @@
-module spi_master #(parameter CLK_DIV = 2, DATA_WIDTH = 16 ,BIT_CNT_WIDTH = 4)(
+module spi_master #(parameter CLK_DIV = 2, DATA_WIDTH = 16)(
     input clk,
     input rst,
     input miso,
@@ -12,6 +12,7 @@ module spi_master #(parameter CLK_DIV = 2, DATA_WIDTH = 16 ,BIT_CNT_WIDTH = 4)(
   );
    
   localparam STATE_SIZE = 2;
+  localparam BIT_CNT_WIDTH=$clog2(DATA_WIDTH);
   
   localparam IDLE = 2'd0,
 				 WAIT_HALF = 2'd1,
@@ -77,7 +78,7 @@ module spi_master #(parameter CLK_DIV = 2, DATA_WIDTH = 16 ,BIT_CNT_WIDTH = 4)(
 		  else if (sck_q == {CLK_DIV{1'b1}}) // else if it's full (about to rise)
 		  begin    
 				 ctr_d = ctr_q + 1'b1;                         // increment bit counter
-				 if (ctr_q == {BIT_CNT_WIDTH{1'b1}}) 
+				 if (ctr_q == /*{BIT_CNT_WIDTH{1'b1}}*/(DATA_WIDTH-1)) 
 				 begin                    // if we are on the last bit
 					state_d = IDLE;                             // change state
 					data_out_d = data_q;                        // output data
@@ -133,7 +134,7 @@ module spi_master_tb();
 	 reg[BIT_CNT_WIDTH-1:0] slave_test_count;
 	 
 	 
-	 spi_master #(CLK_DIV,DATA_WIDTH,BIT_CNT_WIDTH) dac_spi_master(.clk(clk),.rst(rst),.miso(miso),.mosi(mosi),.sck(sck),.start(start),.data_in(data_in),.data_out(data_out),.busy(busy),.new_data(new_data));
+	 spi_master #(CLK_DIV,DATA_WIDTH) dac_spi_master(.clk(clk),.rst(rst),.miso(miso),.mosi(mosi),.sck(sck),.start(start),.data_in(data_in),.data_out(data_out),.busy(busy),.new_data(new_data));
 
 	 initial
 	 begin

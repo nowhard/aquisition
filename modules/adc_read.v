@@ -3,7 +3,8 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
     input rst, 
     input sample_adc,
 	 //input new_period,//???
-	 input start_cycle_conv,	 
+	 input start_cycle_conv,
+	 input halfcycle,
 	 input read_diapason,	 
     output complete,
     output  [OUTPUT_DATA_WIDTH-1:0] data_out_1,
@@ -277,7 +278,7 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 	 reg [35:0] adc_shift_reg;
 	 //------------------
 	 
-	 adc_read  #(OUTPUT_DATA_WIDTH)test_adc_read(.clk(clk),.rst(rst),.sample_adc(sample_adc),.start_cycle_conv(start_cycle_conv),.read_diapason(read_diapason),.complete(complete),.data_out_1(data_out_1),.data_out_2(data_out_2),.cnv(cnv),.adc_busy(adc_busy),.miso(miso),.sck(sck));
+	 adc_read  #(OUTPUT_DATA_WIDTH)test_adc_read(.clk(clk),.rst(rst),.sample_adc(sample_adc),.start_cycle_conv(start_cycle_conv),.halfcycle(halfcycle),.read_diapason(read_diapason),.complete(complete),.data_out_1(data_out_1),.data_out_2(data_out_2),.cnv(cnv),.adc_busy(adc_busy),.miso(miso),.sck(sck));
   
 		initial
 		begin

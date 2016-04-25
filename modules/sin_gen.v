@@ -6,7 +6,7 @@ module sin_gen(
 	output reg [7:0]out,
 	output reg new_period,
 	output reg start_conv,
-	output reg phaze
+	output reg halfcycle
 );
 
 reg [7:0]cnt;
@@ -34,7 +34,7 @@ begin
 		 out<=8'd128;
 		 start_conv<=1'b1;
 		 new_period<=1'b1;
-		 phaze<=1'b1;
+		 halfcycle<=1'b1;
 		 end
 		8'd1:
 		 begin
@@ -292,7 +292,7 @@ begin
 		 begin
 		 out<=8'd128;
 		 start_conv<=1'b1;
-		 phaze<=1'b0;
+		 halfcycle<=1'b0;
 		 end
 		8'd129:
 		 begin
@@ -552,7 +552,7 @@ begin
 		out<=8'd128;
 		new_period<=1'b0;
 		start_conv<=1'b0;
-		phaze<=1'b0;
+		halfcycle<=1'b0;
 		sample_p=1'b0;
 		cnt<=8'b0;
 	end

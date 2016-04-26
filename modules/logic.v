@@ -99,7 +99,21 @@ wire adc_cycle_complete;
 wire [ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_1;
 wire [ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_2;
 adc_read  #(.OUTPUT_DATA_WIDTH(ADC_OUTPUT_DATA_WIDTH))dev_adc_read(.clk(clk),.rst(rst),.sample_adc(gen_start_conv),.start_cycle_conv(adc_start_cycle_conv),.halfcycle(gen_halfcycle),.read_diapason(adc_read_diapason),.complete(adc_cycle_complete),.data_out_1(adc_data_out_1),.data_out_2(adc_data_out_2),.cnv(adc_cnv),.adc_busy(adc_busy),.miso(adc_miso),.sck(adc_sck));
-//------------------------------------				
+//------------------------------------	
+reg [1:0] sample_clk_r;
+wire sig_sample_clk=(sample_clk_r[1]!=sample_clk_r[0])&sample_clk_r[0];	
+ 
+always @(posedge clk) begin
+	if(rst)
+	begin
+		sample_clk_r<=2'b00;
+	end
+	else
+	begin
+		sample_clk_r<={sample_clk_r[0],gen_sample_clk};
+	end
+end
+//------------------------------------		
 always @ (*) begin	//FSM
 	 
 	 state_d=state_q;
@@ -291,6 +305,13 @@ always @ (*) begin	//FSM
 			end		
 //------------------------------------------------			
 		endcase
+		
+		if(gen_enable_q && sig_sample_clk)//send sample on DAC
+		begin
+			dac_reg_data_out<=gen_out;
+			dac_reg_start_d<=1'b1;
+		end
+		
 	end
 	
    always @(posedge clk) begin

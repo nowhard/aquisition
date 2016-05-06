@@ -30,6 +30,8 @@ module logic(
 	 wire gen_enable=gen_enable_q;
 	 
 	 reg [1:0]delay_counter_d, delay_counter_q;
+	 
+	 reg [2:0] mode_reg_d, mode_reg_q;
 
 	 reg [7:0] dac_reg_data_out;
 	 reg dac_reg_new_data;
@@ -121,9 +123,10 @@ always @ (*) begin	//FSM
 	 keys_d=keys_q;
 	 diap_d=diap_q;
 	 cs_dac_reg_d=cs_dac_reg_q;
-	 dac_reg_start_d=dac_reg_start_q;
+	 dac_reg_start_d=1'b0;//dac_reg_start_q;
 	 gen_enable_d=gen_enable_q;
 	 delay_counter_d=delay_counter_q;
+	 mode_reg_d=mode_reg_q;
 	// read_diapason_d=read_diapason_q;
  	 
 		case (state_q)
@@ -146,43 +149,99 @@ always @ (*) begin	//FSM
 
 			end
 //------------------------------------------------			
-			MEASURE_MODE_1_START:
+			MEASURE_MODE_START:
 			begin
 				cs_dac_reg_d<=CS_DAC_REG_REG;
-				state_d<=MEASURE_MODE_1_START_SET_DIAP;
+				state_d<=MEASURE_MODE_START_SET_DIAP_KEYS;
 			end
 			
-			MEASURE_MODE_1_START_SET_DIAP:
+			MEASURE_MODE_START_SET_DIAP_KEYS:
 			begin
-				dac_reg_data_out<={diap_d,keys_d};
+				//set keys from mode (case)
+				case (mode_reg_q)
+				
+					MEASURE_MODE_1:
+					begin
+						keys_d<=
+					end	
+					
+					MEASURE_MODE_2:
+					begin
+						keys_d<=
+					end	
+
+					MEASURE_MODE_3:
+					begin
+						keys_d<=
+					end	
+
+					MEASURE_MODE_4:
+					begin
+						keys_d<=
+					end	
+
+					MEASURE_MODE_5:
+					begin
+						keys_d<=
+					end					
+				//-----------------
+				dac_reg_data_out<={diap_d,keys_d};//???
 				dac_reg_start_d<=1'b1;
-				state_d<=MEASURE_MODE_1_WAIT_SPI;
+				state_d<=MEASURE_MODE_WAIT_SPI;
 			end
 			
-			MEASURE_MODE_1_WAIT_SPI:
+			MEASURE_MODE_WAIT_SPI:
 			begin
-				dac_reg_start_d<=1'b0;
+				//dac_reg_start_d<=1'b0;
 				if(dac_reg_new_data)
 				begin
-					state_d<=MEASURE_MODE_1_GENERATOR_ON;
+					state_d<=MEASURE_MODE_GENERATOR_ON;
 				end
 			end
 			
-			MEASURE_MODE_1_GENERATOR_ON:
+			MEASURE_MODE_GENERATOR_ON:
 			begin
 				cs_dac_reg_d<=CS_DAC_REG_DAC;
 				gen_enable_d<=1'b1;
-				state_d<=MEASURE_MODE_1_SET_MULTIPLEXOR;
+				state_d<=MEASURE_MODE_SET_MULTIPLEXOR;
 			end
 			
-			MEASURE_MODE_1_SET_MULTIPLEXOR:
+			MEASURE_MODE_SET_MULTIPLEXOR:
 			begin
+				//set mux from mode (case)
+				case (mode_reg_q)//???
+				
+					MEASURE_MODE_1:
+					begin
+					
+					end	
+					
+					MEASURE_MODE_2:
+					begin
+					
+					end	
+
+					MEASURE_MODE_3:
+					begin
+					
+					end	
+
+					MEASURE_MODE_4:
+					begin
+					
+					end	
+
+					MEASURE_MODE_5:
+					begin
+					
+					end					
+				//-----------------				
 				analog_mux_chn_d<=MUX_CURRENT;
 				delay_counter_d<=WAIT_PERIODS;
-				state_d<=MEASURE_MODE_1_DELAY;
+				state_d<=MEASURE_MODE_DELAY;
 			end
 			
-			MEASURE_MODE_1_SET_DELAY_1:
+			MEASURE_MODE_SET_DELAY_1:
 			begin
 				if(gen_new_period)
 				begin
@@ -192,40 +251,68 @@ always @ (*) begin	//FSM
 					end
 					else 
 					begin
-						state_d<=MEASURE_MODE_1_START_MEASURE;
+						state_d<=MEASURE_MODE_START_MEASURE;
 					end
 				end
 			end
 
-			MEASURE_MODE_1_START_MEASURE:
+			MEASURE_MODE_START_MEASURE:
 			begin
 				adc_start_cycle_conv=1'b1;
-				state_d<=MEASURE_MODE_1_WAIT_MEASURE_RESULT;
+				state_d<=MEASURE_MODE_WAIT_MEASURE_RESULT;
 			end
 			
-			MEASURE_MODE_1_WAIT_MEASURE_RESULT:
+			MEASURE_MODE_WAIT_MEASURE_RESULT:
 			begin
 				adc_start_cycle_conv=1'b0;
 				if(adc_cycle_complete)
 				begin
-					state_d<=MEASURE_MODE_1_SEND_TO_FIFO;
+					state_d<=MEASURE_MODE_SEND_TO_FIFO;
 				end
 			end			
 			
-			MEASURE_MODE_1_SEND_TO_FIFO:
+			MEASURE_MODE_SEND_TO_FIFO:
 			begin
-				//
+				// command send to fifo!!!
 				state_d<=MEASURE_MODE_1_SET_MULTIPLEXOR_2;
 			end
 
-			MEASURE_MODE_1_SET_MULTIPLEXOR_2:
+			MEASURE_MODE_SET_MULTIPLEXOR_2:
 			begin
-				analog_mux_chn_d<=MUX_MN_NM;
+				//set mux from mode (case)
+				case (mode_reg_q)
+				
+					MEASURE_MODE_1:
+					begin
+					
+					end	
+					
+					MEASURE_MODE_2:
+					begin
+					
+					end	
+
+					MEASURE_MODE_3:
+					begin
+					
+					end	
+
+					MEASURE_MODE_4:
+					begin
+					
+					end	
+
+					MEASURE_MODE_5:
+					begin
+					
+					end					
+				//-----------------				
+				analog_mux_chn_d<=MUX_MN_NM;//???
 				delay_counter_d<=WAIT_PERIODS;
 				state_d<=MEASURE_MODE_2_DELAY;
 			end
 
-			MEASURE_MODE_1_SET_DELAY_2:
+			MEASURE_MODE_SET_DELAY_2:
 			begin
 				if(gen_new_period)
 				begin
@@ -235,51 +322,59 @@ always @ (*) begin	//FSM
 					end
 					else 
 					begin
-						state_d<=MEASURE_MODE_1_START_MEASURE_2;
+						state_d<=MEASURE_MODE_START_MEASURE_2;
 					end
 				end
 			end	
 	
-			MEASURE_MODE_1_START_MEASURE_2:
+			MEASURE_MODE_START_MEASURE_2:
 			begin
-				adc_start_cycle_conv=1'b1;
-				state_d<=MEASURE_MODE_1_WAIT_MEASURE_RESULT_2;
+				adc_start_cycle_conv<=1'b1;
+				state_d<=MEASURE_MODE_WAIT_MEASURE_RESULT_2;
 			end
 			
-			MEASURE_MODE_1_WAIT_MEASURE_RESULT_2:
+			MEASURE_MODE_WAIT_MEASURE_RESULT_2:
 			begin
-				adc_start_cycle_conv=1'b0;
+				adc_start_cycle_conv<=1'b0;
 				if(adc_cycle_complete)
 				begin
-					state_d<=MEASURE_MODE_1_SEND_TO_FIFO_2;
+					state_d<=MEASURE_MODE_SEND_TO_FIFO_2;
 				end
 			end			
 			
-			MEASURE_MODE_1_SEND_TO_FIFO_2:
+			MEASURE_MODE_SEND_TO_FIFO_2:
 			begin
-			//
-				state_d<=MEASURE_MODE_1_GENERATOR_OFF;
+				//sending command
+				state_d<=MEASURE_MODE_GENERATOR_OFF;
 			end	
 		
-			MEASURE_MODE_1_GENERATOR_OFF:
+			MEASURE_MODE_GENERATOR_OFF:
 			begin
 				cs_dac_reg_d<=CS_DAC_REG_NONE;
 				gen_enable_d<=1'b0;
-				state_d<=MEASURE_MODE_1_MULTIPLEXOR_OFF;
+				state_d<=MEASURE_MODE_MULTIPLEXOR_OFF;
 			end	
 	
-			MEASURE_MODE_1_MULTIPLEXOR_OFF:
+			MEASURE_MODE_MULTIPLEXOR_OFF:
 			begin
 				analog_mux_chn_d<=MUX_NONE;
-				state_d<=MEASURE_MODE_1_END;
+				state_d<=MEASURE_MODE_END;
 			end	
 		
-			MEASURE_MODE_1_END:
+			MEASURE_MODE_END:
 			begin
-			
+				if(mode_reg_q==MEASURE_MODE_5)
+				begin
+				//???
+				end
+				else
+				begin
+					mode_reg_d<=mode_reg_q+1;
+					state_d<=MEASURE_MODE_START;
+				end
 			end			
 //------------------------------------------------			
-			MEASURE_MODE_2:
+		/*	MEASURE_MODE_2:
 			begin
 
 			end
@@ -297,7 +392,7 @@ always @ (*) begin	//FSM
 			MEASURE_MODE_5:
 			begin
 
-			end
+			end*/
 //------------------------------------------------			
 			DONE:
 			begin
@@ -323,6 +418,7 @@ always @ (*) begin	//FSM
 		 dac_reg_start_q<=1'b1;
 		 gen_enable_q<=1'b0;
 		 delay_counter_q<=2'b00;
+		 mode_reg_q<=MEASURE_MODE_1;//
     end 
 	 else 
 	 begin
@@ -334,6 +430,7 @@ always @ (*) begin	//FSM
 		 dac_reg_start_q<=dac_reg_start_d;
 		 gen_enable_q<=gen_enable_d;
 		 delay_counter_q<=delay_counter_d;
+		 mode_reg_q<=mode_reg_d;
 		 //read_diapason_q<=read_diapason_d;	 
     end
 	end			

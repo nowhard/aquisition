@@ -1,6 +1,6 @@
 module syn_fifo(data_out,full,empty,data_in,clk,rst_a,wr_en,rd_en);
 
-   parameter data_width    = 16;
+   parameter data_width    = 24;
    parameter address_width = 5;
    parameter ram_depth     =32;
 

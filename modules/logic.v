@@ -35,7 +35,6 @@ module logic(
 
 	 reg [7:0] dac_reg_data_out;
 	 reg dac_reg_new_data;
-	 //reg read_diapason_d, read_diapason_q;
 	 reg read_diapason;
 	
 
@@ -78,6 +77,13 @@ module logic(
 				DIAP_10V			=3'b010,
 				DIAP_20V			=3'b100;
 				
+  localparam [4:0]  	
+				MEASURE_MODE_1_KEY		= 1,
+				MEASURE_MODE_2_KEY		= 2,
+				MEASURE_MODE_3_KEY		= 3,
+				MEASURE_MODE_4_KEY		= 4,
+				MEASURE_MODE_5_KEY		= 5;
+				
 	localparam WAIT_PERIODS	= 2;
 //---generator 5000 Hz--------------
 reg gen_sample_clk;	
@@ -104,6 +110,24 @@ adc_read  #(.OUTPUT_DATA_WIDTH(ADC_OUTPUT_DATA_WIDTH))dev_adc_read(.clk(clk),.rs
 //------------------------------------	
 reg [1:0] sample_clk_r;
 wire sig_sample_clk=(sample_clk_r[1]!=sample_clk_r[0])&sample_clk_r[0];	
+
+
+//--------------FIFO-------------------
+wire [23:0]fifo_data_out;
+wire fifo_full;
+wire fifo_empty;
+reg  [23:0]fifo_data_in;
+
+
+reg  fifo_wr_en_d, fifo_wr_en_q;
+reg  fifo_rd_en_d, fifo_rd_en_q;
+
+wire fifo_wr_en=fifo_wr_en_q;
+wire fifo_rd_en=fifo_rd_en_q;
+
+
+syn_fifo dev_syn_fifo(.data_out(fifo_data_out),.full(fifo_full),.empty(fifo_empty),.data_in(fifo_data_in),.clk(clk),.rst_a(rst),.wr_en(fifo_wr_en),.rd_en(fifo_rd_en));
+//-------------------------------------
  
 always @(posedge clk) begin
 	if(rst)
@@ -123,12 +147,14 @@ always @ (*) begin	//FSM
 	 keys_d=keys_q;
 	 diap_d=diap_q;
 	 cs_dac_reg_d=cs_dac_reg_q;
-	 dac_reg_start_d=1'b0;//dac_reg_start_q;
+	 dac_reg_start_d=1'b0;
 	 gen_enable_d=gen_enable_q;
 	 delay_counter_d=delay_counter_q;
 	 mode_reg_d=mode_reg_q;
-	// read_diapason_d=read_diapason_q;
- 	 
+	 
+	 fifo_wr_en_d=1'b0;//fifo_wr_en_q;
+	 fifo_rd_en_d=1'b0;//fifo_rd_en_q;
+	 
 		case (state_q)
 		
 			IDLE:
@@ -153,46 +179,46 @@ always @ (*) begin	//FSM
 			begin
 				cs_dac_reg_d<=CS_DAC_REG_REG;
 				state_d<=MEASURE_MODE_START_SET_DIAP_KEYS;
-			end
-			
-			MEASURE_MODE_START_SET_DIAP_KEYS:
-			begin
+				
 				//set keys from mode (case)
 				case (mode_reg_q)
 				
 					MEASURE_MODE_1:
 					begin
-						keys_d<=
+						keys_d<=MEASURE_MODE_1_KEY;
 					end	
 					
 					MEASURE_MODE_2:
 					begin
-						keys_d<=
+						keys_d<=MEASURE_MODE_2_KEY;
 					end	
 
 					MEASURE_MODE_3:
 					begin
-						keys_d<=
+						keys_d<=MEASURE_MODE_3_KEY;
 					end	
 
 					MEASURE_MODE_4:
 					begin
-						keys_d<=
+						keys_d<=MEASURE_MODE_4_KEY;
 					end	
 
 					MEASURE_MODE_5:
 					begin
-						keys_d<=
+						keys_d<=MEASURE_MODE_5_KEY;
 					end					
 				//-----------------
-				dac_reg_data_out<={diap_d,keys_d};//???
+			end
+			
+			MEASURE_MODE_START_SET_DIAP_KEYS:
+			begin
+				dac_reg_data_out<={diap_q,keys_q};
 				dac_reg_start_d<=1'b1;
 				state_d<=MEASURE_MODE_WAIT_SPI;
 			end
 			
 			MEASURE_MODE_WAIT_SPI:
 			begin
-				//dac_reg_start_d<=1'b0;
 				if(dac_reg_new_data)
 				begin
 					state_d<=MEASURE_MODE_GENERATOR_ON;
@@ -209,7 +235,7 @@ always @ (*) begin	//FSM
 			MEASURE_MODE_SET_MULTIPLEXOR:
 			begin
 				//set mux from mode (case)
-				case (mode_reg_q)//???
+			/*	case (mode_reg_q)//??? not use!!!
 				
 					MEASURE_MODE_1:
 					begin
@@ -234,7 +260,7 @@ always @ (*) begin	//FSM
 					MEASURE_MODE_5:
 					begin
 					
-					end					
+					end	*/				
 				//-----------------				
 				analog_mux_chn_d<=MUX_CURRENT;
 				delay_counter_d<=WAIT_PERIODS;
@@ -245,9 +271,9 @@ always @ (*) begin	//FSM
 			begin
 				if(gen_new_period)
 				begin
-					if(delay_counter_d!=0)
+					if(delay_counter_q!=0)
 					begin
-						delay_counter_d=delay_counter_d-1;
+						delay_counter_d=delay_counter_q-1;
 					end
 					else 
 					begin
@@ -271,16 +297,24 @@ always @ (*) begin	//FSM
 				end
 			end			
 			
-			MEASURE_MODE_SEND_TO_FIFO:
+			MEASURE_MODE_SEND_TO_FIFO_1:
 			begin
-				// command send to fifo!!!
+				fifo_data_in=adc_data_out_1;
+				fifo_wr_en_d<=1'b0;
+				state_d<=MEASURE_MODE_SEND_TO_FIFO_2;
+			end
+			
+			MEASURE_MODE_SEND_TO_FIFO_2: 
+			begin
+				fifo_data_in=adc_data_out_2;
+				fifo_wr_en_d<=1'b0;
 				state_d<=MEASURE_MODE_1_SET_MULTIPLEXOR_2;
 			end
 
 			MEASURE_MODE_SET_MULTIPLEXOR_2:
 			begin
 				//set mux from mode (case)
-				case (mode_reg_q)
+		/*		case (mode_reg_q)// not use!!!
 				
 					MEASURE_MODE_1:
 					begin
@@ -305,7 +339,7 @@ always @ (*) begin	//FSM
 					MEASURE_MODE_5:
 					begin
 					
-					end					
+					end	*/				
 				//-----------------				
 				analog_mux_chn_d<=MUX_MN_NM;//???
 				delay_counter_d<=WAIT_PERIODS;
@@ -338,15 +372,23 @@ always @ (*) begin	//FSM
 				adc_start_cycle_conv<=1'b0;
 				if(adc_cycle_complete)
 				begin
-					state_d<=MEASURE_MODE_SEND_TO_FIFO_2;
+					state_d<=MEASURE_MODE_SEND_TO_FIFO_3;
 				end
 			end			
-			
-			MEASURE_MODE_SEND_TO_FIFO_2:
+						
+			MEASURE_MODE_SEND_TO_FIFO_3:
 			begin
-				//sending command
+				fifo_data_in=adc_data_out_1;
+				fifo_wr_en_d<=1'b0;
+				state_d<=MEASURE_MODE_SEND_TO_FIFO_4;
+			end
+			
+			MEASURE_MODE_SEND_TO_FIFO_4: 
+			begin
+				fifo_data_in=adc_data_out_2;
+				fifo_wr_en_d<=1'b0;
 				state_d<=MEASURE_MODE_GENERATOR_OFF;
-			end	
+			end
 		
 			MEASURE_MODE_GENERATOR_OFF:
 			begin
@@ -374,26 +416,6 @@ always @ (*) begin	//FSM
 				end
 			end			
 //------------------------------------------------			
-		/*	MEASURE_MODE_2:
-			begin
-
-			end
-//------------------------------------------------			
-			MEASURE_MODE_3:
-			begin
-
-			end
-//------------------------------------------------			
-			MEASURE_MODE_4:
-			begin
-
-			end
-			
-			MEASURE_MODE_5:
-			begin
-
-			end*/
-//------------------------------------------------			
 			DONE:
 			begin
 
@@ -419,6 +441,9 @@ always @ (*) begin	//FSM
 		 gen_enable_q<=1'b0;
 		 delay_counter_q<=2'b00;
 		 mode_reg_q<=MEASURE_MODE_1;//
+		 
+		 fifo_wr_en_q<=1'b0;
+		 fifo_rd_en_q<=1'b0;	
     end 
 	 else 
 	 begin
@@ -430,8 +455,10 @@ always @ (*) begin	//FSM
 		 dac_reg_start_q<=dac_reg_start_d;
 		 gen_enable_q<=gen_enable_d;
 		 delay_counter_q<=delay_counter_d;
-		 mode_reg_q<=mode_reg_d;
-		 //read_diapason_q<=read_diapason_d;	 
+		 mode_reg_q<=mode_reg_d;	
+		
+		 fifo_wr_en_q<=fifo_wr_en_d;
+		 fifo_rd_en_q<=fifo_rd_en_d;	
     end
 	end			
 

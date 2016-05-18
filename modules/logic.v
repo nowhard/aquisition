@@ -26,57 +26,79 @@ module logic(
 	 reg dac_reg_start_d, dac_reg_start_q; 
 	 wire dac_reg_start=dac_reg_start_q;
 	 
-	 reg gen_enable_d, gen_enable_q;
-	 wire gen_enable=gen_enable_q;
+//	 reg gen_enable_d, gen_enable_q;
+//	 wire gen_enable=gen_enable_q;
 	 
 	 reg [1:0]delay_counter_d, delay_counter_q;
 	 
 	 reg [2:0] mode_reg_d, mode_reg_q;
 
 	 reg [7:0] dac_reg_data_out;
-	 reg dac_reg_new_data;
+	 wire dac_reg_new_data;
 	 reg read_diapason;
 	
 
 	// CS DAC REG
 	localparam [1:0]
-				CS_DAC_REG_NONE		=2'b3,
-				CS_DAC_REG_DAC			=2'b1,
-				CS_DAC_REG_REG			=2'b2;
-	//FSM	 state coding	
+				CS_DAC_REG_NONE		=2'b11,
+				CS_DAC_REG_DAC			=2'b01,
+				CS_DAC_REG_REG			=2'b10;
+
+//FSM	 state coding	
   localparam [STATE_SIZE-1:0]  	
 				IDLE 										= 1, 
 				START_CYCLE								= 2,
-				//SET_START_DIAPASON					= 3,???
 				MEASURE_MODE_DIAPASON				= 3,
-				ESTABLISH_DIAPASON					= 3,
-				MEASURE_MODE_1							= 4,
-				MEASURE_MODE_2							= 5,
-				MEASURE_MODE_3							= 6,
-				MEASURE_MODE_4							= 7,
-				MEASURE_MODE_5							= 8,
-				DONE										= 9;
+				MEASURE_MODE_START					= 4,
+				MEASURE_MODE_START_SET_DIAP_KEYS = 5,
+				MEASURE_MODE_WAIT_SPI				= 6,
+				MEASURE_MODE_GENERATOR_ON			= 7,
+				MEASURE_MODE_SET_MULTIPLEXOR		= 8,
+				MEASURE_MODE_SET_DELAY_1			= 9,
+				MEASURE_MODE_START_MEASURE			= 10,
+				MEASURE_MODE_WAIT_MEASURE_RESULT	= 11,
+				MEASURE_MODE_SEND_TO_FIFO_1		= 12,
+				MEASURE_MODE_SEND_TO_FIFO_2		= 13,
+				MEASURE_MODE_SET_MULTIPLEXOR_2	= 14,
+				MEASURE_MODE_SET_DELAY_2			= 15,
+				MEASURE_MODE_START_MEASURE_2		= 16,
+				MEASURE_MODE_WAIT_MEASURE_RESULT_2 = 17,
+				MEASURE_MODE_SEND_TO_FIFO_3		= 18,
+				MEASURE_MODE_SEND_TO_FIFO_4		= 19,
+				MEASURE_MODE_GENERATOR_OFF			= 20,
+				MEASURE_MODE_MULTIPLEXOR_OFF		= 21,
+				MEASURE_MODE_END						= 22,
+				DONE										= 23;
+				
+// Measure mode
+  localparam [2:0] 
+				MEASURE_MODE_DIAP						= 0,
+				MEASURE_MODE_1							= 1,
+				MEASURE_MODE_2							= 2,
+				MEASURE_MODE_3							= 3,
+				MEASURE_MODE_4							= 4,
+				MEASURE_MODE_5							= 5;
 
 // Mode reg
-	localparam [7:0]
-				REG_MODE_NONE	=8'b00000000,
+//	localparam [7:0]
+	/*			REG_MODE_NONE	=8'b00000000,
 				REG_MODE_DIAP	=8'b00000001,
 				REG_MODE_1		=8'b00000001,
 				REG_MODE_2		=8'b00000001,
 				REG_MODE_3		=8'b00000001,
 				REG_MODE_4		=8'b00000001,
-				REG_MODE_5		=8'b00000001;
+				REG_MODE_5		=8'b00000001;*/
 //MUX 				
 	localparam [2:0]
 				MUX_NONE			=3'b000,
 				MUX_MN_NM		=3'b001,
 				MUX_CURRENT		=3'b010;
-	
+//Diap	
 	localparam [2:0]
 				DIAP_5V			=3'b001,
 				DIAP_10V			=3'b010,
 				DIAP_20V			=3'b100;
-				
+//Key states				
   localparam [4:0]  	
 				MEASURE_MODE_1_KEY		= 1,
 				MEASURE_MODE_2_KEY		= 2,
@@ -90,7 +112,9 @@ reg gen_sample_clk;
 wire gen_out;		
 wire gen_new_period;
 wire gen_start_conv;	
-wire gen_enable=enable;
+reg gen_enable_d, gen_enable_q;
+wire gen_enable=gen_enable_q;
+//wire gen_enable=enable;
 wire gen_halfcycle;
 sin_gen dev_sin_gen(.clk(clk),.sample_clk(gen_sample_clk),.rst(rst),.enable(gen_enable),.out(gen_out),.new_period(gen_new_period),.start_conv(gen_start_conv),.halfcycle(gen_halfcycle));	
 			
@@ -98,7 +122,7 @@ sin_gen dev_sin_gen(.clk(clk),.sample_clk(gen_sample_clk),.rst(rst),.enable(gen_
 localparam SPI_DAC_REG_CLK_DIV=2;
 localparam SPI_DAC_REG_DATA_WIDTH=8;
 
-spi_master #(.CLK_DIV(SPI_DAC_REG_CLK_DIV),.DATA_WIDTH(SPI_DAC_REG_DATA_WIDTH)) dac_reg_spi_master(.clk(clk),.rst(rst),.miso(dac_reg_miso),.mosi(dac_reg_mosi),.sck(dac_reg_sck),.start(dac_reg_start),.data_in(dac_reg_data_in),.data_out(dac_reg_data_out),.busy(dac_reg_busy),.new_data(dac_reg_new_data));
+spi_master #(.CLK_DIV(SPI_DAC_REG_CLK_DIV),.DATA_WIDTH(SPI_DAC_REG_DATA_WIDTH)) dac_reg_spi_master(.clk(clk),.rst(rst),.miso(dac_reg_miso),.mosi(dac_reg_mosi),.sck(dac_reg_sck),.start(dac_reg_start),.data_in(dac_reg_data_out),.data_out(dac_reg_data_in),.busy(dac_reg_busy),.new_data(dac_reg_new_data));
 //------------ADC read----------------
 localparam ADC_OUTPUT_DATA_WIDTH = 24;
 reg adc_read_diapason;
@@ -106,6 +130,9 @@ reg adc_start_cycle_conv;
 wire adc_cycle_complete;
 wire [ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_1;
 wire [ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_2;
+
+reg[ADC_OUTPUT_DATA_WIDTH-1:0] diap_current, diap_potential;
+
 adc_read  #(.OUTPUT_DATA_WIDTH(ADC_OUTPUT_DATA_WIDTH))dev_adc_read(.clk(clk),.rst(rst),.sample_adc(gen_start_conv),.start_cycle_conv(adc_start_cycle_conv),.halfcycle(gen_halfcycle),.read_diapason(adc_read_diapason),.complete(adc_cycle_complete),.data_out_1(adc_data_out_1),.data_out_2(adc_data_out_2),.cnv(adc_cnv),.adc_busy(adc_busy),.miso(adc_miso),.sck(adc_sck));
 //------------------------------------	
 reg [1:0] sample_clk_r;
@@ -129,7 +156,7 @@ wire fifo_rd_en=fifo_rd_en_q;
 syn_fifo dev_syn_fifo(.data_out(fifo_data_out),.full(fifo_full),.empty(fifo_empty),.data_in(fifo_data_in),.clk(clk),.rst_a(rst),.wr_en(fifo_wr_en),.rd_en(fifo_rd_en));
 //-------------------------------------
  
-always @(posedge clk) begin
+always @(posedge clk) begin//???
 	if(rst)
 	begin
 		sample_clk_r<=2'b00;
@@ -167,13 +194,43 @@ always @ (*) begin	//FSM
 //------------------------------------------------						
 			START_CYCLE:
 			begin
-				
+				state_d<=MEASURE_MODE_DIAPASON;
 			end
 //------------------------------------------------			
 			MEASURE_MODE_DIAPASON:
 			begin
-
+				
 			end
+			
+			MEASURE_MODE_DIAPASON:
+			begin
+				
+			end
+
+			MEASURE_MODE_DIAPASON:
+			begin
+				
+			end
+
+			MEASURE_MODE_DIAPASON:
+			begin
+				
+			end
+
+			MEASURE_MODE_DIAPASON:
+			begin
+				
+			end
+
+			MEASURE_MODE_DIAPASON:
+			begin
+				
+			end
+
+			MEASURE_MODE_DIAPASON:
+			begin
+				
+			end			
 //------------------------------------------------			
 			MEASURE_MODE_START:
 			begin
@@ -182,6 +239,12 @@ always @ (*) begin	//FSM
 				
 				//set keys from mode (case)
 				case (mode_reg_q)
+				
+					MEASURE_MODE_DIAP:
+					begin
+						keys_d<=;//???
+						diap_d<=;//???
+					end	
 				
 					MEASURE_MODE_1:
 					begin
@@ -206,13 +269,15 @@ always @ (*) begin	//FSM
 					MEASURE_MODE_5:
 					begin
 						keys_d<=MEASURE_MODE_5_KEY;
-					end					
+					end
+				endcase
 				//-----------------
 			end
 			
 			MEASURE_MODE_START_SET_DIAP_KEYS:
 			begin
-				dac_reg_data_out<={diap_q,keys_q};
+
+				dac_reg_data_out<={diap_q,keys_q};				
 				dac_reg_start_d<=1'b1;
 				state_d<=MEASURE_MODE_WAIT_SPI;
 			end
@@ -234,37 +299,10 @@ always @ (*) begin	//FSM
 			
 			MEASURE_MODE_SET_MULTIPLEXOR:
 			begin
-				//set mux from mode (case)
-			/*	case (mode_reg_q)//??? not use!!!
-				
-					MEASURE_MODE_1:
-					begin
-					
-					end	
-					
-					MEASURE_MODE_2:
-					begin
-					
-					end	
-
-					MEASURE_MODE_3:
-					begin
-					
-					end	
-
-					MEASURE_MODE_4:
-					begin
-					
-					end	
-
-					MEASURE_MODE_5:
-					begin
-					
-					end	*/				
-				//-----------------				
+				//set mux from mode (case)		
 				analog_mux_chn_d<=MUX_CURRENT;
 				delay_counter_d<=WAIT_PERIODS;
-				state_d<=MEASURE_MODE_DELAY;
+				state_d<=MEASURE_MODE_SET_DELAY_1;
 			end
 			
 			MEASURE_MODE_SET_DELAY_1:
@@ -284,6 +322,15 @@ always @ (*) begin	//FSM
 
 			MEASURE_MODE_START_MEASURE:
 			begin
+				if(mode_reg_q==MEASURE_MODE_DIAP)//???
+				begin
+					adc_read_diapason=1'b1;
+				end
+				else
+				begin
+					adc_read_diapason=1'b0;
+				end
+				
 				adc_start_cycle_conv=1'b1;
 				state_d<=MEASURE_MODE_WAIT_MEASURE_RESULT;
 			end
@@ -293,7 +340,17 @@ always @ (*) begin	//FSM
 				adc_start_cycle_conv=1'b0;
 				if(adc_cycle_complete)
 				begin
-					state_d<=MEASURE_MODE_SEND_TO_FIFO;
+					if(mode_reg_q==MEASURE_MODE_DIAP)//???
+					begin
+						diap_current<=adc_data_out_1;
+						state_d<=MEASURE_MODE_SET_MULTIPLEXOR_2;
+						
+					end
+					else
+					begin
+						state_d<=MEASURE_MODE_SEND_TO_FIFO_1;
+					end
+					
 				end
 			end			
 			
@@ -308,42 +365,22 @@ always @ (*) begin	//FSM
 			begin
 				fifo_data_in=adc_data_out_2;
 				fifo_wr_en_d<=1'b0;
-				state_d<=MEASURE_MODE_1_SET_MULTIPLEXOR_2;
+				if(mode_reg_q==MEASURE_MODE_1)
+				begin
+					state_d<=MEASURE_MODE_GENERATOR_OFF;
+				end
+				else
+				begin
+					state_d<=MEASURE_MODE_SET_MULTIPLEXOR_2;
+				end
+				
 			end
 
 			MEASURE_MODE_SET_MULTIPLEXOR_2:
-			begin
-				//set mux from mode (case)
-		/*		case (mode_reg_q)// not use!!!
-				
-					MEASURE_MODE_1:
-					begin
-					
-					end	
-					
-					MEASURE_MODE_2:
-					begin
-					
-					end	
-
-					MEASURE_MODE_3:
-					begin
-					
-					end	
-
-					MEASURE_MODE_4:
-					begin
-					
-					end	
-
-					MEASURE_MODE_5:
-					begin
-					
-					end	*/				
-				//-----------------				
+			begin		
 				analog_mux_chn_d<=MUX_MN_NM;//???
 				delay_counter_d<=WAIT_PERIODS;
-				state_d<=MEASURE_MODE_2_DELAY;
+				state_d<=MEASURE_MODE_SET_DELAY_2;
 			end
 
 			MEASURE_MODE_SET_DELAY_2:
@@ -372,7 +409,15 @@ always @ (*) begin	//FSM
 				adc_start_cycle_conv<=1'b0;
 				if(adc_cycle_complete)
 				begin
-					state_d<=MEASURE_MODE_SEND_TO_FIFO_3;
+					if(mode_reg_q==MEASURE_MODE_DIAP)//???
+					begin
+						diap_potential<=adc_data_out_1;
+						state_d<=;						
+					end
+					else
+					begin
+						state_d<=MEASURE_MODE_SEND_TO_FIFO_3;
+					end
 				end
 			end			
 						
@@ -407,7 +452,7 @@ always @ (*) begin	//FSM
 			begin
 				if(mode_reg_q==MEASURE_MODE_5)
 				begin
-				//???
+					state_d<=DONE;
 				end
 				else
 				begin

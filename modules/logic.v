@@ -80,15 +80,6 @@ localparam [STATE_SIZE-1:0]
 			MEASURE_MODE_4							= 4,
 			MEASURE_MODE_5							= 5;
 
-// Mode reg
-//	localparam [7:0]
-/*			REG_MODE_NONE	=8'b00000000,
-			REG_MODE_DIAP	=8'b00000001,
-			REG_MODE_1		=8'b00000001,
-			REG_MODE_2		=8'b00000001,
-			REG_MODE_3		=8'b00000001,
-			REG_MODE_4		=8'b00000001,
-			REG_MODE_5		=8'b00000001;*/
 //MUX 				
 localparam [2:0]
 			MUX_NONE			=3'b000,
@@ -107,6 +98,11 @@ localparam [4:0]
 			MEASURE_MODE_3_KEY		= 3,
 			MEASURE_MODE_4_KEY		= 4,
 			MEASURE_MODE_5_KEY		= 5;
+			
+localparam [23:0]
+			DIAP1_MARGIN				= 0,
+			DIAP2_MARGIN				= 1,
+			DIAP3_MARGIN				= 2;
 			
 localparam WAIT_PERIODS	= 2;
 //---generator 5000 Hz--------------
@@ -157,7 +153,28 @@ wire 	fifo_rd_en=fifo_rd_en_q;
 
 syn_fifo dev_syn_fifo(.data_out(fifo_data_out),.full(fifo_full),.empty(fifo_empty),.data_in(fifo_data_in),.clk(clk),.rst_a(rst),.wr_en(fifo_wr_en),.rd_en(fifo_rd_en));
 //-------------------------------------
- 
+localparam CLOCK_DIVIDER	= 78;
+reg [6:0]clock_div_counter;
+always @(posedge clk) begin//clock divider
+	if(rst)
+	begin
+		clock_div_counter<=7'b0000000;
+	end
+	else
+	begin
+		clock_div_counter=clock_div_counter+1;
+		if(clock_div_counter==CLOCK_DIVIDER)
+		begin
+			gen_sample_clk<=1;
+			clock_div_counter<=7'b0000000;
+		end
+		else if(clock_div_counter==(CLOCK_DIVIDER/2))
+		begin
+			gen_sample_clk<=0;
+		end
+	end
+end
+//------------------------------------- 
 always @(posedge clk) begin//???
 	if(rst)
 	begin
@@ -184,9 +201,11 @@ always @ (*) begin	//FSM
 	 fifo_rd_en_d=1'b0;//fifo_rd_en_q;
 	 
 		case (state_q)
-		
+		//enable generator!!!
+		//gen_enable_d<=1;!!!
 			IDLE:
 			begin
+				gen_enable_d<=1;
 				if(enable && gen_new_period)
 				begin
 					state_d <= START_CYCLE;
@@ -468,6 +487,8 @@ always @ (*) begin	//FSM
 		 
 		 fifo_wr_en_q<=1'b0;
 		 fifo_rd_en_q<=1'b0;	
+		 
+		 adc_start_cycle_conv<=1'b0;
     end 
 	 else 
 	 begin
@@ -490,22 +511,67 @@ endmodule
 
 
 //-----------------------testbench----------------------------
-/*`timescale 1 ps/ 1 ps
+`timescale 1 ps/ 1 ps
 module logic_tb();
+
+	reg clk;
+	reg rst;
+	//---ADC signals-------
+	wire adc_cnv;
+	reg  adc_busy;
+	wire [2:0]analog_mux_chn;
+	
+	//---ADC SPI signals---	 	
+	reg  adc_miso;
+	wire adc_sck;
+	//---DAC & comm SPI----
+	reg  dac_reg_mosi;
+	wire dac_reg_sck;
+
+	wire [1:0]cs_dac_reg;
+
+	reg enable;
+	
+	 //-------adc emul---
+	 reg [35:0] adc_shift_reg;
+	 //-------------------------
+	
+	logic test_logic(.clk(clk),.rst(rst),.adc_cnv(adc_cnv),.adc_busy(adc_busy),.analog_mux_chn(analog_mux_chn),.adc_miso(adc_miso),.adc_sck(adc_sck),.dac_reg_mosi(dac_reg_mosi),.dac_reg_sck(dac_reg_sck),.cs_dac_reg(cs_dac_reg),.enable(enable));
+	
 	 initial
 	 begin
-		clk=0;
+		clk<=0;
+		rst<=0;
+		enable<=1;
+		adc_busy<=0;
+		#100
 		rst=1;
-		#500
+		#100
 		rst=0;
 	 end
 	 
-	   always @(negedge sck) 
-		begin
+	/*always @(negedge sck) 
+	begin
 
-			
-		end
+		
+	end*/
+	
+	 always @(posedge clk) begin
+	 
+	 end
+	 
+	 always @(posedge adc_cnv) begin
+		adc_busy<=1;
+		adc_shift_reg=36'b1;
+		#100
+		adc_busy<=0;
+	 end
+	
+	 always @(posedge adc_sck) begin
+		adc_miso<=adc_shift_reg[35];
+		adc_shift_reg[35:0]<={adc_shift_reg[34:0],1'b0};
+	 end
 	 
 	 always 
 		#5  clk =  ! clk;    
-endmodule*/
+endmodule

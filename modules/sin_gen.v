@@ -15,7 +15,7 @@ reg sample_p;
 
 always @(posedge clk)
 begin
-  if (rst)
+  if (!rst)
   begin
 		if(sample_p!=sample_clk)
 		begin

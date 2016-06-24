@@ -19,6 +19,7 @@ module logic(
 localparam STATE_SIZE = 5;
 reg 	[STATE_SIZE-1:0] state_d, state_q;
 reg 	[2:0] analog_mux_chn_d,analog_mux_chn_q;
+assign analog_mux_chn=analog_mux_chn_q;
 reg 	[4:0] keys_d, keys_q;
 reg 	[2:0] diap_d, diap_q;
 reg 	[1:0] cs_dac_reg_d, cs_dac_reg_q;
@@ -107,7 +108,7 @@ localparam [23:0]
 localparam WAIT_PERIODS	= 2;
 //---generator 5000 Hz--------------
 reg 	gen_sample_clk;	
-wire 	gen_out;		
+wire 	[7:0]gen_out;		
 wire 	gen_new_period;
 wire 	gen_start_conv;	
 reg 	gen_enable_d, gen_enable_q;

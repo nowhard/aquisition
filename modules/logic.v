@@ -125,14 +125,14 @@ spi_master #(.CLK_DIV(SPI_DAC_REG_CLK_DIV),.DATA_WIDTH(SPI_DAC_REG_DATA_WIDTH)) 
 //------------ADC read----------------
 localparam ADC_OUTPUT_DATA_WIDTH = 24;
 reg 	adc_read_diapason;
-reg 	adc_start_cycle_conv;
+reg 	adc_start_cycle_conv_d, adc_start_cycle_conv_q;
 wire 	adc_cycle_complete;
 wire 	[ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_1;
 wire 	[ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_2;
 
 reg	[ADC_OUTPUT_DATA_WIDTH-1:0] diap_current, diap_potential;
 
-adc_read  #(.OUTPUT_DATA_WIDTH(ADC_OUTPUT_DATA_WIDTH))dev_adc_read(.clk(clk),.rst(rst),.sample_adc(gen_start_conv),.start_cycle_conv(adc_start_cycle_conv),.halfcycle(gen_halfcycle),.read_diapason(adc_read_diapason),.complete(adc_cycle_complete),.data_out_1(adc_data_out_1),.data_out_2(adc_data_out_2),.cnv(adc_cnv),.adc_busy(adc_busy),.miso(adc_miso),.sck(adc_sck));
+adc_read  #(.OUTPUT_DATA_WIDTH(ADC_OUTPUT_DATA_WIDTH))dev_adc_read(.clk(clk),.rst(rst),.sample_adc(gen_start_conv),.start_cycle_conv(adc_start_cycle_conv_q),.halfcycle(gen_halfcycle),.read_diapason(adc_read_diapason),.complete(adc_cycle_complete),.data_out_1(adc_data_out_1),.data_out_2(adc_data_out_2),.cnv(adc_cnv),.adc_busy(adc_busy),.miso(adc_miso),.sck(adc_sck));
 //------------------------------------	
 reg 	[1:0] sample_clk_r;
 wire 	sig_sample_clk=(sample_clk_r[1]!=sample_clk_r[0])&sample_clk_r[0];	
@@ -197,6 +197,7 @@ always @ (*) begin	//FSM
 	 gen_enable_d=gen_enable_q;
 	 delay_counter_d=delay_counter_q;
 	 mode_reg_d=mode_reg_q;
+	 adc_start_cycle_conv_d=adc_start_cycle_conv_q;
 	 
 	 fifo_wr_en_d=1'b0;//fifo_wr_en_q;
 	 fifo_rd_en_d=1'b0;//fifo_rd_en_q;
@@ -327,13 +328,13 @@ always @ (*) begin	//FSM
 					adc_read_diapason=1'b0;
 				end
 				
-				adc_start_cycle_conv=1'b1;
+				adc_start_cycle_conv_d=1'b1;
 				state_d<=MEASURE_MODE_WAIT_MEASURE_RESULT;
 			end
 			
 			MEASURE_MODE_WAIT_MEASURE_RESULT:
 			begin
-				adc_start_cycle_conv=1'b0;
+				adc_start_cycle_conv_d=1'b0;
 				if(adc_cycle_complete)
 				begin
 					if(mode_reg_q==MEASURE_MODE_DIAP)
@@ -352,14 +353,14 @@ always @ (*) begin	//FSM
 			MEASURE_MODE_SEND_TO_FIFO_1:
 			begin
 				fifo_data_in=adc_data_out_1;
-				fifo_wr_en_d<=1'b0;
+				fifo_wr_en_d<=1'b1;
 				state_d<=MEASURE_MODE_SEND_TO_FIFO_2;
 			end
 			
 			MEASURE_MODE_SEND_TO_FIFO_2: 
 			begin
 				fifo_data_in=adc_data_out_2;
-				fifo_wr_en_d<=1'b0;
+				fifo_wr_en_d<=1'b1;
 				if(mode_reg_q==MEASURE_MODE_1)
 				begin
 					state_d<=MEASURE_MODE_GENERATOR_OFF;
@@ -394,13 +395,13 @@ always @ (*) begin	//FSM
 	
 			MEASURE_MODE_START_MEASURE_2:
 			begin
-				adc_start_cycle_conv<=1'b1;
+				adc_start_cycle_conv_d<=1'b1;
 				state_d<=MEASURE_MODE_WAIT_MEASURE_RESULT_2;
 			end
 			
 			MEASURE_MODE_WAIT_MEASURE_RESULT_2:
 			begin
-				adc_start_cycle_conv<=1'b0;
+				adc_start_cycle_conv_d<=1'b0;
 				if(adc_cycle_complete)
 				begin
 					if(mode_reg_q==MEASURE_MODE_DIAP)//???
@@ -418,14 +419,14 @@ always @ (*) begin	//FSM
 			MEASURE_MODE_SEND_TO_FIFO_3:
 			begin
 				fifo_data_in=adc_data_out_1;
-				fifo_wr_en_d<=1'b0;
+				fifo_wr_en_d<=1'b1;
 				state_d<=MEASURE_MODE_SEND_TO_FIFO_4;
 			end
 			
 			MEASURE_MODE_SEND_TO_FIFO_4: 
 			begin
 				fifo_data_in=adc_data_out_2;
-				fifo_wr_en_d<=1'b0;
+				fifo_wr_en_d<=1'b1;
 				state_d<=MEASURE_MODE_GENERATOR_OFF;
 			end
 		
@@ -489,7 +490,7 @@ always @ (*) begin	//FSM
 		 fifo_wr_en_q<=1'b0;
 		 fifo_rd_en_q<=1'b0;	
 		 
-		 adc_start_cycle_conv<=1'b0;
+		 adc_start_cycle_conv_q<=1'b0;
     end 
 	 else 
 	 begin
@@ -502,6 +503,8 @@ always @ (*) begin	//FSM
 		 gen_enable_q<=gen_enable_d;
 		 delay_counter_q<=delay_counter_d;
 		 mode_reg_q<=mode_reg_d;	
+		 
+		 adc_start_cycle_conv_q<=adc_start_cycle_conv_d;
 		
 		 fifo_wr_en_q<=fifo_wr_en_d;
 		 fifo_rd_en_q<=fifo_rd_en_d;	

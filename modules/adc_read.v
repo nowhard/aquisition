@@ -45,6 +45,8 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
   localparam STATE_SIZE = 4;
   localparam MEASURE_COUNT_WIDTH = 11;
   
+  localparam ADC_SHIFT_REF_VAL=1000000;
+  
 
   
   reg [STATE_SIZE-1:0] state_d, state_q;
@@ -53,6 +55,9 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
   
   reg [OUTPUT_DATA_WIDTH-1:0] data_out_1_d ,data_out_1_q;
   reg [OUTPUT_DATA_WIDTH-1:0] data_out_2_d ,data_out_2_q;
+  
+  wire [OUTPUT_DATA_WIDTH-1:0] result_1;
+  wire [OUTPUT_DATA_WIDTH-1:0] result_2;
 
   
   reg [1:0] sample_adc_r;  
@@ -76,7 +81,8 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
   assign data_out_2 = data_out_2_q;
   
   assign cnv=cnv_q;
-  	
+  
+
 //------------------SPI---------------------------
 
   //----ADC regs----
@@ -98,6 +104,9 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
     wire[ADC_DATA_WIDTH-1:0] spi_data_out;
     	 
 	 spi_master #(.CLK_DIV(SPI_ADC_CLK_DIV),.DATA_WIDTH(SPI_ADC_DATA_WIDTH)) adc_spi_master(.clk(clk),.rst(rst),.miso(miso),.mosi(mosi),.sck(sck),.start(spi_start),.data_in(spi_data_in),.data_out(spi_data_out),.busy(spi_busy),.new_data(spi_done));
+	 
+  assign result_1 = (spi_data_out[CHANNEL_DATA_WIDTH-1:0]>ADC_SHIFT_REF_VAL) ? (spi_data_out[CHANNEL_DATA_WIDTH-1:0]-ADC_SHIFT_REF_VAL):(ADC_SHIFT_REF_VAL-spi_data_out[CHANNEL_DATA_WIDTH-1:0]);
+  assign result_2 = (spi_data_out[ADC_DATA_WIDTH-1:CHANNEL_DATA_WIDTH]>ADC_SHIFT_REF_VAL) ? (spi_data_out[ADC_DATA_WIDTH-1:CHANNEL_DATA_WIDTH]-ADC_SHIFT_REF_VAL):(ADC_SHIFT_REF_VAL-spi_data_out[ADC_DATA_WIDTH-1:CHANNEL_DATA_WIDTH]);	
 //------------------------------------------------				
 							
  always @(posedge clk) begin //async signals
@@ -127,6 +136,7 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 	 result_integrator_2_d=result_integrator_2_q;
     data_out_1_d=data_out_1_q;
 	 data_out_2_d=data_out_2_q;	 
+	 
 		case (state_q)
 		
 			IDLE:
@@ -182,8 +192,8 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 			SUMM_RESULT:
 			begin
 				measure_count_d<=measure_count_q+1;
-				result_integrator_1_d<=result_integrator_1_q+spi_data_out[CHANNEL_DATA_WIDTH-1:0];
-				result_integrator_2_d<=result_integrator_2_q+spi_data_out[ADC_DATA_WIDTH-1:CHANNEL_DATA_WIDTH];
+				result_integrator_1_d<=result_integrator_1_q+result_1;
+				result_integrator_2_d<=result_integrator_2_q+result_2;
 				state_d <= TEST_FOR_END_CYCLE;
 			end
 			
@@ -252,7 +262,7 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
 	end
   endmodule
   
-  
+ //--------------------------------------------------------------------------------------------- 
 `timescale 1 ns/ 1 ns 
  module adc_read_tb();
 	

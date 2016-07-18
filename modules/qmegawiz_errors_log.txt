@@ -1,0 +1,13 @@
+
+
+D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/dcfifo.v
+
+Jul 18 11AM:22:06>: Variation file name (dcfifo) is identical with the name of one of its sub-components.
+
+MegaWizard Plug-In Manager will rename the variation to "dcfifa" to prevent compilation errors
+
+D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/dcfifo.v
+
+Jul 18 12PM:10:31>: Variation file name (dcfifo) is identical with the name of one of its sub-components.
+
+MegaWizard Plug-In Manager will rename the variation to "dcfifa" to prevent compilation errors

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for aquisition
-Fri Feb 26 12:48:10 2016
+Mon Jul 18 14:51:11 2016
 Quartus II Version 10.1 Build 153 11/29/2010 SJ Full Version
 
 
@@ -9,7 +9,46 @@ Quartus II Version 10.1 Build 153 11/29/2010 SJ Full Version
   1. Legal Notice
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
-  4. Analysis & Synthesis Messages
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. Analysis & Synthesis RAM Summary
+  8. Analysis & Synthesis IP Cores Summary
+  9. State Machine - |logic|state_q
+ 10. State Machine - |logic|adc_read:dev_adc_read|state_q
+ 11. State Machine - |logic|adc_read:dev_adc_read|spi_master:adc_spi_master|state_q
+ 12. State Machine - |logic|spi_master:dac_reg_spi_master|state_q
+ 13. Registers Protected by Synthesis
+ 14. User-Specified and Inferred Latches
+ 15. Registers Removed During Synthesis
+ 16. General Register Statistics
+ 17. Inverted Register Statistics
+ 18. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 19. Source assignments for sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated
+ 20. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component
+ 21. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated
+ 22. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_d86:rdptr_g1p
+ 23. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_21c:wrptr_g1p
+ 24. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_11c:wrptr_gp
+ 25. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|altsyncram_1nu:fifo_ram
+ 26. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|dffpipe_c2e:rdaclr
+ 27. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_5u7:rs_dgwp
+ 28. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_5u7:rs_dgwp|dffpipe_vu8:dffpipe16
+ 29. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_6u7:ws_dgrp
+ 30. Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_6u7:ws_dgrp|dffpipe_0v8:dffpipe19
+ 31. Parameter Settings for User Entity Instance: sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component
+ 32. Parameter Settings for User Entity Instance: spi_master:dac_reg_spi_master
+ 33. Parameter Settings for User Entity Instance: adc_read:dev_adc_read
+ 34. Parameter Settings for User Entity Instance: adc_read:dev_adc_read|spi_master:adc_spi_master
+ 35. Parameter Settings for User Entity Instance: dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component
+ 36. altsyncram Parameter Settings by Entity Instance
+ 37. dcfifo Parameter Settings by Entity Instance
+ 38. Port Connectivity Checks: "dc_fifo:dev_dc_fifo"
+ 39. Port Connectivity Checks: "adc_read:dev_adc_read|spi_master:adc_spi_master"
+ 40. Port Connectivity Checks: "spi_master:dac_reg_spi_master"
+ 41. Elapsed Time Per Partition
+ 42. Analysis & Synthesis Messages
+ 43. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -35,24 +74,20 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                   ;
 +------------------------------------+-------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Fri Feb 26 12:48:10 2016         ;
+; Analysis & Synthesis Status        ; Successful - Mon Jul 18 14:51:11 2016     ;
 ; Quartus II Version                 ; 10.1 Build 153 11/29/2010 SJ Full Version ;
 ; Revision Name                      ; aquisition                                ;
-; Top-level Entity Name              ; aquisition                                ;
-; Family                             ; Cyclone IV GX                             ;
-; Total logic elements               ; N/A until Partition Merge                 ;
-;     Total combinational functions  ; N/A until Partition Merge                 ;
-;     Dedicated logic registers      ; N/A until Partition Merge                 ;
-; Total registers                    ; N/A until Partition Merge                 ;
-; Total pins                         ; N/A until Partition Merge                 ;
-; Total virtual pins                 ; N/A until Partition Merge                 ;
-; Total memory bits                  ; N/A until Partition Merge                 ;
-; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                 ;
-; Total GXB Receiver Channel PCS     ; N/A until Partition Merge                 ;
-; Total GXB Receiver Channel PMA     ; N/A until Partition Merge                 ;
-; Total GXB Transmitter Channel PCS  ; N/A until Partition Merge                 ;
-; Total GXB Transmitter Channel PMA  ; N/A until Partition Merge                 ;
-; Total PLLs                         ; N/A until Partition Merge                 ;
+; Top-level Entity Name              ; logic                                     ;
+; Family                             ; Cyclone II                                ;
+; Total logic elements               ; 562                                       ;
+;     Total combinational functions  ; 524                                       ;
+;     Dedicated logic registers      ; 326                                       ;
+; Total registers                    ; 326                                       ;
+; Total pins                         ; 41                                        ;
+; Total virtual pins                 ; 0                                         ;
+; Total memory bits                  ; 1,536                                     ;
+; Embedded Multiplier 9-bit elements ; 0                                         ;
+; Total PLLs                         ; 0                                         ;
 +------------------------------------+-------------------------------------------+
 
 
@@ -61,8 +96,9 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                     ; Setting            ; Default Value      ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
-; Top-level entity name                                                      ; aquisition         ; aquisition         ;
-; Family name                                                                ; Cyclone IV GX      ; Cyclone IV GX      ;
+; Device                                                                     ; EP2C5T144C6        ;                    ;
+; Top-level entity name                                                      ; logic              ; aquisition         ;
+; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
 ; Use smart compilation                                                      ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
 ; Enable compact report table                                                ; Off                ; Off                ;
@@ -100,13 +136,11 @@ applicable agreement for further details.
 ; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
 ; Auto ROM Replacement                                                       ; On                 ; On                 ;
 ; Auto RAM Replacement                                                       ; On                 ; On                 ;
-; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
 ; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
 ; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
 ; Strict RAM Replacement                                                     ; Off                ; Off                ;
 ; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
 ; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
-; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
 ; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
 ; Auto Resource Sharing                                                      ; Off                ; Off                ;
 ; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
@@ -114,7 +148,7 @@ applicable agreement for further details.
 ; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
 ; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
 ; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
-; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
 ; Report Parameter Settings                                                  ; On                 ; On                 ;
 ; Report Source Assignments                                                  ; On                 ; On                 ;
 ; Report Connectivity Checks                                                 ; On                 ; On                 ;
@@ -138,23 +172,864 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                           ;
++--------------------------------------------------------------+-----------------+----------------------------------------+----------------------------------------------------------------------------------------+
+; File Name with User-Entered Path                             ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                           ;
++--------------------------------------------------------------+-----------------+----------------------------------------+----------------------------------------------------------------------------------------+
+; ../modules/spi_master.v                                      ; yes             ; User Verilog HDL File                  ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/spi_master.v                     ;
+; ../modules/sin_gen.v                                         ; yes             ; User Verilog HDL File                  ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/sin_gen.v                        ;
+; ../modules/adc_read.v                                        ; yes             ; User Verilog HDL File                  ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/adc_read.v                       ;
+; ../modules/logic.v                                           ; yes             ; User Verilog HDL File                  ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/logic.v                          ;
+; sine_rom.v                                                   ; yes             ; User Wizard-Generated File             ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/sine_rom.v                ;
+; dc_fifo.v                                                    ; yes             ; User Wizard-Generated File             ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/dc_fifo.v                 ;
+; altsyncram.tdf                                               ; yes             ; Megafunction                           ; c:/altera/10.1/quartus/libraries/megafunctions/altsyncram.tdf                          ;
+; db/altsyncram_oq71.tdf                                       ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/altsyncram_oq71.tdf    ;
+; /projects/git_repository/verilog/aquisition/modules/sine.mif ; yes             ; Auto-Found Memory Initialization File  ; /projects/git_repository/verilog/aquisition/modules/sine.mif                           ;
+; dcfifo.tdf                                                   ; yes             ; Megafunction                           ; c:/altera/10.1/quartus/libraries/megafunctions/dcfifo.tdf                              ;
+; db/dcfifo_caf1.tdf                                           ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/dcfifo_caf1.tdf        ;
+; db/a_graycounter_d86.tdf                                     ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/a_graycounter_d86.tdf  ;
+; db/a_graycounter_21c.tdf                                     ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/a_graycounter_21c.tdf  ;
+; db/a_graycounter_11c.tdf                                     ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/a_graycounter_11c.tdf  ;
+; db/altsyncram_1nu.tdf                                        ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/altsyncram_1nu.tdf     ;
+; db/dffpipe_c2e.tdf                                           ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/dffpipe_c2e.tdf        ;
+; db/alt_synch_pipe_5u7.tdf                                    ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/alt_synch_pipe_5u7.tdf ;
+; db/dffpipe_vu8.tdf                                           ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/dffpipe_vu8.tdf        ;
+; db/alt_synch_pipe_6u7.tdf                                    ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/alt_synch_pipe_6u7.tdf ;
+; db/dffpipe_0v8.tdf                                           ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/dffpipe_0v8.tdf        ;
+; db/cmpr_q16.tdf                                              ; yes             ; Auto-Generated Megafunction            ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/db/cmpr_q16.tdf           ;
++--------------------------------------------------------------+-----------------+----------------------------------------+----------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 562   ;
+;                                             ;       ;
+; Total combinational functions               ; 524   ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 186   ;
+;     -- 3 input functions                    ; 170   ;
+;     -- <=2 input functions                  ; 168   ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 406   ;
+;     -- arithmetic mode                      ; 118   ;
+;                                             ;       ;
+; Total registers                             ; 326   ;
+;     -- Dedicated logic registers            ; 326   ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 41    ;
+; Total memory bits                           ; 1536  ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 321   ;
+; Total fan-out                               ; 2959  ;
+; Average fan-out                             ; 3.22  ;
++---------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                      ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                            ; Library Name ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+
+; |logic                                       ; 524 (118)         ; 326 (45)     ; 1536        ; 0            ; 0       ; 0         ; 41   ; 0            ; |logic                                                                                                                         ;              ;
+;    |adc_read:dev_adc_read|                   ; 342 (241)         ; 208 (124)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|adc_read:dev_adc_read                                                                                                   ;              ;
+;       |spi_master:adc_spi_master|            ; 101 (101)         ; 84 (84)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|adc_read:dev_adc_read|spi_master:adc_spi_master                                                                         ;              ;
+;    |dc_fifo:dev_dc_fifo|                     ; 32 (0)            ; 56 (0)       ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo                                                                                                     ;              ;
+;       |dcfifo:dcfifo_component|              ; 32 (0)            ; 56 (0)       ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component                                                                             ;              ;
+;          |dcfifo_caf1:auto_generated|        ; 32 (5)            ; 56 (13)      ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated                                                  ;              ;
+;             |a_graycounter_11c:wrptr_gp|     ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_11c:wrptr_gp                       ;              ;
+;             |a_graycounter_d86:rdptr_g1p|    ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_d86:rdptr_g1p                      ;              ;
+;             |alt_synch_pipe_5u7:rs_dgwp|     ; 0 (0)             ; 12 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_5u7:rs_dgwp                       ;              ;
+;                |dffpipe_vu8:dffpipe16|       ; 0 (0)             ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_5u7:rs_dgwp|dffpipe_vu8:dffpipe16 ;              ;
+;             |alt_synch_pipe_6u7:ws_dgrp|     ; 0 (0)             ; 12 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_6u7:ws_dgrp                       ;              ;
+;                |dffpipe_0v8:dffpipe19|       ; 0 (0)             ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_6u7:ws_dgrp|dffpipe_0v8:dffpipe19 ;              ;
+;             |altsyncram_1nu:fifo_ram|        ; 0 (0)             ; 0 (0)        ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|altsyncram_1nu:fifo_ram                          ;              ;
+;             |cmpr_q16:rdempty_eq_comp|       ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|cmpr_q16:rdempty_eq_comp                         ;              ;
+;             |cmpr_q16:wrfull_eq_comp|        ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|cmpr_q16:wrfull_eq_comp                          ;              ;
+;             |dffpipe_c2e:rdaclr|             ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|dffpipe_c2e:rdaclr                               ;              ;
+;    |sin_gen:dev_sin_gen|                     ; 14 (14)           ; 8 (8)        ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|sin_gen:dev_sin_gen                                                                                                     ;              ;
+;       |sine_rom:sine|                        ; 0 (0)             ; 0 (0)        ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|sin_gen:dev_sin_gen|sine_rom:sine                                                                                       ;              ;
+;          |altsyncram:altsyncram_component|   ; 0 (0)             ; 0 (0)        ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component                                                       ;              ;
+;             |altsyncram_oq71:auto_generated| ; 0 (0)             ; 0 (0)        ; 768         ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated                        ;              ;
+;    |spi_master:dac_reg_spi_master|           ; 18 (18)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |logic|spi_master:dac_reg_spi_master                                                                                           ;              ;
++----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                               ;
++-------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+---------------------+
+; Name                                                                                                        ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF                 ;
++-------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+---------------------+
+; dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|altsyncram_1nu:fifo_ram|ALTSYNCRAM   ; AUTO ; Simple Dual Port ; 32           ; 24           ; 32           ; 24           ; 768  ; None                ;
+; sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated|ALTSYNCRAM ; AUTO ; ROM              ; 256          ; 8            ; --           ; --           ; 2048 ; ../modules/sine.mif ;
++-------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+---------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis IP Cores Summary                                                                                                                                              ;
++--------+--------------+---------+--------------+--------------+------------------------------------------+-------------------------------------------------------------------------+
+; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                          ; IP Include File                                                         ;
++--------+--------------+---------+--------------+--------------+------------------------------------------+-------------------------------------------------------------------------+
+; Altera ; FIFO         ; 10.1    ; N/A          ; N/A          ; |logic|dc_fifo:dev_dc_fifo               ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/dc_fifo.v  ;
+; Altera ; ROM: 1-PORT  ; 10.1    ; N/A          ; N/A          ; |logic|sin_gen:dev_sin_gen|sine_rom:sine ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/sine_rom.v ;
++--------+--------------+---------+--------------+--------------+------------------------------------------+-------------------------------------------------------------------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |logic|state_q                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ;
++--------------------------------------------+-------------------------------------------+--------------+--------------------------+--------------------------------------+------------------------------------+-------------------------------------+-------------------------------------+--------------------------------------------+--------------------------------------+----------------------------------+----------------------------------------+-------------------------------------+-------------------------------------+------------------------------------------+------------------------------------+----------------------------------+--------------------------------------+-----------------------------------+-------------------------------+------------------------------------------+----------------------------+-------------------------------+---------------------+--------------+
+; Name                                       ; state_q.MEASURE_MODE_DETERMINATE_DIAPASON ; state_q.DONE ; state_q.MEASURE_MODE_END ; state_q.MEASURE_MODE_MULTIPLEXOR_OFF ; state_q.MEASURE_MODE_GENERATOR_OFF ; state_q.MEASURE_MODE_SEND_TO_FIFO_4 ; state_q.MEASURE_MODE_SEND_TO_FIFO_3 ; state_q.MEASURE_MODE_WAIT_MEASURE_RESULT_2 ; state_q.MEASURE_MODE_START_MEASURE_2 ; state_q.MEASURE_MODE_SET_DELAY_2 ; state_q.MEASURE_MODE_SET_MULTIPLEXOR_2 ; state_q.MEASURE_MODE_SEND_TO_FIFO_2 ; state_q.MEASURE_MODE_SEND_TO_FIFO_1 ; state_q.MEASURE_MODE_WAIT_MEASURE_RESULT ; state_q.MEASURE_MODE_START_MEASURE ; state_q.MEASURE_MODE_SET_DELAY_1 ; state_q.MEASURE_MODE_SET_MULTIPLEXOR ; state_q.MEASURE_MODE_GENERATOR_ON ; state_q.MEASURE_MODE_WAIT_SPI ; state_q.MEASURE_MODE_START_SET_DIAP_KEYS ; state_q.MEASURE_MODE_START ; state_q.MEASURE_MODE_DIAPASON ; state_q.START_CYCLE ; state_q.IDLE ;
++--------------------------------------------+-------------------------------------------+--------------+--------------------------+--------------------------------------+------------------------------------+-------------------------------------+-------------------------------------+--------------------------------------------+--------------------------------------+----------------------------------+----------------------------------------+-------------------------------------+-------------------------------------+------------------------------------------+------------------------------------+----------------------------------+--------------------------------------+-----------------------------------+-------------------------------+------------------------------------------+----------------------------+-------------------------------+---------------------+--------------+
+; state_q.IDLE                               ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 0            ;
+; state_q.START_CYCLE                        ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 1                   ; 1            ;
+; state_q.MEASURE_MODE_DIAPASON              ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 1                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_START                 ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 1                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_START_SET_DIAP_KEYS   ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 1                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_WAIT_SPI              ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 1                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_GENERATOR_ON          ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 1                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_SET_MULTIPLEXOR       ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 1                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_SET_DELAY_1           ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 1                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_START_MEASURE         ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 1                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_WAIT_MEASURE_RESULT   ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 1                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_SEND_TO_FIFO_1        ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 1                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_SEND_TO_FIFO_2        ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 1                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_SET_MULTIPLEXOR_2     ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 1                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_SET_DELAY_2           ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 1                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_START_MEASURE_2       ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 1                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_WAIT_MEASURE_RESULT_2 ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 1                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_SEND_TO_FIFO_3        ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 1                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_SEND_TO_FIFO_4        ; 0                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 1                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_GENERATOR_OFF         ; 0                                         ; 0            ; 0                        ; 0                                    ; 1                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_MULTIPLEXOR_OFF       ; 0                                         ; 0            ; 0                        ; 1                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_END                   ; 0                                         ; 0            ; 1                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.DONE                               ; 0                                         ; 1            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
+; state_q.MEASURE_MODE_DETERMINATE_DIAPASON  ; 1                                         ; 0            ; 0                        ; 0                                    ; 0                                  ; 0                                   ; 0                                   ; 0                                          ; 0                                    ; 0                                ; 0                                      ; 0                                   ; 0                                   ; 0                                        ; 0                                  ; 0                                ; 0                                    ; 0                                 ; 0                             ; 0                                        ; 0                          ; 0                             ; 0                   ; 1            ;
++--------------------------------------------+-------------------------------------------+--------------+--------------------------+--------------------------------------+------------------------------------+-------------------------------------+-------------------------------------+--------------------------------------------+--------------------------------------+----------------------------------+----------------------------------------+-------------------------------------+-------------------------------------+------------------------------------------+------------------------------------+----------------------------------+--------------------------------------+-----------------------------------+-------------------------------+------------------------------------------+----------------------------+-------------------------------+---------------------+--------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |logic|adc_read:dev_adc_read|state_q                                                                                                                                                                                                                                ;
++-------------------------------+--------------+--------------------+--------------------+----------------------------+---------------------+------------------+------------------------+-------------------------+-------------------------------+--------------------+--------------+
+; Name                          ; state_q.DONE ; state_q.STROBE_OUT ; state_q.RESULT_OUT ; state_q.TEST_FOR_END_CYCLE ; state_q.SUMM_RESULT ; state_q.WAIT_SPI ; state_q.START_READ_SPI ; state_q.WAIT_ADC_SAMPLE ; state_q.START_READ_ADC_SAMPLE ; state_q.START_READ ; state_q.IDLE ;
++-------------------------------+--------------+--------------------+--------------------+----------------------------+---------------------+------------------+------------------------+-------------------------+-------------------------------+--------------------+--------------+
+; state_q.IDLE                  ; 0            ; 0                  ; 0                  ; 0                          ; 0                   ; 0                ; 0                      ; 0                       ; 0                             ; 0                  ; 0            ;
+; state_q.START_READ            ; 0            ; 0                  ; 0                  ; 0                          ; 0                   ; 0                ; 0                      ; 0                       ; 0                             ; 1                  ; 1            ;
+; state_q.START_READ_ADC_SAMPLE ; 0            ; 0                  ; 0                  ; 0                          ; 0                   ; 0                ; 0                      ; 0                       ; 1                             ; 0                  ; 1            ;
+; state_q.WAIT_ADC_SAMPLE       ; 0            ; 0                  ; 0                  ; 0                          ; 0                   ; 0                ; 0                      ; 1                       ; 0                             ; 0                  ; 1            ;
+; state_q.START_READ_SPI        ; 0            ; 0                  ; 0                  ; 0                          ; 0                   ; 0                ; 1                      ; 0                       ; 0                             ; 0                  ; 1            ;
+; state_q.WAIT_SPI              ; 0            ; 0                  ; 0                  ; 0                          ; 0                   ; 1                ; 0                      ; 0                       ; 0                             ; 0                  ; 1            ;
+; state_q.SUMM_RESULT           ; 0            ; 0                  ; 0                  ; 0                          ; 1                   ; 0                ; 0                      ; 0                       ; 0                             ; 0                  ; 1            ;
+; state_q.TEST_FOR_END_CYCLE    ; 0            ; 0                  ; 0                  ; 1                          ; 0                   ; 0                ; 0                      ; 0                       ; 0                             ; 0                  ; 1            ;
+; state_q.RESULT_OUT            ; 0            ; 0                  ; 1                  ; 0                          ; 0                   ; 0                ; 0                      ; 0                       ; 0                             ; 0                  ; 1            ;
+; state_q.STROBE_OUT            ; 0            ; 1                  ; 0                  ; 0                          ; 0                   ; 0                ; 0                      ; 0                       ; 0                             ; 0                  ; 1            ;
+; state_q.DONE                  ; 1            ; 0                  ; 0                  ; 0                          ; 0                   ; 0                ; 0                      ; 0                       ; 0                             ; 0                  ; 1            ;
++-------------------------------+--------------+--------------------+--------------------+----------------------------+---------------------+------------------+------------------------+-------------------------+-------------------------------+--------------------+--------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------+
+; State Machine - |logic|adc_read:dev_adc_read|spi_master:adc_spi_master|state_q ;
++-------------------+--------------+------------------+--------------------------+
+; Name              ; state_q.IDLE ; state_q.TRANSFER ; state_q.WAIT_HALF        ;
++-------------------+--------------+------------------+--------------------------+
+; state_q.IDLE      ; 0            ; 0                ; 0                        ;
+; state_q.WAIT_HALF ; 1            ; 0                ; 1                        ;
+; state_q.TRANSFER  ; 1            ; 1                ; 0                        ;
++-------------------+--------------+------------------+--------------------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------+
+; State Machine - |logic|spi_master:dac_reg_spi_master|state_q            ;
++-------------------+--------------+------------------+-------------------+
+; Name              ; state_q.IDLE ; state_q.TRANSFER ; state_q.WAIT_HALF ;
++-------------------+--------------+------------------+-------------------+
+; state_q.IDLE      ; 0            ; 0                ; 0                 ;
+; state_q.WAIT_HALF ; 1            ; 0                ; 1                 ;
+; state_q.TRANSFER  ; 1            ; 1                ; 0                 ;
++-------------------+--------------+------------------+-------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Protected by Synthesis                                                                                                                                                                                     ;
++------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
+; Register Name                                                                                        ; Protected by Synthesis Attribute or Preserve Register Assignment ; Not to be Touched by Netlist Optimizations ;
++------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
+; dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|dffpipe_c2e:rdaclr|dffe15a[0] ; yes                                                              ; yes                                        ;
++------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                               ;
++-----------------------------------------------------+------------------------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal                ; Free of Timing Hazards ;
++-----------------------------------------------------+------------------------------------+------------------------+
+; fifo_data_in[0]                                     ; WideOr26                           ; yes                    ;
+; fifo_data_in[1]                                     ; WideOr26                           ; yes                    ;
+; fifo_data_in[2]                                     ; WideOr26                           ; yes                    ;
+; fifo_data_in[3]                                     ; WideOr26                           ; yes                    ;
+; fifo_data_in[4]                                     ; WideOr26                           ; yes                    ;
+; fifo_data_in[5]                                     ; WideOr26                           ; yes                    ;
+; fifo_data_in[6]                                     ; WideOr26                           ; yes                    ;
+; fifo_data_in[7]                                     ; WideOr26                           ; yes                    ;
+; fifo_data_in[8]                                     ; WideOr26                           ; yes                    ;
+; fifo_data_in[9]                                     ; WideOr26                           ; yes                    ;
+; fifo_data_in[10]                                    ; WideOr26                           ; yes                    ;
+; fifo_data_in[11]                                    ; WideOr26                           ; yes                    ;
+; fifo_data_in[12]                                    ; WideOr26                           ; yes                    ;
+; fifo_data_in[13]                                    ; WideOr26                           ; yes                    ;
+; fifo_data_in[14]                                    ; WideOr26                           ; yes                    ;
+; fifo_data_in[15]                                    ; WideOr26                           ; yes                    ;
+; fifo_data_in[16]                                    ; WideOr26                           ; yes                    ;
+; fifo_data_in[17]                                    ; WideOr26                           ; yes                    ;
+; adc_read_diapason                                   ; state_q.MEASURE_MODE_START_MEASURE ; yes                    ;
+; Number of user-specified and inferred latches = 19  ;                                    ;                        ;
++-----------------------------------------------------+------------------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++-------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                  ;
++--------------------------------------------+----------------------------------------+
+; Register name                              ; Reason for Removal                     ;
++--------------------------------------------+----------------------------------------+
+; adc_read:dev_adc_read|data_out_2_q[18..23] ; Stuck at GND due to stuck port data_in ;
+; adc_read:dev_adc_read|data_out_1_q[18..23] ; Stuck at GND due to stuck port data_in ;
+; analog_mux_chn_q[2]                        ; Stuck at GND due to stuck port data_in ;
+; state_q~2                                  ; Lost fanout                            ;
+; state_q~3                                  ; Lost fanout                            ;
+; state_q~4                                  ; Lost fanout                            ;
+; state_q~5                                  ; Lost fanout                            ;
+; state_q~6                                  ; Lost fanout                            ;
+; adc_read:dev_adc_read|state_q~2            ; Lost fanout                            ;
+; adc_read:dev_adc_read|state_q~3            ; Lost fanout                            ;
+; adc_read:dev_adc_read|state_q~4            ; Lost fanout                            ;
+; adc_read:dev_adc_read|state_q~5            ; Lost fanout                            ;
+; sin_gen:dev_sin_gen|sample_p               ; Merged with sample_clk_r[0]            ;
+; Total Number of Removed Registers = 23     ;                                        ;
++--------------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 326   ;
+; Number of registers using Synchronous Clear  ; 146   ;
+; Number of registers using Synchronous Load   ; 2     ;
+; Number of registers using Asynchronous Clear ; 10    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 132   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Inverted Register Statistics                                                                                               ;
++------------------------------------------------------------------------------------------------------------------+---------+
+; Inverted Register                                                                                                ; Fan out ;
++------------------------------------------------------------------------------------------------------------------+---------+
+; dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_11c:wrptr_gp|sub_parity12a0 ; 1       ;
+; dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_d86:rdptr_g1p|sub_parity6a0 ; 1       ;
+; Total number of inverted registers = 2                                                                           ;         ;
++------------------------------------------------------------------------------------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |logic|sin_gen:dev_sin_gen|cnt[0]                                     ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |logic|clock_div_counter[0]                                           ;
+; 4:1                ; 36 bits   ; 72 LEs        ; 72 LEs               ; 0 LEs                  ; Yes        ; |logic|adc_read:dev_adc_read|data_out_1_q[14]                         ;
+; 6:1                ; 36 bits   ; 144 LEs       ; 36 LEs               ; 108 LEs                ; Yes        ; |logic|adc_read:dev_adc_read|spi_master:adc_spi_master|data_out_q[23] ;
+; 6:1                ; 36 bits   ; 144 LEs       ; 36 LEs               ; 108 LEs                ; Yes        ; |logic|adc_read:dev_adc_read|spi_master:adc_spi_master|data_q[3]      ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |logic|delay_counter_q[1]                                             ;
+; 9:1                ; 3 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; No         ; |logic|adc_read:dev_adc_read|spi_master:adc_spi_master|state_q        ;
+; 9:1                ; 3 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; No         ; |logic|spi_master:dac_reg_spi_master|state_q                          ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |logic|adc_read:dev_adc_read|state_q                                  ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 8 LEs                ; 6 LEs                  ; No         ; |logic|state_q                                                        ;
+; 14:1               ; 2 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; No         ; |logic|state_q                                                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated ;
++---------------------------------+--------------------+------+-----------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                        ;
++---------------------------------+--------------------+------+-----------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                         ;
++---------------------------------+--------------------+------+-----------------------------------------------------------+
+
+
++--------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component ;
++---------------------------------+-------+------+-------------------+
+; Assignment                      ; Value ; From ; To                ;
++---------------------------------+-------+------+-------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                 ;
++---------------------------------+-------+------+-------------------+
+
+
++-----------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated ;
++---------------------------------+-------+------+----------------------------------------------+
+; Assignment                      ; Value ; From ; To                                           ;
++---------------------------------+-------+------+----------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                            ;
+; REMOVE_DUPLICATE_REGISTERS      ; OFF   ; -    ; -                                            ;
+; POWER_UP_LEVEL                  ; LOW   ; -    ; p0addr                                       ;
++---------------------------------+-------+------+----------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_d86:rdptr_g1p ;
++----------------+-------+------+-------------------------------------------------------------------------------------------+
+; Assignment     ; Value ; From ; To                                                                                        ;
++----------------+-------+------+-------------------------------------------------------------------------------------------+
+; POWER_UP_LEVEL ; HIGH  ; -    ; sub_parity6a0                                                                             ;
+; POWER_UP_LEVEL ; LOW   ; -    ; parity5                                                                                   ;
++----------------+-------+------+-------------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_21c:wrptr_g1p ;
++----------------+-------+------+-------------------------------------------------------------------------------------------+
+; Assignment     ; Value ; From ; To                                                                                        ;
++----------------+-------+------+-------------------------------------------------------------------------------------------+
+; POWER_UP_LEVEL ; HIGH  ; -    ; counter8a0                                                                                ;
+; POWER_UP_LEVEL ; HIGH  ; -    ; parity9                                                                                   ;
++----------------+-------+------+-------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_11c:wrptr_gp ;
++----------------+-------+------+------------------------------------------------------------------------------------------+
+; Assignment     ; Value ; From ; To                                                                                       ;
++----------------+-------+------+------------------------------------------------------------------------------------------+
+; POWER_UP_LEVEL ; HIGH  ; -    ; sub_parity12a0                                                                           ;
+; POWER_UP_LEVEL ; LOW   ; -    ; parity11                                                                                 ;
++----------------+-------+------+------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|altsyncram_1nu:fifo_ram ;
++---------------------------------+--------------------+------+---------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                      ;
++---------------------------------+--------------------+------+---------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                       ;
++---------------------------------+--------------------+------+---------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|dffpipe_c2e:rdaclr ;
++---------------------------------+-------+------+-----------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                              ;
++---------------------------------+-------+------+-----------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                               ;
+; PRESERVE_REGISTER               ; ON    ; -    ; -                                                               ;
++---------------------------------+-------+------+-----------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_5u7:rs_dgwp ;
++-----------------------+-------+------+-----------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                                ;
++-----------------------+-------+------+-----------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                 ;
++-----------------------+-------+------+-----------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_5u7:rs_dgwp|dffpipe_vu8:dffpipe16 ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                            ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                             ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_6u7:ws_dgrp ;
++-----------------------+-------+------+-----------------------------------------------------------------------------------+
+; Assignment            ; Value ; From ; To                                                                                ;
++-----------------------+-------+------+-----------------------------------------------------------------------------------+
+; X_ON_VIOLATION_OPTION ; OFF   ; -    ; -                                                                                 ;
++-----------------------+-------+------+-----------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_6u7:ws_dgrp|dffpipe_0v8:dffpipe19 ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                            ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                             ;
++---------------------------------+-------+------+-----------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+----------------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                               ;
++------------------------------------+----------------------+----------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                            ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                         ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                       ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                       ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                     ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                            ;
+; OPERATION_MODE                     ; ROM                  ; Untyped                                            ;
+; WIDTH_A                            ; 8                    ; Signed Integer                                     ;
+; WIDTHAD_A                          ; 8                    ; Signed Integer                                     ;
+; NUMWORDS_A                         ; 256                  ; Signed Integer                                     ;
+; OUTDATA_REG_A                      ; CLOCK0               ; Untyped                                            ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                            ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                            ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                            ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                            ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                            ;
+; WIDTH_B                            ; 1                    ; Untyped                                            ;
+; WIDTHAD_B                          ; 1                    ; Untyped                                            ;
+; NUMWORDS_B                         ; 1                    ; Untyped                                            ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                            ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                            ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                            ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                            ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                            ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                            ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                            ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                            ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                            ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                            ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                            ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                            ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                     ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                            ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                            ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                            ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                            ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                            ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                            ;
+; INIT_FILE                          ; ../modules/sine.mif  ; Untyped                                            ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                            ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                            ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                            ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                            ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                            ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                            ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                            ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                            ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                            ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                            ;
+; DEVICE_FAMILY                      ; Cyclone II           ; Untyped                                            ;
+; CBXI_PARAMETER                     ; altsyncram_oq71      ; Untyped                                            ;
++------------------------------------+----------------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: spi_master:dac_reg_spi_master ;
++----------------+-------+---------------------------------------------------+
+; Parameter Name ; Value ; Type                                              ;
++----------------+-------+---------------------------------------------------+
+; CLK_DIV        ; 2     ; Signed Integer                                    ;
+; DATA_WIDTH     ; 8     ; Signed Integer                                    ;
++----------------+-------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: adc_read:dev_adc_read ;
++-------------------+-------+----------------------------------------+
+; Parameter Name    ; Value ; Type                                   ;
++-------------------+-------+----------------------------------------+
+; OUTPUT_DATA_WIDTH ; 24    ; Signed Integer                         ;
++-------------------+-------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: adc_read:dev_adc_read|spi_master:adc_spi_master ;
++----------------+-------+---------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                ;
++----------------+-------+---------------------------------------------------------------------+
+; CLK_DIV        ; 2     ; Signed Integer                                                      ;
+; DATA_WIDTH     ; 36    ; Signed Integer                                                      ;
++----------------+-------+---------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component ;
++-------------------------+-------------+--------------------------------------------------+
+; Parameter Name          ; Value       ; Type                                             ;
++-------------------------+-------------+--------------------------------------------------+
+; WIDTH_BYTEENA           ; 1           ; Untyped                                          ;
+; AUTO_CARRY_CHAINS       ; ON          ; AUTO_CARRY                                       ;
+; IGNORE_CARRY_BUFFERS    ; OFF         ; IGNORE_CARRY                                     ;
+; AUTO_CASCADE_CHAINS     ; ON          ; AUTO_CASCADE                                     ;
+; IGNORE_CASCADE_BUFFERS  ; OFF         ; IGNORE_CASCADE                                   ;
+; LPM_WIDTH               ; 24          ; Signed Integer                                   ;
+; LPM_NUMWORDS            ; 32          ; Signed Integer                                   ;
+; LPM_WIDTHU              ; 5           ; Signed Integer                                   ;
+; LPM_SHOWAHEAD           ; OFF         ; Untyped                                          ;
+; UNDERFLOW_CHECKING      ; ON          ; Untyped                                          ;
+; OVERFLOW_CHECKING       ; ON          ; Untyped                                          ;
+; USE_EAB                 ; ON          ; Untyped                                          ;
+; ADD_RAM_OUTPUT_REGISTER ; OFF         ; Untyped                                          ;
+; DELAY_RDUSEDW           ; 1           ; Untyped                                          ;
+; DELAY_WRUSEDW           ; 1           ; Untyped                                          ;
+; RDSYNC_DELAYPIPE        ; 4           ; Signed Integer                                   ;
+; WRSYNC_DELAYPIPE        ; 4           ; Signed Integer                                   ;
+; CLOCKS_ARE_SYNCHRONIZED ; FALSE       ; Untyped                                          ;
+; MAXIMIZE_SPEED          ; 5           ; Untyped                                          ;
+; DEVICE_FAMILY           ; Cyclone II  ; Untyped                                          ;
+; ADD_USEDW_MSB_BIT       ; OFF         ; Untyped                                          ;
+; WRITE_ACLR_SYNCH        ; OFF         ; Untyped                                          ;
+; CBXI_PARAMETER          ; dcfifo_caf1 ; Untyped                                          ;
++-------------------------+-------------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                                              ;
++-------------------------------------------+-------------------------------------------------------------------+
+; Name                                      ; Value                                                             ;
++-------------------------------------------+-------------------------------------------------------------------+
+; Number of entity instances                ; 1                                                                 ;
+; Entity Instance                           ; sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; ROM                                                               ;
+;     -- WIDTH_A                            ; 8                                                                 ;
+;     -- NUMWORDS_A                         ; 256                                                               ;
+;     -- OUTDATA_REG_A                      ; CLOCK0                                                            ;
+;     -- WIDTH_B                            ; 1                                                                 ;
+;     -- NUMWORDS_B                         ; 1                                                                 ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                            ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                      ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                              ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                         ;
++-------------------------------------------+-------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------+
+; dcfifo Parameter Settings by Entity Instance                             ;
++----------------------------+---------------------------------------------+
+; Name                       ; Value                                       ;
++----------------------------+---------------------------------------------+
+; Number of entity instances ; 1                                           ;
+; Entity Instance            ; dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component ;
+;     -- FIFO Type           ; Dual Clock                                  ;
+;     -- LPM_WIDTH           ; 24                                          ;
+;     -- LPM_NUMWORDS        ; 32                                          ;
+;     -- LPM_SHOWAHEAD       ; OFF                                         ;
+;     -- USE_EAB             ; ON                                          ;
++----------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "dc_fifo:dev_dc_fifo"                                                                  ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; wrfull ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "adc_read:dev_adc_read|spi_master:adc_spi_master"                                    ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; mosi ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; busy ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "spi_master:dac_reg_spi_master"                                                                                                  ;
++----------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                                     ;
++----------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------+
+; mosi     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                         ;
+; data_out ; Output ; Warning  ; Output or bidir port (8 bits) is wider than the port expression (1 bits) it drives; bit(s) "data_out[7..1]" have no fanouts ;
+; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                         ;
+; busy     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                         ;
++----------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:03     ;
++----------------+--------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 10.1 Build 153 11/29/2010 SJ Full Version
-    Info: Processing started: Fri Feb 26 12:48:09 2016
+    Info: Processing started: Mon Jul 18 14:51:03 2016
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off aquisition -c aquisition
 Info: Only one processor detected - disabling parallel compilation
-Info: Found 2 design units, including 2 entities, in source file /projects/git_repository/verilog/aquisition/modules/fifo.v
-    Info: Found entity 1: syn_fifo
-    Info: Found entity 2: memory_32x16
-Error: Top-level design entity "aquisition" is undefined
-Error: Quartus II Analysis & Synthesis was unsuccessful. 1 error, 0 warnings
-    Error: Peak virtual memory: 214 megabytes
-    Error: Processing ended: Fri Feb 26 12:48:11 2016
-    Error: Elapsed time: 00:00:02
-    Error: Total CPU time (on all processors): 00:00:01
+Info: Found 2 design units, including 2 entities, in source file /projects/git_repository/verilog/aquisition/modules/spi_slave.v
+    Info: Found entity 1: spi_slave
+    Info: Found entity 2: spi_slave_tb
+Info: Found 1 design units, including 1 entities, in source file /projects/git_repository/verilog/aquisition/modules/spi_master.v
+    Info: Found entity 1: spi_master
+Info: Found 2 design units, including 2 entities, in source file /projects/git_repository/verilog/aquisition/modules/sin_gen.v
+    Info: Found entity 1: sin_gen
+    Info: Found entity 2: sin_gen_tb
+Info: Found 2 design units, including 2 entities, in source file /projects/git_repository/verilog/aquisition/modules/adc_read.v
+    Info: Found entity 1: adc_read
+    Info: Found entity 2: adc_read_tb
+Warning (10463): Verilog HDL Declaration warning at logic.v(1): "logic" is SystemVerilog-2005 keyword
+Info: Found 2 design units, including 2 entities, in source file /projects/git_repository/verilog/aquisition/modules/logic.v
+    Info: Found entity 1: logic
+    Info: Found entity 2: logic_tb
+Info: Found 0 design units, including 0 entities, in source file /projects/git_repository/verilog/aquisition/modules/aquisition.v
+Info: Found 1 design units, including 1 entities, in source file sine_rom.v
+    Info: Found entity 1: sine_rom
+Info: Found 1 design units, including 1 entities, in source file dc_fifo.v
+    Info: Found entity 1: dc_fifo
+Warning (10236): Verilog HDL Implicit Net warning at adc_read.v(291): created implicit net for "halfcycle"
+Warning (10236): Verilog HDL Implicit Net warning at logic.v(129): created implicit net for "dac_reg_miso"
+Warning (10236): Verilog HDL Implicit Net warning at logic.v(129): created implicit net for "dac_reg_data_in"
+Warning (10236): Verilog HDL Implicit Net warning at logic.v(129): created implicit net for "dac_reg_busy"
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(20): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(21): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(22): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(23): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(24): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(25): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(26): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(27): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(29): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(98): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Warning (10222): Verilog HDL Parameter Declaration warning at adc_read.v(99): Parameter Declaration in module "adc_read" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List
+Info: Elaborating entity "logic" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at logic.v(138): object "diap_current" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at logic.v(138): object "diap_potential" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at logic.v(154): object "fifo_rd_en_q" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at logic.v(172): truncated value with size 32 to match size of target (7)
+Warning (10270): Verilog HDL Case Statement warning at logic.v(246): incomplete case statement has no default case item
+Warning (10230): Verilog HDL assignment warning at logic.v(307): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at logic.v(317): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at logic.v(383): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at logic.v(393): truncated value with size 32 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at logic.v(460): truncated value with size 32 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at logic.v(465): truncated value with size 32 to match size of target (3)
+Warning (10240): Verilog HDL Always Construct warning at logic.v(197): inferring latch(es) for variable "dac_reg_data_out", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at logic.v(197): inferring latch(es) for variable "adc_read_diapason", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at logic.v(197): inferring latch(es) for variable "fifo_data_in", which holds its previous value in one or more paths through the always construct
+Warning (10034): Output port "cs_dac_reg" at logic.v(15) has no driver
+Info (10041): Inferred latch for "fifo_data_in[0]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[1]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[2]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[3]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[4]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[5]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[6]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[7]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[8]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[9]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[10]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[11]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[12]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[13]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[14]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[15]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[16]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[17]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[18]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[19]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[20]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[21]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[22]" at logic.v(197)
+Info (10041): Inferred latch for "fifo_data_in[23]" at logic.v(197)
+Info (10041): Inferred latch for "adc_read_diapason" at logic.v(197)
+Info (10041): Inferred latch for "dac_reg_data_out[0]" at logic.v(197)
+Info (10041): Inferred latch for "dac_reg_data_out[1]" at logic.v(197)
+Info (10041): Inferred latch for "dac_reg_data_out[2]" at logic.v(197)
+Info (10041): Inferred latch for "dac_reg_data_out[3]" at logic.v(197)
+Info (10041): Inferred latch for "dac_reg_data_out[4]" at logic.v(197)
+Info (10041): Inferred latch for "dac_reg_data_out[5]" at logic.v(197)
+Info (10041): Inferred latch for "dac_reg_data_out[6]" at logic.v(197)
+Info (10041): Inferred latch for "dac_reg_data_out[7]" at logic.v(197)
+Info: Elaborating entity "sin_gen" for hierarchy "sin_gen:dev_sin_gen"
+Warning (10230): Verilog HDL assignment warning at sin_gen.v(16): truncated value with size 32 to match size of target (1)
+Warning (10230): Verilog HDL assignment warning at sin_gen.v(17): truncated value with size 32 to match size of target (1)
+Warning (10230): Verilog HDL assignment warning at sin_gen.v(18): truncated value with size 32 to match size of target (1)
+Info: Elaborating entity "sine_rom" for hierarchy "sin_gen:dev_sin_gen|sine_rom:sine"
+Info: Elaborating entity "altsyncram" for hierarchy "sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component"
+Info: Elaborated megafunction instantiation "sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component"
+Info: Instantiated megafunction "sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component" with the following parameter:
+    Info: Parameter "clock_enable_input_a" = "BYPASS"
+    Info: Parameter "clock_enable_output_a" = "BYPASS"
+    Info: Parameter "init_file" = "../modules/sine.mif"
+    Info: Parameter "intended_device_family" = "Cyclone II"
+    Info: Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info: Parameter "lpm_type" = "altsyncram"
+    Info: Parameter "numwords_a" = "256"
+    Info: Parameter "operation_mode" = "ROM"
+    Info: Parameter "outdata_aclr_a" = "NONE"
+    Info: Parameter "outdata_reg_a" = "CLOCK0"
+    Info: Parameter "widthad_a" = "8"
+    Info: Parameter "width_a" = "8"
+    Info: Parameter "width_byteena_a" = "1"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_oq71.tdf
+    Info: Found entity 1: altsyncram_oq71
+Info: Elaborating entity "altsyncram_oq71" for hierarchy "sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated"
+Info: Elaborating entity "spi_master" for hierarchy "spi_master:dac_reg_spi_master"
+Warning (10230): Verilog HDL assignment warning at spi_master.v(48): truncated value with size 4 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at spi_master.v(96): truncated value with size 4 to match size of target (2)
+Info: Elaborating entity "adc_read" for hierarchy "adc_read:dev_adc_read"
+Warning (10230): Verilog HDL assignment warning at adc_read.v(108): truncated value with size 32 to match size of target (24)
+Warning (10230): Verilog HDL assignment warning at adc_read.v(109): truncated value with size 32 to match size of target (24)
+Warning (10230): Verilog HDL assignment warning at adc_read.v(194): truncated value with size 32 to match size of target (11)
+Info: Elaborating entity "spi_master" for hierarchy "adc_read:dev_adc_read|spi_master:adc_spi_master"
+Warning (10230): Verilog HDL assignment warning at spi_master.v(48): truncated value with size 4 to match size of target (2)
+Warning (10230): Verilog HDL assignment warning at spi_master.v(96): truncated value with size 4 to match size of target (2)
+Info: Elaborating entity "dc_fifo" for hierarchy "dc_fifo:dev_dc_fifo"
+Info: Elaborating entity "dcfifo" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component"
+Info: Elaborated megafunction instantiation "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component"
+Info: Instantiated megafunction "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component" with the following parameter:
+    Info: Parameter "intended_device_family" = "Cyclone II"
+    Info: Parameter "lpm_numwords" = "32"
+    Info: Parameter "lpm_showahead" = "OFF"
+    Info: Parameter "lpm_type" = "dcfifo"
+    Info: Parameter "lpm_width" = "24"
+    Info: Parameter "lpm_widthu" = "5"
+    Info: Parameter "overflow_checking" = "ON"
+    Info: Parameter "rdsync_delaypipe" = "4"
+    Info: Parameter "underflow_checking" = "ON"
+    Info: Parameter "use_eab" = "ON"
+    Info: Parameter "wrsync_delaypipe" = "4"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_caf1.tdf
+    Info: Found entity 1: dcfifo_caf1
+Info: Elaborating entity "dcfifo_caf1" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_d86.tdf
+    Info: Found entity 1: a_graycounter_d86
+Info: Elaborating entity "a_graycounter_d86" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_d86:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_21c.tdf
+    Info: Found entity 1: a_graycounter_21c
+Info: Elaborating entity "a_graycounter_21c" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_21c:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_11c.tdf
+    Info: Found entity 1: a_graycounter_11c
+Info: Elaborating entity "a_graycounter_11c" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_11c:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_1nu.tdf
+    Info: Found entity 1: altsyncram_1nu
+Info: Elaborating entity "altsyncram_1nu" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|altsyncram_1nu:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_c2e.tdf
+    Info: Found entity 1: dffpipe_c2e
+Info: Elaborating entity "dffpipe_c2e" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|dffpipe_c2e:rdaclr"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_5u7.tdf
+    Info: Found entity 1: alt_synch_pipe_5u7
+Info: Elaborating entity "alt_synch_pipe_5u7" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_5u7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_vu8.tdf
+    Info: Found entity 1: dffpipe_vu8
+Info: Elaborating entity "dffpipe_vu8" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_5u7:rs_dgwp|dffpipe_vu8:dffpipe16"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_6u7.tdf
+    Info: Found entity 1: alt_synch_pipe_6u7
+Info: Elaborating entity "alt_synch_pipe_6u7" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_6u7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_0v8.tdf
+    Info: Found entity 1: dffpipe_0v8
+Info: Elaborating entity "dffpipe_0v8" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_6u7:ws_dgrp|dffpipe_0v8:dffpipe19"
+Info: Found 1 design units, including 1 entities, in source file db/cmpr_q16.tdf
+    Info: Found entity 1: cmpr_q16
+Info: Elaborating entity "cmpr_q16" for hierarchy "dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|cmpr_q16:rdempty_eq_comp"
+Warning: Synthesized away the following node(s):
+    Warning: Synthesized away the following RAM node(s):
+        Warning (14320): Synthesized away node "sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated|q_a[3]"
+        Warning (14320): Synthesized away node "sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated|q_a[4]"
+        Warning (14320): Synthesized away node "sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated|q_a[5]"
+        Warning (14320): Synthesized away node "sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated|q_a[6]"
+        Warning (14320): Synthesized away node "sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated|q_a[7]"
+Warning: 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning: Latch fifo_data_in[0] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[1] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[2] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[3] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[4] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[5] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[6] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[7] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[8] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[9] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[10] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[11] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[12] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[13] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[14] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[15] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[16] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Warning: Latch fifo_data_in[17] has unsafe behavior
+    Warning: Ports D and ENA on the latch are fed by the same signal state_q.MEASURE_MODE_SEND_TO_FIFO_2
+Info: Registers with preset signals will power-up high
+Info: DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning: Output pins are stuck at VCC or GND
+    Warning (13410): Pin "analog_mux_chn[2]" is stuck at GND
+    Warning (13410): Pin "cs_dac_reg[0]" is stuck at GND
+    Warning (13410): Pin "cs_dac_reg[1]" is stuck at GND
+Info: 9 registers lost all their fanouts during netlist optimizations. The first 9 are displayed below.
+    Info: Register "state_q~2" lost all its fanouts during netlist optimizations.
+    Info: Register "state_q~3" lost all its fanouts during netlist optimizations.
+    Info: Register "state_q~4" lost all its fanouts during netlist optimizations.
+    Info: Register "state_q~5" lost all its fanouts during netlist optimizations.
+    Info: Register "state_q~6" lost all its fanouts during netlist optimizations.
+    Info: Register "adc_read:dev_adc_read|state_q~2" lost all its fanouts during netlist optimizations.
+    Info: Register "adc_read:dev_adc_read|state_q~3" lost all its fanouts during netlist optimizations.
+    Info: Register "adc_read:dev_adc_read|state_q~4" lost all its fanouts during netlist optimizations.
+    Info: Register "adc_read:dev_adc_read|state_q~5" lost all its fanouts during netlist optimizations.
+Info: Generated suppressed messages file D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/aquisition.map.smsg
+Info: Generating hard_block partition "hard_block:auto_generated_inst"
+Warning: Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "dac_reg_mosi"
+Info: Implemented 633 device resources after synthesis - the final resource count might be different
+    Info: Implemented 8 input pins
+    Info: Implemented 33 output pins
+    Info: Implemented 565 logic cells
+    Info: Implemented 27 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 91 warnings
+    Info: Peak virtual memory: 223 megabytes
+    Info: Processing ended: Mon Jul 18 14:51:11 2016
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:08
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/aquisition.map.smsg.
 
 

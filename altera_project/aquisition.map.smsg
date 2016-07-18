@@ -1,0 +1,7 @@
+Warning (10268): Verilog HDL information at sin_gen.v(22): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at adc_read.v(131): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at adc_read.v(323): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at logic.v(165): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at logic.v(197): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at logic.v(485): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at logic.v(578): always construct contains both blocking and non-blocking assignments

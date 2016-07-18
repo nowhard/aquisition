@@ -1,7 +1,7 @@
 Quartus II
 Version 10.1 Build 153 11/29/2010 SJ Full Version
-40
-4554
+14
+950
 OFF
 OFF
 OFF
@@ -22,8 +22,8 @@ VHSM_ON
 # entity
 spi_master
 # storage
-db|aquisition.(1).cnf
-db|aquisition.(1).cnf
+db|aquisition.(2).cnf
+db|aquisition.(2).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
@@ -31,7 +31,53 @@ ON
 # case_sensitive
 # source_file
 |projects|git_repository|verilog|aquisition|modules|spi_master.v
-d0a75746bfff696257b5b74c8b026d8
+17f95f04df5f2a6732384bc1528f1a6
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+CLK_DIV
+2
+PARAMETER_SIGNED_DEC
+USR
+DATA_WIDTH
+8
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+spi_master:dac_reg_spi_master
+}
+# macro_sequence
+
+# end
+# entity
+spi_master
+# storage
+db|aquisition.(4).cnf
+db|aquisition.(4).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+|projects|git_repository|verilog|aquisition|modules|spi_master.v
+17f95f04df5f2a6732384bc1528f1a6
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -58,30 +104,26 @@ DATA_WIDTH
 36
 PARAMETER_SIGNED_DEC
 USR
-BIT_CNT_WIDTH
-4
-PARAMETER_SIGNED_DEC
-USR
 }
 # hierarchies {
-spi_master:adc_spi_master
+adc_read:dev_adc_read|spi_master:adc_spi_master
 }
 # macro_sequence
 
 # end
 # entity
-adc_read
+syn_fifo
 # storage
-db|aquisition.(0).cnf
-db|aquisition.(0).cnf
+db|aquisition.(5).cnf
+db|aquisition.(5).cnf
 # logic_option {
 AUTO_RAM_RECOGNITION
 ON
 }
 # case_sensitive
 # source_file
-|projects|git_repository|verilog|aquisition|modules|adc_read.v
-72349342cfd6fbc356ffbb803c6b
+|projects|git_repository|verilog|aquisition|modules|fifo.v
+3d24257554dac7beda4e1fa4d8790e6
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -100,14 +142,1555 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 250
 }
 # user_parameter {
-DATA_WIDTH
+data_width
 24
 PARAMETER_SIGNED_DEC
 DEF
-DIAP_WIDTH
-2
+address_width
+5
 PARAMETER_SIGNED_DEC
 DEF
+ram_depth
+32
+PARAMETER_SIGNED_DEC
+DEF
+}
+# macro_sequence
+
+# end
+# entity
+memory_32x16
+# storage
+db|aquisition.(6).cnf
+db|aquisition.(6).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+|projects|git_repository|verilog|aquisition|modules|fifo.v
+3d24257554dac7beda4e1fa4d8790e6
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+data_width
+24
+PARAMETER_SIGNED_DEC
+USR
+address_width
+5
+PARAMETER_SIGNED_DEC
+USR
+ram_depth
+32
+PARAMETER_SIGNED_DEC
+USR
+}
+# macro_sequence
+
+# end
+# entity
+sin_gen
+# storage
+db|aquisition.(1).cnf
+db|aquisition.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+|projects|git_repository|verilog|aquisition|modules|sin_gen.v
+2b866f88967cdb53a355302a977c119c
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+sin_gen:dev_sin_gen
+}
+# macro_sequence
+
+# end
+# entity
+sine_rom
+# storage
+db|aquisition.(7).cnf
+db|aquisition.(7).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+sine_rom.v
+f47ad8a48995a994dfea80baedfe8
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+sin_gen:dev_sin_gen|sine_rom:sine
+}
+# macro_sequence
+ALTERA_RESERVED_QISALTERA_RESERVED_QIS
+# end
+# entity
+altsyncram
+# storage
+db|aquisition.(8).cnf
+db|aquisition.(8).cnf
+# case_insensitive
+# source_file
+c:|altera|10.1|quartus|libraries|megafunctions|altsyncram.tdf
+a4d10f9e281b56b458be9ebba1027
+7
+# user_parameter {
+BYTE_SIZE_BLOCK
+8
+PARAMETER_UNKNOWN
+DEF
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+OPERATION_MODE
+ROM
+PARAMETER_UNKNOWN
+USR
+WIDTH_A
+8
+PARAMETER_SIGNED_DEC
+USR
+WIDTHAD_A
+8
+PARAMETER_SIGNED_DEC
+USR
+NUMWORDS_A
+256
+PARAMETER_SIGNED_DEC
+USR
+OUTDATA_REG_A
+CLOCK0
+PARAMETER_UNKNOWN
+USR
+ADDRESS_ACLR_A
+NONE
+PARAMETER_UNKNOWN
+DEF
+OUTDATA_ACLR_A
+NONE
+PARAMETER_UNKNOWN
+USR
+WRCONTROL_ACLR_A
+NONE
+PARAMETER_UNKNOWN
+DEF
+INDATA_ACLR_A
+NONE
+PARAMETER_UNKNOWN
+DEF
+BYTEENA_ACLR_A
+NONE
+PARAMETER_UNKNOWN
+DEF
+WIDTH_B
+1
+PARAMETER_UNKNOWN
+DEF
+WIDTHAD_B
+1
+PARAMETER_UNKNOWN
+DEF
+NUMWORDS_B
+1
+PARAMETER_UNKNOWN
+DEF
+INDATA_REG_B
+CLOCK1
+PARAMETER_UNKNOWN
+DEF
+WRCONTROL_WRADDRESS_REG_B
+CLOCK1
+PARAMETER_UNKNOWN
+DEF
+RDCONTROL_REG_B
+CLOCK1
+PARAMETER_UNKNOWN
+DEF
+ADDRESS_REG_B
+CLOCK1
+PARAMETER_UNKNOWN
+DEF
+OUTDATA_REG_B
+UNREGISTERED
+PARAMETER_UNKNOWN
+DEF
+BYTEENA_REG_B
+CLOCK1
+PARAMETER_UNKNOWN
+DEF
+INDATA_ACLR_B
+NONE
+PARAMETER_UNKNOWN
+DEF
+WRCONTROL_ACLR_B
+NONE
+PARAMETER_UNKNOWN
+DEF
+ADDRESS_ACLR_B
+NONE
+PARAMETER_UNKNOWN
+DEF
+OUTDATA_ACLR_B
+NONE
+PARAMETER_UNKNOWN
+DEF
+RDCONTROL_ACLR_B
+NONE
+PARAMETER_UNKNOWN
+DEF
+BYTEENA_ACLR_B
+NONE
+PARAMETER_UNKNOWN
+DEF
+WIDTH_BYTEENA_A
+1
+PARAMETER_SIGNED_DEC
+USR
+WIDTH_BYTEENA_B
+1
+PARAMETER_UNKNOWN
+DEF
+RAM_BLOCK_TYPE
+AUTO
+PARAMETER_UNKNOWN
+DEF
+BYTE_SIZE
+8
+PARAMETER_UNKNOWN
+DEF
+READ_DURING_WRITE_MODE_MIXED_PORTS
+DONT_CARE
+PARAMETER_UNKNOWN
+DEF
+READ_DURING_WRITE_MODE_PORT_A
+NEW_DATA_NO_NBE_READ
+PARAMETER_UNKNOWN
+DEF
+READ_DURING_WRITE_MODE_PORT_B
+NEW_DATA_NO_NBE_READ
+PARAMETER_UNKNOWN
+DEF
+INIT_FILE
+../modules/sine.mif
+PARAMETER_UNKNOWN
+USR
+INIT_FILE_LAYOUT
+PORT_A
+PARAMETER_UNKNOWN
+DEF
+MAXIMUM_DEPTH
+0
+PARAMETER_UNKNOWN
+DEF
+CLOCK_ENABLE_INPUT_A
+BYPASS
+PARAMETER_UNKNOWN
+USR
+CLOCK_ENABLE_INPUT_B
+NORMAL
+PARAMETER_UNKNOWN
+DEF
+CLOCK_ENABLE_OUTPUT_A
+BYPASS
+PARAMETER_UNKNOWN
+USR
+CLOCK_ENABLE_OUTPUT_B
+NORMAL
+PARAMETER_UNKNOWN
+DEF
+CLOCK_ENABLE_CORE_A
+USE_INPUT_CLKEN
+PARAMETER_UNKNOWN
+DEF
+CLOCK_ENABLE_CORE_B
+USE_INPUT_CLKEN
+PARAMETER_UNKNOWN
+DEF
+ENABLE_ECC
+FALSE
+PARAMETER_UNKNOWN
+DEF
+WIDTH_ECCSTATUS
+3
+PARAMETER_UNKNOWN
+DEF
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+CBXI_PARAMETER
+altsyncram_oq71
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+q_a
+-1
+3
+clock0
+-1
+3
+address_a
+-1
+3
+wren_b
+-1
+1
+wren_a
+-1
+1
+addressstall_b
+-1
+1
+addressstall_a
+-1
+1
+aclr1
+-1
+1
+aclr0
+-1
+1
+rden_b
+-1
+2
+rden_a
+-1
+2
+data_b
+-1
+2
+data_a
+-1
+2
+clocken3
+-1
+2
+clocken2
+-1
+2
+clocken1
+-1
+2
+clocken0
+-1
+2
+clock1
+-1
+2
+byteena_b
+-1
+2
+byteena_a
+-1
+2
+address_b
+-1
+2
+}
+# hierarchies {
+sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_oq71
+# storage
+db|aquisition.(9).cnf
+db|aquisition.(9).cnf
+# case_insensitive
+# source_file
+db|altsyncram_oq71.tdf
+11d79196d2274dceb3614c617e4c7e
+7
+# used_port {
+q_a7
+-1
+3
+q_a6
+-1
+3
+q_a5
+-1
+3
+q_a4
+-1
+3
+q_a3
+-1
+3
+q_a2
+-1
+3
+q_a1
+-1
+3
+q_a0
+-1
+3
+clock0
+-1
+3
+address_a7
+-1
+3
+address_a6
+-1
+3
+address_a5
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+}
+# memory_file {
+|projects|git_repository|verilog|aquisition|modules|sine.mif
+c7cfec53c46b6adab94a65fc9f5f858
+}
+# hierarchies {
+sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component|altsyncram_oq71:auto_generated
+}
+# macro_sequence
+
+# end
+# entity
+adc_read
+# storage
+db|aquisition.(3).cnf
+db|aquisition.(3).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+|projects|git_repository|verilog|aquisition|modules|adc_read.v
+41e3caa48a8dda02f4987df19c15d6a
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# user_parameter {
+OUTPUT_DATA_WIDTH
+24
+PARAMETER_SIGNED_DEC
+USR
+}
+# hierarchies {
+adc_read:dev_adc_read
+}
+# macro_sequence
+
+# end
+# entity
+dc_fifo
+# storage
+db|aquisition.(10).cnf
+db|aquisition.(10).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+dc_fifo.v
+4ade3c218695eb31768e2713974e3fe
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo
+}
+# macro_sequence
+
+# end
+# entity
+dcfifo
+# storage
+db|aquisition.(11).cnf
+db|aquisition.(11).cnf
+# case_insensitive
+# source_file
+c:|altera|10.1|quartus|libraries|megafunctions|dcfifo.tdf
+628cc13efcc05b5554a6869503d2344
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+24
+PARAMETER_SIGNED_DEC
+USR
+LPM_NUMWORDS
+32
+PARAMETER_SIGNED_DEC
+USR
+LPM_WIDTHU
+5
+PARAMETER_SIGNED_DEC
+USR
+LPM_SHOWAHEAD
+OFF
+PARAMETER_UNKNOWN
+USR
+UNDERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+OVERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+USE_EAB
+ON
+PARAMETER_UNKNOWN
+USR
+ADD_RAM_OUTPUT_REGISTER
+OFF
+PARAMETER_UNKNOWN
+DEF
+DELAY_RDUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+DELAY_WRUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+RDSYNC_DELAYPIPE
+4
+PARAMETER_SIGNED_DEC
+USR
+WRSYNC_DELAYPIPE
+4
+PARAMETER_SIGNED_DEC
+USR
+CLOCKS_ARE_SYNCHRONIZED
+FALSE
+PARAMETER_UNKNOWN
+DEF
+MAXIMIZE_SPEED
+5
+PARAMETER_UNKNOWN
+DEF
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+ADD_USEDW_MSB_BIT
+OFF
+PARAMETER_UNKNOWN
+DEF
+WRITE_ACLR_SYNCH
+OFF
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+dcfifo_caf1
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrclk
+-1
+3
+rdreq
+-1
+3
+rdempty
+-1
+3
+rdclk
+-1
+3
+q
+-1
+3
+data
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component
+}
+# macro_sequence
+
+# end
+# entity
+dcfifo_caf1
+# storage
+db|aquisition.(12).cnf
+db|aquisition.(12).cnf
+# case_insensitive
+# source_file
+db|dcfifo_caf1.tdf
+7c2dc142e82140e0ec7f27c5c778324e
+7
+# used_port {
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrclk
+-1
+3
+rdreq
+-1
+3
+rdempty
+-1
+3
+rdclk
+-1
+3
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q23
+-1
+3
+q22
+-1
+3
+q21
+-1
+3
+q20
+-1
+3
+q2
+-1
+3
+q19
+-1
+3
+q18
+-1
+3
+q17
+-1
+3
+q16
+-1
+3
+q15
+-1
+3
+q14
+-1
+3
+q13
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+data9
+-1
+3
+data8
+-1
+3
+data7
+-1
+3
+data6
+-1
+3
+data5
+-1
+3
+data4
+-1
+3
+data3
+-1
+3
+data23
+-1
+3
+data22
+-1
+3
+data21
+-1
+3
+data20
+-1
+3
+data2
+-1
+3
+data19
+-1
+3
+data18
+-1
+3
+data17
+-1
+3
+data16
+-1
+3
+data15
+-1
+3
+data14
+-1
+3
+data13
+-1
+3
+data12
+-1
+3
+data11
+-1
+3
+data10
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated
+}
+# macro_sequence
+
+# end
+# entity
+a_graycounter_d86
+# storage
+db|aquisition.(13).cnf
+db|aquisition.(13).cnf
+# case_insensitive
+# source_file
+db|a_graycounter_d86.tdf
+b826f2d3cb7f30d55ec31e587fd56686
+7
+# used_port {
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+aclr
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_d86:rdptr_g1p
+}
+# macro_sequence
+
+# end
+# entity
+a_graycounter_21c
+# storage
+db|aquisition.(14).cnf
+db|aquisition.(14).cnf
+# case_insensitive
+# source_file
+db|a_graycounter_21c.tdf
+8241b1725994fe8ee486fe6a96cf1b
+7
+# used_port {
+cnt_en
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_21c:wrptr_g1p
+}
+# macro_sequence
+
+# end
+# entity
+a_graycounter_11c
+# storage
+db|aquisition.(15).cnf
+db|aquisition.(15).cnf
+# case_insensitive
+# source_file
+db|a_graycounter_11c.tdf
+8f104a191e7d528dac04858e5f781be
+7
+# used_port {
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+cnt_en
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|a_graycounter_11c:wrptr_gp
+}
+# macro_sequence
+
+# end
+# entity
+altsyncram_1nu
+# storage
+db|aquisition.(16).cnf
+db|aquisition.(16).cnf
+# case_insensitive
+# source_file
+db|altsyncram_1nu.tdf
+fbb7c0506a93a6e212f1ae6cec7b1cb
+7
+# used_port {
+wren_a
+-1
+3
+q_b9
+-1
+3
+q_b8
+-1
+3
+q_b7
+-1
+3
+q_b6
+-1
+3
+q_b5
+-1
+3
+q_b4
+-1
+3
+q_b3
+-1
+3
+q_b23
+-1
+3
+q_b22
+-1
+3
+q_b21
+-1
+3
+q_b20
+-1
+3
+q_b2
+-1
+3
+q_b19
+-1
+3
+q_b18
+-1
+3
+q_b17
+-1
+3
+q_b16
+-1
+3
+q_b15
+-1
+3
+q_b14
+-1
+3
+q_b13
+-1
+3
+q_b12
+-1
+3
+q_b11
+-1
+3
+q_b10
+-1
+3
+q_b1
+-1
+3
+q_b0
+-1
+3
+data_a9
+-1
+3
+data_a8
+-1
+3
+data_a7
+-1
+3
+data_a6
+-1
+3
+data_a5
+-1
+3
+data_a4
+-1
+3
+data_a3
+-1
+3
+data_a23
+-1
+3
+data_a22
+-1
+3
+data_a21
+-1
+3
+data_a20
+-1
+3
+data_a2
+-1
+3
+data_a19
+-1
+3
+data_a18
+-1
+3
+data_a17
+-1
+3
+data_a16
+-1
+3
+data_a15
+-1
+3
+data_a14
+-1
+3
+data_a13
+-1
+3
+data_a12
+-1
+3
+data_a11
+-1
+3
+data_a10
+-1
+3
+data_a1
+-1
+3
+data_a0
+-1
+3
+clocken1
+-1
+3
+clock1
+-1
+3
+clock0
+-1
+3
+addressstall_b
+-1
+3
+address_b4
+-1
+3
+address_b3
+-1
+3
+address_b2
+-1
+3
+address_b1
+-1
+3
+address_b0
+-1
+3
+address_a4
+-1
+3
+address_a3
+-1
+3
+address_a2
+-1
+3
+address_a1
+-1
+3
+address_a0
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|altsyncram_1nu:fifo_ram
+}
+# macro_sequence
+
+# end
+# entity
+dffpipe_c2e
+# storage
+db|aquisition.(17).cnf
+db|aquisition.(17).cnf
+# case_insensitive
+# source_file
+db|dffpipe_c2e.tdf
+514b612055fe2dc91a47f7104f5bb437
+7
+# used_port {
+q0
+-1
+3
+clock
+-1
+3
+d0
+-1
+2
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|dffpipe_c2e:rdaclr
+}
+# macro_sequence
+
+# end
+# entity
+alt_synch_pipe_5u7
+# storage
+db|aquisition.(18).cnf
+db|aquisition.(18).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_5u7.tdf
+68f0798de2bcfe14809c6ae4577f60
+7
+# used_port {
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_5u7:rs_dgwp
+}
+# macro_sequence
+
+# end
+# entity
+dffpipe_vu8
+# storage
+db|aquisition.(19).cnf
+db|aquisition.(19).cnf
+# case_insensitive
+# source_file
+db|dffpipe_vu8.tdf
+a054f3e82c277689cee120933248e5
+7
+# used_port {
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_5u7:rs_dgwp|dffpipe_vu8:dffpipe16
+}
+# macro_sequence
+
+# end
+# entity
+alt_synch_pipe_6u7
+# storage
+db|aquisition.(20).cnf
+db|aquisition.(20).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_6u7.tdf
+2e93567a335cbd8bebb48b5268c6c94c
+7
+# used_port {
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_6u7:ws_dgrp
+}
+# macro_sequence
+
+# end
+# entity
+dffpipe_0v8
+# storage
+db|aquisition.(21).cnf
+db|aquisition.(21).cnf
+# case_insensitive
+# source_file
+db|dffpipe_0v8.tdf
+96a34443ffd9242892426d1326e5ad3
+7
+# used_port {
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|alt_synch_pipe_6u7:ws_dgrp|dffpipe_0v8:dffpipe19
+}
+# macro_sequence
+
+# end
+# entity
+cmpr_q16
+# storage
+db|aquisition.(22).cnf
+db|aquisition.(22).cnf
+# case_insensitive
+# source_file
+db|cmpr_q16.tdf
+9e7fb34b5b249c2e5e453667c7b1d7
+7
+# used_port {
+datab5
+-1
+3
+datab4
+-1
+3
+datab3
+-1
+3
+datab2
+-1
+3
+datab1
+-1
+3
+datab0
+-1
+3
+dataa5
+-1
+3
+dataa4
+-1
+3
+dataa3
+-1
+3
+dataa2
+-1
+3
+dataa1
+-1
+3
+dataa0
+-1
+3
+aeb
+-1
+3
+}
+# hierarchies {
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|cmpr_q16:rdempty_eq_comp
+dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component|dcfifo_caf1:auto_generated|cmpr_q16:wrfull_eq_comp
+}
+# macro_sequence
+
+# end
+# entity
+logic
+# storage
+db|aquisition.(0).cnf
+db|aquisition.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+|projects|git_repository|verilog|aquisition|modules|logic.v
+d7afda506d3faef5cb78ffa8c4e1a394
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
 }
 # hierarchies {
 |

@@ -1,0 +1,16 @@
+Fitter Status : Successful - Mon Jul 18 14:51:22 2016
+Quartus II Version : 10.1 Build 153 11/29/2010 SJ Full Version
+Revision Name : aquisition
+Top-level Entity Name : logic
+Family : Cyclone II
+Device : EP2C5T144C6
+Timing Models : Final
+Total logic elements : 557 / 4,608 ( 12 % )
+    Total combinational functions : 526 / 4,608 ( 11 % )
+    Dedicated logic registers : 326 / 4,608 ( 7 % )
+Total registers : 326
+Total pins : 41 / 89 ( 46 % )
+Total virtual pins : 0
+Total memory bits : 1,536 / 119,808 ( 1 % )
+Embedded Multiplier 9-bit elements : 0 / 26 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )

@@ -1,5 +1,5 @@
 Flow report for aquisition
-Fri Feb 26 12:48:10 2016
+Mon Jul 18 14:51:30 2016
 Quartus II Version 10.1 Build 153 11/29/2010 SJ Full Version
 
 
@@ -38,24 +38,22 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Flow Summary                                                                   ;
 +------------------------------------+-------------------------------------------+
-; Flow Status                        ; Flow Failed - Fri Feb 26 12:48:10 2016    ;
+; Flow Status                        ; Successful - Mon Jul 18 14:51:27 2016     ;
 ; Quartus II Version                 ; 10.1 Build 153 11/29/2010 SJ Full Version ;
 ; Revision Name                      ; aquisition                                ;
-; Top-level Entity Name              ; aquisition                                ;
-; Family                             ; Cyclone IV GX                             ;
-; Total logic elements               ; N/A until Partition Merge                 ;
-;     Total combinational functions  ; N/A until Partition Merge                 ;
-;     Dedicated logic registers      ; N/A until Partition Merge                 ;
-; Total registers                    ; N/A until Partition Merge                 ;
-; Total pins                         ; N/A until Partition Merge                 ;
-; Total virtual pins                 ; N/A until Partition Merge                 ;
-; Total memory bits                  ; N/A until Partition Merge                 ;
-; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                 ;
-; Total GXB Receiver Channel PCS     ; N/A until Partition Merge                 ;
-; Total GXB Receiver Channel PMA     ; N/A until Partition Merge                 ;
-; Total GXB Transmitter Channel PCS  ; N/A until Partition Merge                 ;
-; Total GXB Transmitter Channel PMA  ; N/A until Partition Merge                 ;
-; Total PLLs                         ; N/A until Partition Merge                 ;
+; Top-level Entity Name              ; logic                                     ;
+; Family                             ; Cyclone II                                ;
+; Device                             ; EP2C5T144C6                               ;
+; Timing Models                      ; Final                                     ;
+; Total logic elements               ; 557 / 4,608 ( 12 % )                      ;
+;     Total combinational functions  ; 526 / 4,608 ( 11 % )                      ;
+;     Dedicated logic registers      ; 326 / 4,608 ( 7 % )                       ;
+; Total registers                    ; 326                                       ;
+; Total pins                         ; 41 / 89 ( 46 % )                          ;
+; Total virtual pins                 ; 0                                         ;
+; Total memory bits                  ; 1,536 / 119,808 ( 1 % )                   ;
+; Embedded Multiplier 9-bit elements ; 0 / 26 ( 0 % )                            ;
+; Total PLLs                         ; 0 / 2 ( 0 % )                             ;
 +------------------------------------+-------------------------------------------+
 
 
@@ -64,47 +62,64 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 02/26/2016 12:48:09 ;
+; Start date & time ; 07/18/2016 14:51:04 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; aquisition          ;
 +-------------------+---------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                              ;
-+-------------------------------------+------------------------------+---------------+-------------+------------+
-; Assignment Name                     ; Value                        ; Default Value ; Entity Name ; Section Id ;
-+-------------------------------------+------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 131198687082.145648008900536 ; --            ; --          ; --         ;
-; PARTITION_COLOR                     ; 16764057                     ; --            ; --          ; Top        ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING        ; --            ; --          ; Top        ;
-; PARTITION_NETLIST_TYPE              ; SOURCE                       ; --            ; --          ; Top        ;
-+-------------------------------------+------------------------------+---------------+-------------+------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                             ;
++-------------------------------------+-----------------------------------------------------------------------------+---------------+-------------+------------+
+; Assignment Name                     ; Value                                                                       ; Default Value ; Entity Name ; Section Id ;
++-------------------------------------+-----------------------------------------------------------------------------+---------------+-------------+------------+
+; COMPILER_SIGNATURE_ID               ; 131198687082.146884266305700                                                ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; ROM: 1-PORT                                                                 ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; FIFO                                                                        ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 10.1                                                                        ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 10.1                                                                        ; --            ; --          ; --         ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                                                                          ; --            ; --          ; --         ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                                                                           ; --            ; --          ; --         ;
+; MISC_FILE                           ; D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/altera_project/aquisition.dpf ; --            ; --          ; --         ;
+; PARTITION_COLOR                     ; 16764057                                                                    ; --            ; logic       ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                                                       ; --            ; logic       ; Top        ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                                                                      ; --            ; logic       ; Top        ;
+; TOP_LEVEL_ENTITY                    ; logic                                                                       ; aquisition    ; --          ; --         ;
++-------------------------------------+-----------------------------------------------------------------------------+---------------+-------------+------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------+
-; Flow Elapsed Time                                                                                                        ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:01     ; 1.0                     ; 211 MB              ; 00:00:01                           ;
-; Total                ; 00:00:01     ; --                      ; --                  ; 00:00:01                           ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                             ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis      ; 00:00:07     ; 1.0                     ; 223 MB              ; 00:00:07                           ;
+; Fitter                    ; 00:00:09     ; 1.0                     ; 255 MB              ; 00:00:08                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 183 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:06     ; 1.0                     ; 192 MB              ; 00:00:04                           ;
+; Total                     ; 00:00:24     ; --                      ; --                  ; 00:00:21                           ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
-+------------------------------------------------------------------------------------+
-; Flow OS Summary                                                                    ;
-+----------------------+------------------+------------+------------+----------------+
-; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
-+----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; sasha            ; Windows XP ; 5.1        ; i1586          ;
-+----------------------+------------------+------------+------------+----------------+
++-----------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                         ;
++---------------------------+------------------+------------+------------+----------------+
+; Module Name               ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
++---------------------------+------------------+------------+------------+----------------+
+; Analysis & Synthesis      ; sasha            ; Windows XP ; 5.1        ; i1586          ;
+; Fitter                    ; sasha            ; Windows XP ; 5.1        ; i1586          ;
+; Assembler                 ; sasha            ; Windows XP ; 5.1        ; i1586          ;
+; TimeQuest Timing Analyzer ; sasha            ; Windows XP ; 5.1        ; i1586          ;
++---------------------------+------------------+------------+------------+----------------+
 
 
 ------------
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off aquisition -c aquisition
+quartus_fit --read_settings_files=off --write_settings_files=off aquisition -c aquisition
+quartus_asm --read_settings_files=off --write_settings_files=off aquisition -c aquisition
+quartus_sta aquisition -c aquisition
 
 
 

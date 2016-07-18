@@ -1,5 +1,7 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="aquisition">
+		<CBX_INST_ENTRY INSTANCE_NAME="|logic|dc_fifo:dev_dc_fifo|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_caf1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|logic|sin_gen:dev_sin_gen|sine_rom:sine|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_oq71.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

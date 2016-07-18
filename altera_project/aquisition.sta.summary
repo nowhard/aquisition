@@ -1,0 +1,141 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow Model Setup 'clk'
+Slack : -5.345
+TNS   : -920.168
+
+Type  : Slow Model Setup 'state_q.MEASURE_MODE_START_MEASURE'
+Slack : -3.582
+TNS   : -3.582
+
+Type  : Slow Model Setup 'rdclk'
+Slack : -3.045
+TNS   : -123.464
+
+Type  : Slow Model Setup 'gen_sample_clk'
+Slack : -2.164
+TNS   : -7.014
+
+Type  : Slow Model Setup 'state_q.MEASURE_MODE_SEND_TO_FIFO_1'
+Slack : -0.978
+TNS   : -12.970
+
+Type  : Slow Model Hold 'clk'
+Slack : -2.224
+TNS   : -19.934
+
+Type  : Slow Model Hold 'state_q.MEASURE_MODE_SEND_TO_FIFO_1'
+Slack : -0.091
+TNS   : -0.457
+
+Type  : Slow Model Hold 'rdclk'
+Slack : 0.391
+TNS   : 0.000
+
+Type  : Slow Model Hold 'gen_sample_clk'
+Slack : 0.642
+TNS   : 0.000
+
+Type  : Slow Model Hold 'state_q.MEASURE_MODE_START_MEASURE'
+Slack : 3.504
+TNS   : 0.000
+
+Type  : Slow Model Recovery 'rdclk'
+Slack : -0.948
+TNS   : -8.748
+
+Type  : Slow Model Removal 'rdclk'
+Slack : 1.535
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'clk'
+Slack : -1.880
+TNS   : -501.420
+
+Type  : Slow Model Minimum Pulse Width 'rdclk'
+Slack : -1.880
+TNS   : -139.420
+
+Type  : Slow Model Minimum Pulse Width 'gen_sample_clk'
+Slack : -1.423
+TNS   : -31.306
+
+Type  : Slow Model Minimum Pulse Width 'state_q.MEASURE_MODE_SEND_TO_FIFO_1'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'state_q.MEASURE_MODE_START_MEASURE'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Fast Model Setup 'clk'
+Slack : -1.952
+TNS   : -286.975
+
+Type  : Fast Model Setup 'state_q.MEASURE_MODE_START_MEASURE'
+Slack : -1.700
+TNS   : -1.700
+
+Type  : Fast Model Setup 'rdclk'
+Slack : -0.981
+TNS   : -35.193
+
+Type  : Fast Model Setup 'gen_sample_clk'
+Slack : -0.979
+TNS   : -2.937
+
+Type  : Fast Model Setup 'state_q.MEASURE_MODE_SEND_TO_FIFO_1'
+Slack : -0.218
+TNS   : -1.811
+
+Type  : Fast Model Hold 'clk'
+Slack : -1.362
+TNS   : -17.156
+
+Type  : Fast Model Hold 'rdclk'
+Slack : 0.215
+TNS   : 0.000
+
+Type  : Fast Model Hold 'gen_sample_clk'
+Slack : 0.327
+TNS   : 0.000
+
+Type  : Fast Model Hold 'state_q.MEASURE_MODE_SEND_TO_FIFO_1'
+Slack : 0.377
+TNS   : 0.000
+
+Type  : Fast Model Hold 'state_q.MEASURE_MODE_START_MEASURE'
+Slack : 2.229
+TNS   : 0.000
+
+Type  : Fast Model Recovery 'rdclk'
+Slack : -0.285
+TNS   : -2.526
+
+Type  : Fast Model Removal 'rdclk'
+Slack : 1.084
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'clk'
+Slack : -1.880
+TNS   : -501.420
+
+Type  : Fast Model Minimum Pulse Width 'rdclk'
+Slack : -1.880
+TNS   : -139.420
+
+Type  : Fast Model Minimum Pulse Width 'gen_sample_clk'
+Slack : -1.423
+TNS   : -31.306
+
+Type  : Fast Model Minimum Pulse Width 'state_q.MEASURE_MODE_SEND_TO_FIFO_1'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'state_q.MEASURE_MODE_START_MEASURE'
+Slack : 0.500
+TNS   : 0.000
+
+------------------------------------------------------------

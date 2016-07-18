@@ -1,0 +1,64 @@
+# Reading C:/altera/10.1/modelsim_ase/tcl/vsim/pref.tcl 
+# OpenFile D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/vsim.wlf 
+# WLF Error: File is open by another application or was not closed properly.
+# Cannot open file: D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/vsim.wlf
+# Load canceled
+vlog -reportprogress 300 -work work D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/spi_slave.v
+# Model Technology ModelSim ALTERA vlog 6.6c Compiler 2010.08 Aug 24 2010
+# -- Compiling module spi_slave
+# -- Compiling module spi_slave_tb
+# 
+# Top level modules:
+# 	spi_slave_tb
+vlog -reportprogress 300 -work work D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/adc_read.v
+# Model Technology ModelSim ALTERA vlog 6.6c Compiler 2010.08 Aug 24 2010
+# -- Compiling module adc_read
+# -- Compiling module adc_read_tb
+# 
+# Top level modules:
+# 	adc_read_tb
+vlog -reportprogress 30 -work work D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/aquisition.v
+# Model Technology ModelSim ALTERA vlog 6.6c Compiler 2010.08 Aug 24 2010
+vlog -reportprogress 30 -work work D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/fifo.v
+# Model Technology ModelSim ALTERA vlog 6.6c Compiler 2010.08 Aug 24 2010
+# -- Compiling module syn_fifo
+# -- Compiling module memory_32x16
+# 
+# Top level modules:
+# 	syn_fifo
+vlog -reportprogress 30 -work work D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/logic.v
+# Model Technology ModelSim ALTERA vlog 6.6c Compiler 2010.08 Aug 24 2010
+# -- Compiling module logic
+# -- Compiling module logic_tb
+# 
+# Top level modules:
+# 	logic_tb
+vlog -reportprogress 30 -work work D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/sin_gen.v
+# Model Technology ModelSim ALTERA vlog 6.6c Compiler 2010.08 Aug 24 2010
+# -- Compiling module sin_gen
+# -- Compiling module sin_gen_tb
+# 
+# Top level modules:
+# 	sin_gen_tb
+vlog -reportprogress 30 -work work D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/spi_master.v
+# Model Technology ModelSim ALTERA vlog 6.6c Compiler 2010.08 Aug 24 2010
+# -- Compiling module spi_master
+# 
+# Top level modules:
+# 	spi_master
+vsim -gui work.logic_tb
+# vsim -gui work.logic_tb 
+# Loading work.logic_tb
+# Loading work.logic
+# Loading work.sin_gen
+# Loading work.spi_master
+# Loading work.adc_read
+# Loading work.syn_fifo
+# Loading work.memory_32x16
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by:   Hostname:   ProcessID: 1
+#           Attempting to use alternate WLF file "./wlfthrcvyq".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlfthrcvyq
+# ** Warning: (vsim-3015) D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/logic.v(124): [PCDPC] - Port size (8 or 8) does not match connection size (1) for port 'data_out'. The port definition is at: D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/spi_master.v(9).
+#         Region: /logic_tb/test_logic/dac_reg_spi_master

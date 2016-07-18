@@ -14,7 +14,12 @@ module logic(
 
 	output [1:0]cs_dac_reg,
 	//---------------------
-	input enable
+	input enable,	
+	//--FIFO signals-------
+	output [23:0]fifo_data_out,
+	output fifo_empty,
+	input  fifo_rd_en,
+	input  rdclk
 );
 localparam STATE_SIZE = 5;
 reg 	[STATE_SIZE-1:0] state_d, state_q;
@@ -139,9 +144,9 @@ wire 	sig_sample_clk=(sample_clk_r[1]!=sample_clk_r[0])&sample_clk_r[0];
 
 
 //--------------FIFO-------------------
-wire 	[23:0]fifo_data_out;
+//wire 	[23:0]fifo_data_out;
 wire 	fifo_full;
-wire 	fifo_empty;
+//wire 	fifo_empty;
 reg  	[23:0]fifo_data_in;
 
 
@@ -149,10 +154,11 @@ reg  	fifo_wr_en_d, fifo_wr_en_q;
 reg  	fifo_rd_en_d, fifo_rd_en_q;
 
 wire 	fifo_wr_en=fifo_wr_en_q;
-wire 	fifo_rd_en=fifo_rd_en_q;
+//wire 	fifo_rd_en=fifo_rd_en_q;
 
 
-syn_fifo dev_syn_fifo(.data_out(fifo_data_out),.full(fifo_full),.empty(fifo_empty),.data_in(fifo_data_in),.clk(clk),.rst_a(rst),.wr_en(fifo_wr_en),.rd_en(fifo_rd_en));
+//dc_fifo dev_dc_fifo(.data_out(fifo_data_out),.full(fifo_full),.empty(fifo_empty),.data_in(fifo_data_in),.clk(clk),.rst_a(rst),.wr_en(fifo_wr_en),.rd_en(fifo_rd_en));
+dc_fifo dev_dc_fifo (.data(fifo_data_in),.rdclk(rdclk),.rdreq(fifo_rd_en),.wrclk(clk),.wrreq(fifo_wr_en),.q(fifo_data_out),.rdempty(fifo_empty),.wrfull(fifo_full));
 //-------------------------------------
 localparam CLOCK_DIVIDER	= 78;
 reg [6:0]clock_div_counter;
@@ -536,11 +542,16 @@ module logic_tb();
 
 	reg enable;
 	
+	wire fifo_data_out;
+	wire fifo_empty;
+	reg  fifo_rd_en;
+	reg  rdclk;
+	
 	 //-------adc emul---
 	 reg [35:0] adc_shift_reg;
 	 //-------------------------
 	
-	logic test_logic(.clk(clk),.rst(rst),.adc_cnv(adc_cnv),.adc_busy(adc_busy),.analog_mux_chn(analog_mux_chn),.adc_miso(adc_miso),.adc_sck(adc_sck),.dac_reg_mosi(dac_reg_mosi),.dac_reg_sck(dac_reg_sck),.cs_dac_reg(cs_dac_reg),.enable(enable));
+	logic test_logic(.clk(clk),.rst(rst),.adc_cnv(adc_cnv),.adc_busy(adc_busy),.analog_mux_chn(analog_mux_chn),.adc_miso(adc_miso),.adc_sck(adc_sck),.dac_reg_mosi(dac_reg_mosi),.dac_reg_sck(dac_reg_sck),.cs_dac_reg(cs_dac_reg),.enable(enable),.fifo_data_out(fifo_data_out),.fifo_empty(fifo_empty),.fifo_rd_en(fifo_rd_en),.rdclk(rdclk));
 	
 	 initial
 	 begin

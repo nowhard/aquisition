@@ -1,0 +1,185 @@
+m255
+K3
+13
+cModel Technology
+Z0 dD:\PROJECTS\GIT_REPOSITORY\verilog\aquisition\modules
+vadc_read
+Z1 I4aOm]o4_]E[9IX4E^QZV20
+Z2 VC:jcV2VlALEihFe9;Ml6S0
+Z3 dD:\PROJECTS\GIT_REPOSITORY\verilog\aquisition\modules
+Z4 w1460710273
+Z5 8D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/adc_read.v
+Z6 FD:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/adc_read.v
+L0 1
+Z7 OV;L;6.6c;45
+r1
+31
+Z8 o-work work -O0
+Z9 !s100 1e5G9YoGL;BQKY@kje:oe2
+!s85 0
+!s101 -O0
+vadc_read_tb
+Z10 IJEQWkKJ7BzOGo`]dTmi>R0
+Z11 VIGbToH`S;ITDhQj`^dRQ]3
+R3
+R4
+R5
+R6
+Z12 L0 257
+R7
+r1
+31
+R8
+Z13 !s100 @H<PRb_;bZ`?1T6^Y_8aj3
+!s85 0
+!s101 -O0
+vlogic
+Z14 I:zKzc9c2b_H@ai9Y]B`jH0
+Z15 V:0M_hHoiTE9z_OX_aL]QT3
+R3
+Z16 w1467015806
+Z17 8D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/logic.v
+Z18 FD:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/logic.v
+L0 1
+R7
+r1
+31
+R8
+Z19 !s100 ZAFVS^cJcNGo<Joj5]]nU0
+!s85 0
+!s101 -O0
+vlogic_tb
+Z20 IITeM;]0lXzaE?B44:l`QY0
+Z21 V?9mX1aAJSc2iL8_dG>SN<1
+R3
+R16
+R17
+R18
+Z22 L0 516
+R7
+r1
+31
+R8
+Z23 !s100 Y0kP>OVRE3K?8ooCblhLR1
+!s85 0
+!s101 -O0
+vmemory_32x16
+Z24 IE]`1>^E5SE3_Ed=F`oMP03
+Z25 V_05:=Zc35[ZMD57@:;LUh3
+R3
+Z26 w1462873401
+Z27 8D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/fifo.v
+Z28 FD:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/fifo.v
+L0 79
+R7
+r1
+31
+R8
+Z29 !s100 kIkXE`o2FXeUCazR2S0B70
+!s85 0
+!s101 -O0
+vsin_gen
+Z30 IQjLXdL^X<fJaVFNj4lVi10
+Z31 VCjXEUi9B=23zR?4YocEgJ3
+R3
+Z32 w1464249056
+Z33 8D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/sin_gen.v
+Z34 FD:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/sin_gen.v
+L0 1
+R7
+r1
+31
+R8
+Z35 !s100 K9hATU:4VZ4Uf^>>:@gMT2
+!s85 0
+!s101 -O0
+vsin_gen_tb
+Z36 IlE`6e2CjF`17kJLfW3JP13
+Z37 VfD1_AY8O9zk[N<5:e<6?d0
+R3
+R32
+R33
+R34
+Z38 L0 565
+R7
+r1
+31
+R8
+Z39 !s100 m@n1Ozh;l<QAnmA7Zg^TV3
+!s85 0
+!s101 -O0
+vspi_master
+!s100 3j7YHC[;NRF>5Dn`XD[Fz0
+IDE`JMhD]C?CZ1V2S_PhUE2
+VZ>I]^=E]AP4dG;GM5amI13
+R3
+w1460618878
+Z40 8D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/spi_master.v
+Z41 FD:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/spi_master.v
+L0 1
+R7
+r1
+!s85 0
+31
+!s101 -O0
+R8
+vspi_master_tb
+Z42 Im0eb>8jZK8Q2719RWeO=L2
+Z43 V8TzP8225AdOGBQ`aXnEgh0
+R3
+Z44 w1456842497
+R40
+R41
+Z45 L0 115
+R7
+r1
+31
+R8
+Z46 !s100 286ajUn]@zUDWCG9N4W@D2
+!s85 0
+!s101 -O0
+vspi_slave
+Z47 !s100 e14JzQzz2_f5ehKXbmHl=1
+Z48 IBj=EVCfF<GMXi_T`D<?W_3
+Z49 Vj?OgJBd8cz5]PQY_f7``U2
+R3
+Z50 w1456905153
+Z51 8D:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/spi_slave.v
+Z52 FD:/PROJECTS/GIT_REPOSITORY/verilog/aquisition/modules/spi_slave.v
+L0 1
+R7
+r1
+31
+R8
+!s85 0
+!s101 -O0
+vspi_slave_tb
+Z53 !s100 M<D5J:O[G<9K]22m^:?U_0
+Z54 IO94]OEl4ZfiN[P79HUEDd0
+Z55 V1SU8az067YamCgCz:Hk2F2
+R3
+R50
+R51
+R52
+L0 96
+R7
+r1
+31
+R8
+!s85 0
+!s101 -O0
+vsyn_fifo
+Z56 IM]>W3:Hdg_RU5j:la2TC63
+Z57 VKF4R2VZRdkLWdYIj35nKj3
+R3
+R26
+R27
+R28
+L0 1
+R7
+r1
+31
+R8
+Z58 !s100 lz7V1R0PgBzKbCFNgIBE`2
+!s85 0
+!s101 -O0

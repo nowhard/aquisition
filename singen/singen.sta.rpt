@@ -1,0 +1,1292 @@
+TimeQuest Timing Analyzer report for singen
+Wed Aug 31 16:38:04 2016
+Quartus II Version 10.1 Build 153 11/29/2010 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. TimeQuest Timing Analyzer Summary
+  3. Clocks
+  4. Slow Model Fmax Summary
+  5. Slow Model Setup Summary
+  6. Slow Model Hold Summary
+  7. Slow Model Recovery Summary
+  8. Slow Model Removal Summary
+  9. Slow Model Minimum Pulse Width Summary
+ 10. Slow Model Setup: 'clk'
+ 11. Slow Model Setup: 'gen_sample_clk'
+ 12. Slow Model Hold: 'clk'
+ 13. Slow Model Hold: 'gen_sample_clk'
+ 14. Slow Model Minimum Pulse Width: 'gen_sample_clk'
+ 15. Slow Model Minimum Pulse Width: 'clk'
+ 16. Setup Times
+ 17. Hold Times
+ 18. Clock to Output Times
+ 19. Minimum Clock to Output Times
+ 20. Fast Model Setup Summary
+ 21. Fast Model Hold Summary
+ 22. Fast Model Recovery Summary
+ 23. Fast Model Removal Summary
+ 24. Fast Model Minimum Pulse Width Summary
+ 25. Fast Model Setup: 'clk'
+ 26. Fast Model Setup: 'gen_sample_clk'
+ 27. Fast Model Hold: 'clk'
+ 28. Fast Model Hold: 'gen_sample_clk'
+ 29. Fast Model Minimum Pulse Width: 'gen_sample_clk'
+ 30. Fast Model Minimum Pulse Width: 'clk'
+ 31. Setup Times
+ 32. Hold Times
+ 33. Clock to Output Times
+ 34. Minimum Clock to Output Times
+ 35. Multicorner Timing Analysis Summary
+ 36. Setup Times
+ 37. Hold Times
+ 38. Clock to Output Times
+ 39. Minimum Clock to Output Times
+ 40. Setup Transfers
+ 41. Hold Transfers
+ 42. Report TCCS
+ 43. Report RSKM
+ 44. Unconstrained Paths
+ 45. TimeQuest Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------+
+; TimeQuest Timing Analyzer Summary                                      ;
++--------------------+---------------------------------------------------+
+; Quartus II Version ; Version 10.1 Build 153 11/29/2010 SJ Full Version ;
+; Revision Name      ; singen                                            ;
+; Device Family      ; Cyclone II                                        ;
+; Device Name        ; EP2C5T144C8                                       ;
+; Timing Models      ; Final                                             ;
+; Delay Model        ; Combined                                          ;
+; Rise/Fall Delays   ; Unavailable                                       ;
++--------------------+---------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                                         ;
++----------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+--------------------+
+; Clock Name     ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets            ;
++----------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+--------------------+
+; clk            ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clk }            ;
+; gen_sample_clk ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { gen_sample_clk } ;
++----------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+--------------------+
+
+
++--------------------------------------------------+
+; Slow Model Fmax Summary                          ;
++------------+-----------------+------------+------+
+; Fmax       ; Restricted Fmax ; Clock Name ; Note ;
++------------+-----------------+------------+------+
+; 195.54 MHz ; 195.54 MHz      ; clk        ;      ;
++------------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+
+
++-----------------------------------------+
+; Slow Model Setup Summary                ;
++----------------+--------+---------------+
+; Clock          ; Slack  ; End Point TNS ;
++----------------+--------+---------------+
+; clk            ; -7.676 ; -199.266      ;
+; gen_sample_clk ; 0.211  ; 0.000         ;
++----------------+--------+---------------+
+
+
++-----------------------------------------+
+; Slow Model Hold Summary                 ;
++----------------+--------+---------------+
+; Clock          ; Slack  ; End Point TNS ;
++----------------+--------+---------------+
+; clk            ; -2.548 ; -4.368        ;
+; gen_sample_clk ; 0.407  ; 0.000         ;
++----------------+--------+---------------+
+
+
+-------------------------------
+; Slow Model Recovery Summary ;
+-------------------------------
+No paths to report.
+
+
+------------------------------
+; Slow Model Removal Summary ;
+------------------------------
+No paths to report.
+
+
++-----------------------------------------+
+; Slow Model Minimum Pulse Width Summary  ;
++----------------+--------+---------------+
+; Clock          ; Slack  ; End Point TNS ;
++----------------+--------+---------------+
+; gen_sample_clk ; -2.277 ; -36.432       ;
+; clk            ; -1.941 ; -107.305      ;
++----------------+--------+---------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Setup: 'clk'                                                                                                                                                                                                                                    ;
++--------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------+----------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                                                                                       ; To Node                                 ; Launch Clock   ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------+----------------+-------------+--------------+------------+------------+
+; -7.676 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 7.170      ;
+; -7.676 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 7.170      ;
+; -7.676 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 7.170      ;
+; -7.676 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 7.170      ;
+; -7.676 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 7.170      ;
+; -7.676 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 7.170      ;
+; -7.676 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 7.170      ;
+; -7.676 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 7.170      ;
+; -7.284 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -1.541     ; 6.783      ;
+; -7.284 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -1.541     ; 6.783      ;
+; -7.284 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -1.541     ; 6.783      ;
+; -7.284 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -1.541     ; 6.783      ;
+; -7.284 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -1.541     ; 6.783      ;
+; -7.284 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -1.541     ; 6.783      ;
+; -7.284 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -1.541     ; 6.783      ;
+; -7.284 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -1.541     ; 6.783      ;
+; -6.480 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.974      ;
+; -6.480 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.974      ;
+; -6.480 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.974      ;
+; -6.480 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.974      ;
+; -6.480 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.974      ;
+; -6.480 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.974      ;
+; -6.480 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.974      ;
+; -6.480 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.974      ;
+; -6.324 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.818      ;
+; -6.324 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.818      ;
+; -6.324 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.818      ;
+; -6.324 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.818      ;
+; -6.324 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.818      ;
+; -6.324 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.818      ;
+; -6.324 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.818      ;
+; -6.324 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.818      ;
+; -5.928 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.422      ;
+; -5.928 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.422      ;
+; -5.928 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.422      ;
+; -5.928 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.422      ;
+; -5.928 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.422      ;
+; -5.928 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.422      ;
+; -5.928 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.422      ;
+; -5.928 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.422      ;
+; -5.927 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.421      ;
+; -5.927 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.421      ;
+; -5.927 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.421      ;
+; -5.927 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.421      ;
+; -5.927 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.421      ;
+; -5.927 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.421      ;
+; -5.927 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.421      ;
+; -5.927 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.421      ;
+; -5.906 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.400      ;
+; -5.906 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.400      ;
+; -5.906 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.400      ;
+; -5.906 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.400      ;
+; -5.906 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.400      ;
+; -5.906 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.400      ;
+; -5.906 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.400      ;
+; -5.906 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.400      ;
+; -5.897 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.391      ;
+; -5.897 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.391      ;
+; -5.897 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.391      ;
+; -5.897 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.391      ;
+; -5.897 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.391      ;
+; -5.897 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.391      ;
+; -5.897 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.391      ;
+; -5.897 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -1.546     ; 5.391      ;
+; -4.114 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.019     ; 5.135      ;
+; -4.066 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.019     ; 5.087      ;
+; -4.025 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.019     ; 5.046      ;
+; -3.985 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; delay_counter_q[6]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 5.002      ;
+; -3.984 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; delay_counter_q[3]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 5.001      ;
+; -3.982 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.999      ;
+; -3.981 ; sin_gen:dev_sin_gen|cnt[7]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.019     ; 5.002      ;
+; -3.980 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; delay_counter_q[0]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.997      ;
+; -3.977 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.019     ; 4.998      ;
+; -3.937 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; delay_counter_q[6]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.954      ;
+; -3.936 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; delay_counter_q[3]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.953      ;
+; -3.934 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.951      ;
+; -3.932 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; delay_counter_q[0]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.949      ;
+; -3.921 ; sin_gen:dev_sin_gen|cnt[4]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.019     ; 4.942      ;
+; -3.915 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.019     ; 4.936      ;
+; -3.892 ; sin_gen:dev_sin_gen|cnt[7]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.019     ; 4.913      ;
+; -3.892 ; sin_gen:dev_sin_gen|cnt[5]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.019     ; 4.913      ;
+; -3.882 ; delay_counter_q[4]                                                                                                              ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; 0.004      ; 4.926      ;
+; -3.832 ; sin_gen:dev_sin_gen|cnt[4]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.019     ; 4.853      ;
+; -3.826 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.019     ; 4.847      ;
+; -3.803 ; sin_gen:dev_sin_gen|cnt[5]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.019     ; 4.824      ;
+; -3.793 ; delay_counter_q[4]                                                                                                              ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; 0.004      ; 4.837      ;
+; -3.786 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; delay_counter_q[6]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.803      ;
+; -3.785 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; delay_counter_q[3]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.802      ;
+; -3.783 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.800      ;
+; -3.781 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; delay_counter_q[0]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.798      ;
+; -3.765 ; state_q.MEASURE_MODE_SET_DELAY_1                                                                                                ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.004     ; 4.801      ;
+; -3.747 ; sin_gen:dev_sin_gen|cnt[3]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.019     ; 4.768      ;
+; -3.686 ; sin_gen:dev_sin_gen|cnt[7]                                                                                                      ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.703      ;
+; -3.672 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_ON       ; clk            ; clk         ; 1.000        ; -0.023     ; 4.689      ;
+; -3.658 ; sin_gen:dev_sin_gen|cnt[3]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.019     ; 4.679      ;
+; -3.626 ; state_q.MEASURE_MODE_WAIT_SPI                                                                                                   ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; 0.000      ; 4.666      ;
+; -3.626 ; sin_gen:dev_sin_gen|cnt[4]                                                                                                      ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.643      ;
+; -3.624 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_ON       ; clk            ; clk         ; 1.000        ; -0.023     ; 4.641      ;
+; -3.618 ; sin_gen:dev_sin_gen|cnt[3]                                                                                                      ; delay_counter_q[6]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.635      ;
+; -3.617 ; sin_gen:dev_sin_gen|cnt[3]                                                                                                      ; delay_counter_q[3]                      ; clk            ; clk         ; 1.000        ; -0.023     ; 4.634      ;
++--------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------+----------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Setup: 'gen_sample_clk'                                                                                                                                                                                                            ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+; Slack ; From Node                  ; To Node                                                                                                                         ; Launch Clock ; Latch Clock    ; Relationship ; Clock Skew ; Data Delay ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+; 0.211 ; sin_gen:dev_sin_gen|cnt[6] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; clk          ; gen_sample_clk ; 1.000        ; 1.522      ; 2.265      ;
+; 0.239 ; sin_gen:dev_sin_gen|cnt[7] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; clk          ; gen_sample_clk ; 1.000        ; 1.522      ; 2.237      ;
+; 0.253 ; sin_gen:dev_sin_gen|cnt[5] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; clk          ; gen_sample_clk ; 1.000        ; 1.522      ; 2.223      ;
+; 0.258 ; sin_gen:dev_sin_gen|cnt[1] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; clk          ; gen_sample_clk ; 1.000        ; 1.522      ; 2.218      ;
+; 0.258 ; sin_gen:dev_sin_gen|cnt[3] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; clk          ; gen_sample_clk ; 1.000        ; 1.522      ; 2.218      ;
+; 0.263 ; sin_gen:dev_sin_gen|cnt[0] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; clk          ; gen_sample_clk ; 1.000        ; 1.522      ; 2.213      ;
+; 0.274 ; sin_gen:dev_sin_gen|cnt[4] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; clk          ; gen_sample_clk ; 1.000        ; 1.522      ; 2.202      ;
+; 0.280 ; sin_gen:dev_sin_gen|cnt[2] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; clk          ; gen_sample_clk ; 1.000        ; 1.522      ; 2.196      ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Hold: 'clk'                                                                                                                                                             ;
++--------+-------------------------------------------------+-------------------------------------------------+----------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                       ; To Node                                         ; Launch Clock   ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-------------------------------------------------+-------------------------------------------------+----------------+-------------+--------------+------------+------------+
+; -2.548 ; gen_sample_clk                                  ; gen_sample_clk                                  ; gen_sample_clk ; clk         ; 0.000        ; 2.743      ; 0.805      ;
+; -2.048 ; gen_sample_clk                                  ; gen_sample_clk                                  ; gen_sample_clk ; clk         ; -0.500       ; 2.743      ; 0.805      ;
+; -1.820 ; gen_sample_clk                                  ; sin_gen:dev_sin_gen|sample[0]                   ; gen_sample_clk ; clk         ; 0.000        ; 2.743      ; 1.533      ;
+; -1.320 ; gen_sample_clk                                  ; sin_gen:dev_sin_gen|sample[0]                   ; gen_sample_clk ; clk         ; -0.500       ; 2.743      ; 1.533      ;
+; 0.499  ; analog_mux_chn_q[1]                             ; analog_mux_chn_q[1]                             ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; state_q.MEASURE_MODE_GENERATOR_ON               ; state_q.MEASURE_MODE_GENERATOR_ON               ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; state_q.MEASURE_MODE_SET_DELAY_1                ; state_q.MEASURE_MODE_SET_DELAY_1                ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; state_q.MEASURE_MODE_WAIT_SPI                   ; state_q.MEASURE_MODE_WAIT_SPI                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; state_q.IDLE                                    ; state_q.IDLE                                    ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; spi_master:dac_reg_spi_master|ctr_q[1]          ; spi_master:dac_reg_spi_master|ctr_q[1]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; spi_master:dac_reg_spi_master|ctr_q[2]          ; spi_master:dac_reg_spi_master|ctr_q[2]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; spi_master:dac_reg_spi_master|ctr_q[0]          ; spi_master:dac_reg_spi_master|ctr_q[0]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; spi_master:dac_reg_spi_master|sck_q[0]          ; spi_master:dac_reg_spi_master|sck_q[0]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; spi_master:dac_reg_spi_master|sck_q[1]          ; spi_master:dac_reg_spi_master|sck_q[1]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; spi_master:dac_reg_spi_master|state_q.IDLE      ; spi_master:dac_reg_spi_master|state_q.IDLE      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; gen_enable_q                                    ; gen_enable_q                                    ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; mode_reg_q[0]                                   ; mode_reg_q[0]                                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; mode_reg_q[2]                                   ; mode_reg_q[2]                                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; mode_reg_q[1]                                   ; mode_reg_q[1]                                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; spi_master:dac_reg_spi_master|mosi_q            ; spi_master:dac_reg_spi_master|mosi_q            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; cs_dac_reg_q.CS_DAC_REG_DAC                     ; cs_dac_reg_q.CS_DAC_REG_DAC                     ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; cs_dac_reg_q.CS_DAC_REG_REG                     ; cs_dac_reg_q.CS_DAC_REG_REG                     ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; spi_master:dac_reg_spi_master|data_q[0]         ; spi_master:dac_reg_spi_master|data_q[0]         ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.499  ; keys_q[0]                                       ; keys_q[0]                                       ; clk            ; clk         ; 0.000        ; 0.000      ; 0.805      ;
+; 0.746  ; sin_gen:dev_sin_gen|sample[0]                   ; sin_gen:dev_sin_gen|sample[1]                   ; clk            ; clk         ; 0.000        ; 0.000      ; 1.052      ;
+; 0.754  ; state_q.MEASURE_MODE_MULTIPLEXOR_OFF            ; analog_mux_chn_q[1]                             ; clk            ; clk         ; 0.000        ; 0.000      ; 1.060      ;
+; 0.758  ; sin_gen:dev_sin_gen|cnt[7]                      ; sin_gen:dev_sin_gen|cnt[7]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.064      ;
+; 0.758  ; state_q.MEASURE_MODE_MULTIPLEXOR_OFF            ; state_q.MEASURE_MODE_END                        ; clk            ; clk         ; 0.000        ; 0.000      ; 1.064      ;
+; 0.771  ; state_q.MEASURE_MODE_START_SET_DIAP_KEYS        ; state_q.MEASURE_MODE_WAIT_SPI                   ; clk            ; clk         ; 0.000        ; 0.000      ; 1.077      ;
+; 0.774  ; state_q.MEASURE_MODE_START                      ; state_q.MEASURE_MODE_START_SET_DIAP_KEYS        ; clk            ; clk         ; 0.000        ; 0.000      ; 1.080      ;
+; 0.823  ; spi_master:dac_reg_spi_master|sck_q[0]          ; spi_master:dac_reg_spi_master|sck_q[1]          ; clk            ; clk         ; 0.000        ; 0.000      ; 1.129      ;
+; 0.900  ; spi_master:dac_reg_spi_master|data_q[4]         ; spi_master:dac_reg_spi_master|data_q[5]         ; clk            ; clk         ; 0.000        ; 0.000      ; 1.206      ;
+; 0.901  ; spi_master:dac_reg_spi_master|data_q[1]         ; spi_master:dac_reg_spi_master|data_q[2]         ; clk            ; clk         ; 0.000        ; 0.000      ; 1.207      ;
+; 0.902  ; spi_master:dac_reg_spi_master|data_q[2]         ; spi_master:dac_reg_spi_master|data_q[3]         ; clk            ; clk         ; 0.000        ; 0.000      ; 1.208      ;
+; 0.905  ; spi_master:dac_reg_spi_master|data_q[6]         ; spi_master:dac_reg_spi_master|data_q[7]         ; clk            ; clk         ; 0.000        ; 0.000      ; 1.211      ;
+; 0.905  ; spi_master:dac_reg_spi_master|data_q[3]         ; spi_master:dac_reg_spi_master|data_q[4]         ; clk            ; clk         ; 0.000        ; 0.000      ; 1.211      ;
+; 0.954  ; state_q.MEASURE_MODE_DIAPASON                   ; state_q.MEASURE_MODE_DETERMINATE_DIAPASON       ; clk            ; clk         ; 0.000        ; 0.000      ; 1.260      ;
+; 1.079  ; spi_master:dac_reg_spi_master|data_q[7]         ; spi_master:dac_reg_spi_master|mosi_q            ; clk            ; clk         ; 0.000        ; 0.005      ; 1.390      ;
+; 1.081  ; state_q.DONE                                    ; state_q.IDLE                                    ; clk            ; clk         ; 0.000        ; 0.000      ; 1.387      ;
+; 1.106  ; sin_gen:dev_sin_gen|sample[2]                   ; sin_gen:dev_sin_gen|data_ready                  ; clk            ; clk         ; 0.000        ; 0.000      ; 1.412      ;
+; 1.165  ; mode_reg_q[1]                                   ; mode_reg_q[2]                                   ; clk            ; clk         ; 0.000        ; 0.000      ; 1.471      ;
+; 1.165  ; state_q.MEASURE_MODE_START                      ; cs_dac_reg_q.CS_DAC_REG_DAC                     ; clk            ; clk         ; 0.000        ; 0.000      ; 1.471      ;
+; 1.167  ; clock_div_counter[0]                            ; clock_div_counter[0]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.473      ;
+; 1.176  ; clock_div_counter[1]                            ; clock_div_counter[1]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.482      ;
+; 1.177  ; clock_div_counter[3]                            ; clock_div_counter[3]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.483      ;
+; 1.178  ; clock_div_counter[6]                            ; clock_div_counter[6]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.484      ;
+; 1.181  ; sin_gen:dev_sin_gen|cnt[3]                      ; sin_gen:dev_sin_gen|cnt[3]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.487      ;
+; 1.185  ; state_q.MEASURE_MODE_SET_DELAY_1                ; state_q.MEASURE_MODE_GENERATOR_OFF              ; clk            ; clk         ; 0.000        ; 0.000      ; 1.491      ;
+; 1.185  ; sin_gen:dev_sin_gen|cnt[5]                      ; sin_gen:dev_sin_gen|cnt[5]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.491      ;
+; 1.187  ; state_q.MEASURE_MODE_SET_MULTIPLEXOR            ; state_q.MEASURE_MODE_SET_DELAY_1                ; clk            ; clk         ; 0.000        ; 0.000      ; 1.493      ;
+; 1.189  ; state_q.MEASURE_MODE_SET_MULTIPLEXOR            ; analog_mux_chn_q[1]                             ; clk            ; clk         ; 0.000        ; 0.000      ; 1.495      ;
+; 1.190  ; sin_gen:dev_sin_gen|cnt[1]                      ; sin_gen:dev_sin_gen|cnt[1]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.496      ;
+; 1.195  ; state_q.MEASURE_MODE_START                      ; cs_dac_reg_q.CS_DAC_REG_REG                     ; clk            ; clk         ; 0.000        ; 0.000      ; 1.501      ;
+; 1.199  ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; spi_master:dac_reg_spi_master|ctr_q[2]          ; clk            ; clk         ; 0.000        ; 0.000      ; 1.505      ;
+; 1.201  ; state_q.MEASURE_MODE_END                        ; state_q.MEASURE_MODE_DETERMINATE_DIAPASON       ; clk            ; clk         ; 0.000        ; 0.000      ; 1.507      ;
+; 1.205  ; state_q.MEASURE_MODE_END                        ; state_q.MEASURE_MODE_START                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.511      ;
+; 1.205  ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; spi_master:dac_reg_spi_master|ctr_q[0]          ; clk            ; clk         ; 0.000        ; 0.000      ; 1.511      ;
+; 1.206  ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; spi_master:dac_reg_spi_master|sck_q[1]          ; clk            ; clk         ; 0.000        ; 0.000      ; 1.512      ;
+; 1.208  ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; spi_master:dac_reg_spi_master|ctr_q[1]          ; clk            ; clk         ; 0.000        ; 0.000      ; 1.514      ;
+; 1.217  ; state_q.MEASURE_MODE_GENERATOR_OFF              ; cs_dac_reg_q.CS_DAC_REG_DAC                     ; clk            ; clk         ; 0.000        ; 0.000      ; 1.523      ;
+; 1.221  ; state_q.MEASURE_MODE_GENERATOR_OFF              ; gen_enable_q                                    ; clk            ; clk         ; 0.000        ; 0.000      ; 1.527      ;
+; 1.222  ; gen_enable_q                                    ; sin_gen:dev_sin_gen|data_ready                  ; clk            ; clk         ; 0.000        ; 0.000      ; 1.528      ;
+; 1.225  ; clock_div_counter[2]                            ; clock_div_counter[2]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.531      ;
+; 1.226  ; clock_div_counter[4]                            ; clock_div_counter[4]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.532      ;
+; 1.226  ; clock_div_counter[5]                            ; clock_div_counter[5]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.532      ;
+; 1.229  ; sin_gen:dev_sin_gen|cnt[2]                      ; sin_gen:dev_sin_gen|cnt[2]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.535      ;
+; 1.232  ; sin_gen:dev_sin_gen|cnt[0]                      ; sin_gen:dev_sin_gen|cnt[0]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.538      ;
+; 1.233  ; sin_gen:dev_sin_gen|cnt[4]                      ; sin_gen:dev_sin_gen|cnt[4]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.539      ;
+; 1.239  ; state_q.MEASURE_MODE_DETERMINATE_DIAPASON       ; state_q.MEASURE_MODE_START                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.545      ;
+; 1.253  ; spi_master:dac_reg_spi_master|data_q[5]         ; spi_master:dac_reg_spi_master|data_q[6]         ; clk            ; clk         ; 0.000        ; 0.000      ; 1.559      ;
+; 1.256  ; state_q.MEASURE_MODE_GENERATOR_OFF              ; state_q.MEASURE_MODE_MULTIPLEXOR_OFF            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.562      ;
+; 1.256  ; spi_master:dac_reg_spi_master|sck_q[0]          ; spi_master:dac_reg_spi_master|mosi_q            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.562      ;
+; 1.256  ; state_q.MEASURE_MODE_GENERATOR_OFF              ; cs_dac_reg_q.CS_DAC_REG_REG                     ; clk            ; clk         ; 0.000        ; 0.000      ; 1.562      ;
+; 1.272  ; spi_master:dac_reg_spi_master|data_q[0]         ; spi_master:dac_reg_spi_master|data_q[1]         ; clk            ; clk         ; 0.000        ; -0.005     ; 1.573      ;
+; 1.395  ; spi_master:dac_reg_spi_master|sck_q[1]          ; spi_master:dac_reg_spi_master|ctr_q[2]          ; clk            ; clk         ; 0.000        ; 0.000      ; 1.701      ;
+; 1.444  ; sin_gen:dev_sin_gen|data_ready                  ; dac_reg_start_q                                 ; clk            ; clk         ; 0.000        ; 0.007      ; 1.757      ;
+; 1.464  ; dac_reg_start_q                                 ; spi_master:dac_reg_spi_master|state_q.IDLE      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.770      ;
+; 1.509  ; spi_master:dac_reg_spi_master|ctr_q[1]          ; spi_master:dac_reg_spi_master|ctr_q[2]          ; clk            ; clk         ; 0.000        ; 0.000      ; 1.815      ;
+; 1.519  ; cs_dac_reg_q.CS_DAC_REG_DAC                     ; spi_master:dac_reg_spi_master|data_q[3]         ; clk            ; clk         ; 0.000        ; -0.005     ; 1.820      ;
+; 1.528  ; state_q.START_CYCLE                             ; mode_reg_q[0]                                   ; clk            ; clk         ; 0.000        ; 0.013      ; 1.847      ;
+; 1.549  ; spi_master:dac_reg_spi_master|state_q.TRANSFER  ; spi_master:dac_reg_spi_master|new_data_q        ; clk            ; clk         ; 0.000        ; 0.000      ; 1.855      ;
+; 1.557  ; sin_gen:dev_sin_gen|cnt[6]                      ; sin_gen:dev_sin_gen|cnt[6]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.863      ;
+; 1.566  ; mode_reg_q[0]                                   ; keys_q[0]                                       ; clk            ; clk         ; 0.000        ; -0.013     ; 1.859      ;
+; 1.638  ; clock_div_counter[5]                            ; gen_sample_clk                                  ; clk            ; clk         ; 0.000        ; 0.000      ; 1.944      ;
+; 1.645  ; clock_div_counter[0]                            ; clock_div_counter[1]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.951      ;
+; 1.655  ; clock_div_counter[1]                            ; clock_div_counter[2]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.961      ;
+; 1.656  ; clock_div_counter[3]                            ; clock_div_counter[4]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 1.962      ;
+; 1.660  ; sin_gen:dev_sin_gen|cnt[3]                      ; sin_gen:dev_sin_gen|cnt[4]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.966      ;
+; 1.664  ; sin_gen:dev_sin_gen|cnt[5]                      ; sin_gen:dev_sin_gen|cnt[6]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.970      ;
+; 1.669  ; sin_gen:dev_sin_gen|cnt[1]                      ; sin_gen:dev_sin_gen|cnt[2]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 1.975      ;
+; 1.700  ; sin_gen:dev_sin_gen|sample[1]                   ; sin_gen:dev_sin_gen|sample[2]                   ; clk            ; clk         ; 0.000        ; -0.019     ; 1.987      ;
+; 1.701  ; sin_gen:dev_sin_gen|sample[1]                   ; sin_gen:dev_sin_gen|data_ready                  ; clk            ; clk         ; 0.000        ; -0.019     ; 1.988      ;
+; 1.705  ; clock_div_counter[2]                            ; clock_div_counter[3]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 2.011      ;
+; 1.706  ; clock_div_counter[5]                            ; clock_div_counter[6]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 2.012      ;
+; 1.706  ; clock_div_counter[4]                            ; clock_div_counter[5]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 2.012      ;
+; 1.709  ; sin_gen:dev_sin_gen|cnt[2]                      ; sin_gen:dev_sin_gen|cnt[3]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 2.015      ;
+; 1.709  ; sin_gen:dev_sin_gen|cnt[0]                      ; sin_gen:dev_sin_gen|cnt[1]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 2.015      ;
+; 1.713  ; sin_gen:dev_sin_gen|cnt[4]                      ; sin_gen:dev_sin_gen|cnt[5]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 2.019      ;
+; 1.724  ; spi_master:dac_reg_spi_master|sck_q[1]          ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; clk            ; clk         ; 0.000        ; 0.000      ; 2.030      ;
++--------+-------------------------------------------------+-------------------------------------------------+----------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Hold: 'gen_sample_clk'                                                                                                                                                                                                             ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+; Slack ; From Node                  ; To Node                                                                                                                         ; Launch Clock ; Latch Clock    ; Relationship ; Clock Skew ; Data Delay ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+; 0.407 ; sin_gen:dev_sin_gen|cnt[2] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; clk          ; gen_sample_clk ; 0.000        ; 1.522      ; 2.196      ;
+; 0.413 ; sin_gen:dev_sin_gen|cnt[4] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; clk          ; gen_sample_clk ; 0.000        ; 1.522      ; 2.202      ;
+; 0.424 ; sin_gen:dev_sin_gen|cnt[0] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; clk          ; gen_sample_clk ; 0.000        ; 1.522      ; 2.213      ;
+; 0.429 ; sin_gen:dev_sin_gen|cnt[1] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; clk          ; gen_sample_clk ; 0.000        ; 1.522      ; 2.218      ;
+; 0.429 ; sin_gen:dev_sin_gen|cnt[3] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; clk          ; gen_sample_clk ; 0.000        ; 1.522      ; 2.218      ;
+; 0.434 ; sin_gen:dev_sin_gen|cnt[5] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; clk          ; gen_sample_clk ; 0.000        ; 1.522      ; 2.223      ;
+; 0.448 ; sin_gen:dev_sin_gen|cnt[7] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; clk          ; gen_sample_clk ; 0.000        ; 1.522      ; 2.237      ;
+; 0.476 ; sin_gen:dev_sin_gen|cnt[6] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; clk          ; gen_sample_clk ; 0.000        ; 1.522      ; 2.265      ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Minimum Pulse Width: 'gen_sample_clk'                                                                                                                                                                          ;
++--------+--------------+----------------+------------------+----------------+------------+---------------------------------------------------------------------------------------------------------------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock          ; Clock Edge ; Target                                                                                                                          ;
++--------+--------------+----------------+------------------+----------------+------------+---------------------------------------------------------------------------------------------------------------------------------+
+; -2.277 ; 0.500        ; 2.777          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ;
+; -2.277 ; 0.500        ; 2.777          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ;
+; -2.277 ; 0.500        ; 2.777          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ;
+; -2.277 ; 0.500        ; 2.777          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ;
+; -2.277 ; 0.500        ; 2.777          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ;
+; -2.277 ; 0.500        ; 2.777          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ;
+; -2.277 ; 0.500        ; 2.777          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ;
+; -2.277 ; 0.500        ; 2.777          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ;
+; -2.277 ; 0.500        ; 2.777          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ;
+; -2.277 ; 0.500        ; 2.777          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ;
+; -2.277 ; 0.500        ; 2.777          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ;
+; -2.277 ; 0.500        ; 2.777          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ;
+; -2.277 ; 0.500        ; 2.777          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ;
+; -2.277 ; 0.500        ; 2.777          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ;
+; -2.277 ; 0.500        ; 2.777          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ;
+; -2.277 ; 0.500        ; 2.777          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; gen_sample_clk ; Rise       ; dev_sin_gen|sine|altsyncram_component|auto_generated|ram_block1a0|clk0                                                          ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; dev_sin_gen|sine|altsyncram_component|auto_generated|ram_block1a0|clk0                                                          ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; gen_sample_clk ; Rise       ; gen_sample_clk|regout                                                                                                           ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; gen_sample_clk|regout                                                                                                           ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; gen_sample_clk ; Rise       ; gen_sample_clk~clkctrl|inclk[0]                                                                                                 ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; gen_sample_clk~clkctrl|inclk[0]                                                                                                 ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; gen_sample_clk ; Rise       ; gen_sample_clk~clkctrl|outclk                                                                                                   ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; gen_sample_clk~clkctrl|outclk                                                                                                   ;
++--------+--------------+----------------+------------------+----------------+------------+---------------------------------------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Minimum Pulse Width: 'clk'                                                                                    ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                                  ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; -1.941 ; 1.000        ; 2.941          ; Port Rate        ; clk   ; Rise       ; clk                                     ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; analog_mux_chn_q[1]                     ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; analog_mux_chn_q[1]                     ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[0]                    ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[0]                    ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[1]                    ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[1]                    ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[2]                    ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[2]                    ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[3]                    ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[3]                    ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[4]                    ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[4]                    ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[5]                    ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[5]                    ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[6]                    ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[6]                    ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; cs_dac_reg_q.CS_DAC_REG_DAC             ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; cs_dac_reg_q.CS_DAC_REG_DAC             ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; cs_dac_reg_q.CS_DAC_REG_REG             ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; cs_dac_reg_q.CS_DAC_REG_REG             ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; dac_reg_start_q                         ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; dac_reg_start_q                         ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[0]                      ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[0]                      ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[1]                      ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[1]                      ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[2]                      ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[2]                      ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[3]                      ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[3]                      ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[4]                      ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[4]                      ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[5]                      ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[5]                      ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[6]                      ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[6]                      ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[7]                      ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[7]                      ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; gen_enable_q                            ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; gen_enable_q                            ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; gen_sample_clk                          ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; gen_sample_clk                          ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; keys_q[0]                               ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; keys_q[0]                               ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; keys_q[1]                               ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; keys_q[1]                               ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; keys_q[2]                               ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; keys_q[2]                               ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; mode_reg_q[0]                           ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; mode_reg_q[0]                           ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; mode_reg_q[1]                           ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; mode_reg_q[1]                           ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; mode_reg_q[2]                           ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; mode_reg_q[2]                           ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[0]              ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[0]              ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[1]              ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[1]              ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[2]              ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[2]              ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[3]              ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[3]              ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[4]              ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[4]              ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[5]              ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[5]              ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[6]              ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[6]              ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[7]              ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[7]              ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|data_ready          ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|data_ready          ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[0]           ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[0]           ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[1]           ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[1]           ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[2]           ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[2]           ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[0]  ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[0]  ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[1]  ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[1]  ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[2]  ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[2]  ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[0] ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[0] ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[1] ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[1] ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[2] ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[2] ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[3] ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[3] ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[4] ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[4] ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[5] ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[5] ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[6] ;
+; -0.742 ; 0.500        ; 1.242          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[6] ;
+; -0.742 ; 0.500        ; 1.242          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[7] ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Setup Times                                                           ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; enable    ; clk        ; 7.687 ; 7.687 ; Rise       ; clk             ;
+; rst       ; clk        ; 2.667 ; 2.667 ; Rise       ; clk             ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; enable    ; clk        ; -5.587 ; -5.587 ; Rise       ; clk             ;
+; rst       ; clk        ; 0.124  ; 0.124  ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++----------------------------------------------------------------------------------+
+; Clock to Output Times                                                            ;
++--------------------+------------+--------+--------+------------+-----------------+
+; Data Port          ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++--------------------+------------+--------+--------+------------+-----------------+
+; analog_mux_chn[*]  ; clk        ; 8.263  ; 8.263  ; Rise       ; clk             ;
+;  analog_mux_chn[1] ; clk        ; 8.263  ; 8.263  ; Rise       ; clk             ;
+; cs_dac_reg[*]      ; clk        ; 9.405  ; 9.405  ; Rise       ; clk             ;
+;  cs_dac_reg[0]     ; clk        ; 8.785  ; 8.785  ; Rise       ; clk             ;
+;  cs_dac_reg[1]     ; clk        ; 9.405  ; 9.405  ; Rise       ; clk             ;
+; dac_reg_mosi       ; clk        ; 8.800  ; 8.800  ; Rise       ; clk             ;
+; dac_reg_sck        ; clk        ; 10.502 ; 10.502 ; Rise       ; clk             ;
+; sample_clk         ; clk        ; 8.418  ; 8.418  ; Rise       ; clk             ;
++--------------------+------------+--------+--------+------------+-----------------+
+
+
++--------------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                                  ;
++--------------------+------------+-------+-------+------------+-----------------+
+; Data Port          ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------------+------------+-------+-------+------------+-----------------+
+; analog_mux_chn[*]  ; clk        ; 8.263 ; 8.263 ; Rise       ; clk             ;
+;  analog_mux_chn[1] ; clk        ; 8.263 ; 8.263 ; Rise       ; clk             ;
+; cs_dac_reg[*]      ; clk        ; 8.785 ; 8.785 ; Rise       ; clk             ;
+;  cs_dac_reg[0]     ; clk        ; 8.785 ; 8.785 ; Rise       ; clk             ;
+;  cs_dac_reg[1]     ; clk        ; 9.405 ; 9.405 ; Rise       ; clk             ;
+; dac_reg_mosi       ; clk        ; 8.800 ; 8.800 ; Rise       ; clk             ;
+; dac_reg_sck        ; clk        ; 9.466 ; 9.466 ; Rise       ; clk             ;
+; sample_clk         ; clk        ; 8.418 ; 8.418 ; Rise       ; clk             ;
++--------------------+------------+-------+-------+------------+-----------------+
+
+
++-----------------------------------------+
+; Fast Model Setup Summary                ;
++----------------+--------+---------------+
+; Clock          ; Slack  ; End Point TNS ;
++----------------+--------+---------------+
+; clk            ; -2.377 ; -30.046       ;
+; gen_sample_clk ; 0.554  ; 0.000         ;
++----------------+--------+---------------+
+
+
++-----------------------------------------+
+; Fast Model Hold Summary                 ;
++----------------+--------+---------------+
+; Clock          ; Slack  ; End Point TNS ;
++----------------+--------+---------------+
+; clk            ; -1.358 ; -2.552        ;
+; gen_sample_clk ; 0.265  ; 0.000         ;
++----------------+--------+---------------+
+
+
+-------------------------------
+; Fast Model Recovery Summary ;
+-------------------------------
+No paths to report.
+
+
+------------------------------
+; Fast Model Removal Summary ;
+------------------------------
+No paths to report.
+
+
++-----------------------------------------+
+; Fast Model Minimum Pulse Width Summary  ;
++----------------+--------+---------------+
+; Clock          ; Slack  ; End Point TNS ;
++----------------+--------+---------------+
+; gen_sample_clk ; -1.423 ; -22.768       ;
+; clk            ; -1.380 ; -72.380       ;
++----------------+--------+---------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Setup: 'clk'                                                                                                                                                                                                                                    ;
++--------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------+----------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                                                                                       ; To Node                                 ; Launch Clock   ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------+----------------+-------------+--------------+------------+------------+
+; -2.377 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 3.035      ;
+; -2.377 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 3.035      ;
+; -2.377 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 3.035      ;
+; -2.377 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 3.035      ;
+; -2.377 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 3.035      ;
+; -2.377 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 3.035      ;
+; -2.377 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 3.035      ;
+; -2.377 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[2] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 3.035      ;
+; -2.231 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -0.366     ; 2.897      ;
+; -2.231 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -0.366     ; 2.897      ;
+; -2.231 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -0.366     ; 2.897      ;
+; -2.231 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -0.366     ; 2.897      ;
+; -2.231 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -0.366     ; 2.897      ;
+; -2.231 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -0.366     ; 2.897      ;
+; -2.231 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -0.366     ; 2.897      ;
+; -2.231 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[0] ; gen_sample_clk ; clk         ; 1.000        ; -0.366     ; 2.897      ;
+; -1.985 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.643      ;
+; -1.985 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.643      ;
+; -1.985 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.643      ;
+; -1.985 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.643      ;
+; -1.985 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.643      ;
+; -1.985 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.643      ;
+; -1.985 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.643      ;
+; -1.985 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[1] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.643      ;
+; -1.942 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.600      ;
+; -1.942 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.600      ;
+; -1.942 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.600      ;
+; -1.942 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.600      ;
+; -1.942 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.600      ;
+; -1.942 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.600      ;
+; -1.942 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.600      ;
+; -1.942 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[3] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.600      ;
+; -1.831 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.489      ;
+; -1.831 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.489      ;
+; -1.831 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.489      ;
+; -1.831 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.489      ;
+; -1.831 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.489      ;
+; -1.831 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.489      ;
+; -1.831 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.489      ;
+; -1.831 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[7] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.489      ;
+; -1.829 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.487      ;
+; -1.829 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.487      ;
+; -1.829 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.487      ;
+; -1.829 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.487      ;
+; -1.829 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.487      ;
+; -1.829 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.487      ;
+; -1.829 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.487      ;
+; -1.829 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[4] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.487      ;
+; -1.818 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.476      ;
+; -1.818 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.476      ;
+; -1.818 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.476      ;
+; -1.818 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.476      ;
+; -1.818 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.476      ;
+; -1.818 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.476      ;
+; -1.818 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.476      ;
+; -1.818 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[6] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.476      ;
+; -1.812 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.470      ;
+; -1.812 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.470      ;
+; -1.812 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.470      ;
+; -1.812 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.470      ;
+; -1.812 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.470      ;
+; -1.812 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.470      ;
+; -1.812 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.470      ;
+; -1.812 ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; spi_master:dac_reg_spi_master|data_q[5] ; gen_sample_clk ; clk         ; 1.000        ; -0.374     ; 2.470      ;
+; -0.702 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.021     ; 1.713      ;
+; -0.678 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.021     ; 1.689      ;
+; -0.664 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.021     ; 1.675      ;
+; -0.640 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.021     ; 1.651      ;
+; -0.622 ; sin_gen:dev_sin_gen|cnt[7]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.021     ; 1.633      ;
+; -0.621 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; delay_counter_q[6]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.626      ;
+; -0.621 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; delay_counter_q[3]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.626      ;
+; -0.619 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.624      ;
+; -0.618 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; delay_counter_q[0]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.623      ;
+; -0.617 ; sin_gen:dev_sin_gen|cnt[4]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.021     ; 1.628      ;
+; -0.614 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.021     ; 1.625      ;
+; -0.604 ; sin_gen:dev_sin_gen|cnt[5]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.021     ; 1.615      ;
+; -0.597 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; delay_counter_q[6]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.602      ;
+; -0.597 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; delay_counter_q[3]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.602      ;
+; -0.595 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.600      ;
+; -0.594 ; sin_gen:dev_sin_gen|cnt[1]                                                                                                      ; delay_counter_q[0]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.599      ;
+; -0.584 ; sin_gen:dev_sin_gen|cnt[7]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.021     ; 1.595      ;
+; -0.579 ; sin_gen:dev_sin_gen|cnt[4]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.021     ; 1.590      ;
+; -0.576 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.021     ; 1.587      ;
+; -0.566 ; sin_gen:dev_sin_gen|cnt[3]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; -0.021     ; 1.577      ;
+; -0.566 ; sin_gen:dev_sin_gen|cnt[5]                                                                                                      ; state_q.MEASURE_MODE_SET_DELAY_1        ; clk            ; clk         ; 1.000        ; -0.021     ; 1.577      ;
+; -0.562 ; delay_counter_q[4]                                                                                                              ; state_q.MEASURE_MODE_GENERATOR_OFF      ; clk            ; clk         ; 1.000        ; 0.006      ; 1.600      ;
+; -0.546 ; sin_gen:dev_sin_gen|cnt[0]                                                                                                      ; state_q.MEASURE_MODE_GENERATOR_ON       ; clk            ; clk         ; 1.000        ; -0.027     ; 1.551      ;
+; -0.537 ; dac_reg_start_q                                                                                                                 ; spi_master:dac_reg_spi_master|data_q[7] ; clk            ; clk         ; 1.000        ; -0.012     ; 1.557      ;
+; -0.537 ; dac_reg_start_q                                                                                                                 ; spi_master:dac_reg_spi_master|data_q[6] ; clk            ; clk         ; 1.000        ; -0.012     ; 1.557      ;
+; -0.537 ; dac_reg_start_q                                                                                                                 ; spi_master:dac_reg_spi_master|data_q[5] ; clk            ; clk         ; 1.000        ; -0.012     ; 1.557      ;
+; -0.537 ; dac_reg_start_q                                                                                                                 ; spi_master:dac_reg_spi_master|data_q[4] ; clk            ; clk         ; 1.000        ; -0.012     ; 1.557      ;
+; -0.537 ; dac_reg_start_q                                                                                                                 ; spi_master:dac_reg_spi_master|data_q[3] ; clk            ; clk         ; 1.000        ; -0.012     ; 1.557      ;
+; -0.537 ; dac_reg_start_q                                                                                                                 ; spi_master:dac_reg_spi_master|data_q[2] ; clk            ; clk         ; 1.000        ; -0.012     ; 1.557      ;
+; -0.537 ; dac_reg_start_q                                                                                                                 ; spi_master:dac_reg_spi_master|data_q[1] ; clk            ; clk         ; 1.000        ; -0.012     ; 1.557      ;
+; -0.533 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; delay_counter_q[6]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.538      ;
+; -0.533 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; delay_counter_q[3]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.538      ;
+; -0.532 ; sin_gen:dev_sin_gen|cnt[7]                                                                                                      ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.537      ;
+; -0.531 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.536      ;
+; -0.531 ; state_q.MEASURE_MODE_SET_DELAY_1                                                                                                ; delay_counter_q[7]                      ; clk            ; clk         ; 1.000        ; -0.006     ; 1.557      ;
+; -0.530 ; sin_gen:dev_sin_gen|cnt[2]                                                                                                      ; delay_counter_q[0]                      ; clk            ; clk         ; 1.000        ; -0.027     ; 1.535      ;
++--------+---------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------+----------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Setup: 'gen_sample_clk'                                                                                                                                                                                                            ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+; Slack ; From Node                  ; To Node                                                                                                                         ; Launch Clock ; Latch Clock    ; Relationship ; Clock Skew ; Data Delay ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+; 0.554 ; sin_gen:dev_sin_gen|cnt[6] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; clk          ; gen_sample_clk ; 1.000        ; 0.346      ; 0.791      ;
+; 0.567 ; sin_gen:dev_sin_gen|cnt[7] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; clk          ; gen_sample_clk ; 1.000        ; 0.346      ; 0.778      ;
+; 0.579 ; sin_gen:dev_sin_gen|cnt[3] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; clk          ; gen_sample_clk ; 1.000        ; 0.346      ; 0.766      ;
+; 0.582 ; sin_gen:dev_sin_gen|cnt[0] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; clk          ; gen_sample_clk ; 1.000        ; 0.346      ; 0.763      ;
+; 0.583 ; sin_gen:dev_sin_gen|cnt[5] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; clk          ; gen_sample_clk ; 1.000        ; 0.346      ; 0.762      ;
+; 0.586 ; sin_gen:dev_sin_gen|cnt[1] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; clk          ; gen_sample_clk ; 1.000        ; 0.346      ; 0.759      ;
+; 0.592 ; sin_gen:dev_sin_gen|cnt[4] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; clk          ; gen_sample_clk ; 1.000        ; 0.346      ; 0.753      ;
+; 0.596 ; sin_gen:dev_sin_gen|cnt[2] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; clk          ; gen_sample_clk ; 1.000        ; 0.346      ; 0.749      ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Hold: 'clk'                                                                                                                                                             ;
++--------+-------------------------------------------------+-------------------------------------------------+----------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                       ; To Node                                         ; Launch Clock   ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-------------------------------------------------+-------------------------------------------------+----------------+-------------+--------------+------------+------------+
+; -1.358 ; gen_sample_clk                                  ; gen_sample_clk                                  ; gen_sample_clk ; clk         ; 0.000        ; 1.432      ; 0.367      ;
+; -1.194 ; gen_sample_clk                                  ; sin_gen:dev_sin_gen|sample[0]                   ; gen_sample_clk ; clk         ; 0.000        ; 1.432      ; 0.531      ;
+; -0.858 ; gen_sample_clk                                  ; gen_sample_clk                                  ; gen_sample_clk ; clk         ; -0.500       ; 1.432      ; 0.367      ;
+; -0.694 ; gen_sample_clk                                  ; sin_gen:dev_sin_gen|sample[0]                   ; gen_sample_clk ; clk         ; -0.500       ; 1.432      ; 0.531      ;
+; 0.215  ; analog_mux_chn_q[1]                             ; analog_mux_chn_q[1]                             ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; state_q.MEASURE_MODE_GENERATOR_ON               ; state_q.MEASURE_MODE_GENERATOR_ON               ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; state_q.MEASURE_MODE_SET_DELAY_1                ; state_q.MEASURE_MODE_SET_DELAY_1                ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; state_q.MEASURE_MODE_WAIT_SPI                   ; state_q.MEASURE_MODE_WAIT_SPI                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; state_q.IDLE                                    ; state_q.IDLE                                    ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; spi_master:dac_reg_spi_master|ctr_q[1]          ; spi_master:dac_reg_spi_master|ctr_q[1]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; spi_master:dac_reg_spi_master|ctr_q[2]          ; spi_master:dac_reg_spi_master|ctr_q[2]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; spi_master:dac_reg_spi_master|ctr_q[0]          ; spi_master:dac_reg_spi_master|ctr_q[0]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; spi_master:dac_reg_spi_master|sck_q[0]          ; spi_master:dac_reg_spi_master|sck_q[0]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; spi_master:dac_reg_spi_master|sck_q[1]          ; spi_master:dac_reg_spi_master|sck_q[1]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; spi_master:dac_reg_spi_master|state_q.IDLE      ; spi_master:dac_reg_spi_master|state_q.IDLE      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; gen_enable_q                                    ; gen_enable_q                                    ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; mode_reg_q[0]                                   ; mode_reg_q[0]                                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; mode_reg_q[2]                                   ; mode_reg_q[2]                                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; mode_reg_q[1]                                   ; mode_reg_q[1]                                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; spi_master:dac_reg_spi_master|mosi_q            ; spi_master:dac_reg_spi_master|mosi_q            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; cs_dac_reg_q.CS_DAC_REG_DAC                     ; cs_dac_reg_q.CS_DAC_REG_DAC                     ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; cs_dac_reg_q.CS_DAC_REG_REG                     ; cs_dac_reg_q.CS_DAC_REG_REG                     ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; spi_master:dac_reg_spi_master|data_q[0]         ; spi_master:dac_reg_spi_master|data_q[0]         ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.215  ; keys_q[0]                                       ; keys_q[0]                                       ; clk            ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.242  ; sin_gen:dev_sin_gen|sample[0]                   ; sin_gen:dev_sin_gen|sample[1]                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.394      ;
+; 0.245  ; sin_gen:dev_sin_gen|cnt[7]                      ; sin_gen:dev_sin_gen|cnt[7]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.397      ;
+; 0.245  ; state_q.MEASURE_MODE_MULTIPLEXOR_OFF            ; analog_mux_chn_q[1]                             ; clk            ; clk         ; 0.000        ; 0.000      ; 0.397      ;
+; 0.248  ; state_q.MEASURE_MODE_MULTIPLEXOR_OFF            ; state_q.MEASURE_MODE_END                        ; clk            ; clk         ; 0.000        ; 0.000      ; 0.400      ;
+; 0.255  ; state_q.MEASURE_MODE_START_SET_DIAP_KEYS        ; state_q.MEASURE_MODE_WAIT_SPI                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.407      ;
+; 0.256  ; state_q.MEASURE_MODE_START                      ; state_q.MEASURE_MODE_START_SET_DIAP_KEYS        ; clk            ; clk         ; 0.000        ; 0.000      ; 0.408      ;
+; 0.277  ; spi_master:dac_reg_spi_master|sck_q[0]          ; spi_master:dac_reg_spi_master|sck_q[1]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.429      ;
+; 0.308  ; state_q.MEASURE_MODE_DIAPASON                   ; state_q.MEASURE_MODE_DETERMINATE_DIAPASON       ; clk            ; clk         ; 0.000        ; 0.000      ; 0.460      ;
+; 0.326  ; spi_master:dac_reg_spi_master|data_q[2]         ; spi_master:dac_reg_spi_master|data_q[3]         ; clk            ; clk         ; 0.000        ; 0.000      ; 0.478      ;
+; 0.327  ; spi_master:dac_reg_spi_master|data_q[4]         ; spi_master:dac_reg_spi_master|data_q[5]         ; clk            ; clk         ; 0.000        ; 0.000      ; 0.479      ;
+; 0.327  ; spi_master:dac_reg_spi_master|data_q[1]         ; spi_master:dac_reg_spi_master|data_q[2]         ; clk            ; clk         ; 0.000        ; 0.000      ; 0.479      ;
+; 0.329  ; spi_master:dac_reg_spi_master|data_q[3]         ; spi_master:dac_reg_spi_master|data_q[4]         ; clk            ; clk         ; 0.000        ; 0.000      ; 0.481      ;
+; 0.330  ; spi_master:dac_reg_spi_master|data_q[6]         ; spi_master:dac_reg_spi_master|data_q[7]         ; clk            ; clk         ; 0.000        ; 0.000      ; 0.482      ;
+; 0.336  ; spi_master:dac_reg_spi_master|data_q[7]         ; spi_master:dac_reg_spi_master|mosi_q            ; clk            ; clk         ; 0.000        ; 0.008      ; 0.496      ;
+; 0.355  ; clock_div_counter[0]                            ; clock_div_counter[0]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.507      ;
+; 0.360  ; clock_div_counter[1]                            ; clock_div_counter[1]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.512      ;
+; 0.360  ; mode_reg_q[1]                                   ; mode_reg_q[2]                                   ; clk            ; clk         ; 0.000        ; 0.000      ; 0.512      ;
+; 0.361  ; clock_div_counter[3]                            ; clock_div_counter[3]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.513      ;
+; 0.361  ; clock_div_counter[6]                            ; clock_div_counter[6]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.513      ;
+; 0.361  ; state_q.DONE                                    ; state_q.IDLE                                    ; clk            ; clk         ; 0.000        ; 0.000      ; 0.513      ;
+; 0.363  ; sin_gen:dev_sin_gen|cnt[3]                      ; sin_gen:dev_sin_gen|cnt[3]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.515      ;
+; 0.364  ; sin_gen:dev_sin_gen|cnt[5]                      ; sin_gen:dev_sin_gen|cnt[5]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.516      ;
+; 0.365  ; sin_gen:dev_sin_gen|cnt[1]                      ; sin_gen:dev_sin_gen|cnt[1]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.517      ;
+; 0.367  ; state_q.MEASURE_MODE_SET_DELAY_1                ; state_q.MEASURE_MODE_GENERATOR_OFF              ; clk            ; clk         ; 0.000        ; 0.000      ; 0.519      ;
+; 0.369  ; state_q.MEASURE_MODE_SET_MULTIPLEXOR            ; state_q.MEASURE_MODE_SET_DELAY_1                ; clk            ; clk         ; 0.000        ; 0.000      ; 0.521      ;
+; 0.371  ; sin_gen:dev_sin_gen|sample[2]                   ; sin_gen:dev_sin_gen|data_ready                  ; clk            ; clk         ; 0.000        ; 0.000      ; 0.523      ;
+; 0.371  ; clock_div_counter[2]                            ; clock_div_counter[2]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.523      ;
+; 0.371  ; state_q.MEASURE_MODE_SET_MULTIPLEXOR            ; analog_mux_chn_q[1]                             ; clk            ; clk         ; 0.000        ; 0.000      ; 0.523      ;
+; 0.371  ; state_q.MEASURE_MODE_END                        ; state_q.MEASURE_MODE_DETERMINATE_DIAPASON       ; clk            ; clk         ; 0.000        ; 0.000      ; 0.523      ;
+; 0.372  ; clock_div_counter[4]                            ; clock_div_counter[4]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372  ; clock_div_counter[5]                            ; clock_div_counter[5]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.372  ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; spi_master:dac_reg_spi_master|ctr_q[2]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.524      ;
+; 0.373  ; sin_gen:dev_sin_gen|cnt[0]                      ; sin_gen:dev_sin_gen|cnt[0]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.525      ;
+; 0.373  ; state_q.MEASURE_MODE_START                      ; cs_dac_reg_q.CS_DAC_REG_REG                     ; clk            ; clk         ; 0.000        ; 0.000      ; 0.525      ;
+; 0.374  ; sin_gen:dev_sin_gen|cnt[2]                      ; sin_gen:dev_sin_gen|cnt[2]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.526      ;
+; 0.374  ; state_q.MEASURE_MODE_START                      ; cs_dac_reg_q.CS_DAC_REG_DAC                     ; clk            ; clk         ; 0.000        ; 0.000      ; 0.526      ;
+; 0.375  ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; spi_master:dac_reg_spi_master|ctr_q[0]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.527      ;
+; 0.376  ; sin_gen:dev_sin_gen|cnt[4]                      ; sin_gen:dev_sin_gen|cnt[4]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.528      ;
+; 0.376  ; gen_enable_q                                    ; sin_gen:dev_sin_gen|data_ready                  ; clk            ; clk         ; 0.000        ; 0.000      ; 0.528      ;
+; 0.377  ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; spi_master:dac_reg_spi_master|ctr_q[1]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.529      ;
+; 0.378  ; state_q.MEASURE_MODE_END                        ; state_q.MEASURE_MODE_START                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.530      ;
+; 0.379  ; spi_master:dac_reg_spi_master|state_q.WAIT_HALF ; spi_master:dac_reg_spi_master|sck_q[1]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.531      ;
+; 0.384  ; state_q.MEASURE_MODE_GENERATOR_OFF              ; cs_dac_reg_q.CS_DAC_REG_DAC                     ; clk            ; clk         ; 0.000        ; 0.000      ; 0.536      ;
+; 0.387  ; state_q.MEASURE_MODE_GENERATOR_OFF              ; gen_enable_q                                    ; clk            ; clk         ; 0.000        ; 0.000      ; 0.539      ;
+; 0.387  ; state_q.MEASURE_MODE_DETERMINATE_DIAPASON       ; state_q.MEASURE_MODE_START                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.539      ;
+; 0.388  ; state_q.MEASURE_MODE_GENERATOR_OFF              ; cs_dac_reg_q.CS_DAC_REG_REG                     ; clk            ; clk         ; 0.000        ; 0.000      ; 0.540      ;
+; 0.393  ; state_q.MEASURE_MODE_GENERATOR_OFF              ; state_q.MEASURE_MODE_MULTIPLEXOR_OFF            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.545      ;
+; 0.400  ; spi_master:dac_reg_spi_master|sck_q[0]          ; spi_master:dac_reg_spi_master|mosi_q            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.552      ;
+; 0.437  ; spi_master:dac_reg_spi_master|data_q[5]         ; spi_master:dac_reg_spi_master|data_q[6]         ; clk            ; clk         ; 0.000        ; 0.000      ; 0.589      ;
+; 0.445  ; spi_master:dac_reg_spi_master|sck_q[1]          ; spi_master:dac_reg_spi_master|ctr_q[2]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.597      ;
+; 0.448  ; sin_gen:dev_sin_gen|data_ready                  ; dac_reg_start_q                                 ; clk            ; clk         ; 0.000        ; 0.005      ; 0.605      ;
+; 0.454  ; spi_master:dac_reg_spi_master|data_q[0]         ; spi_master:dac_reg_spi_master|data_q[1]         ; clk            ; clk         ; 0.000        ; -0.008     ; 0.598      ;
+; 0.456  ; dac_reg_start_q                                 ; spi_master:dac_reg_spi_master|state_q.IDLE      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.608      ;
+; 0.467  ; state_q.START_CYCLE                             ; mode_reg_q[0]                                   ; clk            ; clk         ; 0.000        ; 0.013      ; 0.632      ;
+; 0.470  ; sin_gen:dev_sin_gen|cnt[6]                      ; sin_gen:dev_sin_gen|cnt[6]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.622      ;
+; 0.493  ; clock_div_counter[0]                            ; clock_div_counter[1]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.645      ;
+; 0.495  ; spi_master:dac_reg_spi_master|ctr_q[1]          ; spi_master:dac_reg_spi_master|ctr_q[2]          ; clk            ; clk         ; 0.000        ; 0.000      ; 0.647      ;
+; 0.498  ; cs_dac_reg_q.CS_DAC_REG_DAC                     ; spi_master:dac_reg_spi_master|data_q[3]         ; clk            ; clk         ; 0.000        ; -0.007     ; 0.643      ;
+; 0.498  ; mode_reg_q[0]                                   ; keys_q[0]                                       ; clk            ; clk         ; 0.000        ; -0.013     ; 0.637      ;
+; 0.498  ; clock_div_counter[1]                            ; clock_div_counter[2]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.650      ;
+; 0.499  ; clock_div_counter[3]                            ; clock_div_counter[4]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.651      ;
+; 0.501  ; sin_gen:dev_sin_gen|cnt[3]                      ; sin_gen:dev_sin_gen|cnt[4]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.653      ;
+; 0.502  ; sin_gen:dev_sin_gen|cnt[5]                      ; sin_gen:dev_sin_gen|cnt[6]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.654      ;
+; 0.503  ; sin_gen:dev_sin_gen|cnt[1]                      ; sin_gen:dev_sin_gen|cnt[2]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.655      ;
+; 0.511  ; clock_div_counter[2]                            ; clock_div_counter[3]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.663      ;
+; 0.512  ; clock_div_counter[5]                            ; clock_div_counter[6]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.664      ;
+; 0.512  ; clock_div_counter[4]                            ; clock_div_counter[5]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.664      ;
+; 0.513  ; sin_gen:dev_sin_gen|cnt[0]                      ; sin_gen:dev_sin_gen|cnt[1]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.665      ;
+; 0.514  ; sin_gen:dev_sin_gen|cnt[2]                      ; sin_gen:dev_sin_gen|cnt[3]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.666      ;
+; 0.516  ; clock_div_counter[5]                            ; gen_sample_clk                                  ; clk            ; clk         ; 0.000        ; 0.001      ; 0.669      ;
+; 0.516  ; sin_gen:dev_sin_gen|cnt[4]                      ; sin_gen:dev_sin_gen|cnt[5]                      ; clk            ; clk         ; 0.000        ; 0.000      ; 0.668      ;
+; 0.528  ; clock_div_counter[0]                            ; clock_div_counter[2]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.680      ;
+; 0.533  ; clock_div_counter[1]                            ; clock_div_counter[3]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.685      ;
+; 0.534  ; state_q.START_CYCLE                             ; state_q.START_CYCLE                             ; clk            ; clk         ; 0.000        ; 0.000      ; 0.686      ;
+; 0.534  ; clock_div_counter[3]                            ; clock_div_counter[5]                            ; clk            ; clk         ; 0.000        ; 0.000      ; 0.686      ;
++--------+-------------------------------------------------+-------------------------------------------------+----------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Hold: 'gen_sample_clk'                                                                                                                                                                                                             ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+; Slack ; From Node                  ; To Node                                                                                                                         ; Launch Clock ; Latch Clock    ; Relationship ; Clock Skew ; Data Delay ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+; 0.265 ; sin_gen:dev_sin_gen|cnt[2] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ; clk          ; gen_sample_clk ; 0.000        ; 0.346      ; 0.749      ;
+; 0.269 ; sin_gen:dev_sin_gen|cnt[4] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ; clk          ; gen_sample_clk ; 0.000        ; 0.346      ; 0.753      ;
+; 0.275 ; sin_gen:dev_sin_gen|cnt[1] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ; clk          ; gen_sample_clk ; 0.000        ; 0.346      ; 0.759      ;
+; 0.278 ; sin_gen:dev_sin_gen|cnt[5] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ; clk          ; gen_sample_clk ; 0.000        ; 0.346      ; 0.762      ;
+; 0.279 ; sin_gen:dev_sin_gen|cnt[0] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ; clk          ; gen_sample_clk ; 0.000        ; 0.346      ; 0.763      ;
+; 0.282 ; sin_gen:dev_sin_gen|cnt[3] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ; clk          ; gen_sample_clk ; 0.000        ; 0.346      ; 0.766      ;
+; 0.294 ; sin_gen:dev_sin_gen|cnt[7] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ; clk          ; gen_sample_clk ; 0.000        ; 0.346      ; 0.778      ;
+; 0.307 ; sin_gen:dev_sin_gen|cnt[6] ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ; clk          ; gen_sample_clk ; 0.000        ; 0.346      ; 0.791      ;
++-------+----------------------------+---------------------------------------------------------------------------------------------------------------------------------+--------------+----------------+--------------+------------+------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Minimum Pulse Width: 'gen_sample_clk'                                                                                                                                                                          ;
++--------+--------------+----------------+------------------+----------------+------------+---------------------------------------------------------------------------------------------------------------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock          ; Clock Edge ; Target                                                                                                                          ;
++--------+--------------+----------------+------------------+----------------+------------+---------------------------------------------------------------------------------------------------------------------------------+
+; -1.423 ; 0.500        ; 1.923          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ;
+; -1.423 ; 0.500        ; 1.923          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg0 ;
+; -1.423 ; 0.500        ; 1.923          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ;
+; -1.423 ; 0.500        ; 1.923          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg1 ;
+; -1.423 ; 0.500        ; 1.923          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ;
+; -1.423 ; 0.500        ; 1.923          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg2 ;
+; -1.423 ; 0.500        ; 1.923          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ;
+; -1.423 ; 0.500        ; 1.923          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg3 ;
+; -1.423 ; 0.500        ; 1.923          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ;
+; -1.423 ; 0.500        ; 1.923          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg4 ;
+; -1.423 ; 0.500        ; 1.923          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ;
+; -1.423 ; 0.500        ; 1.923          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg5 ;
+; -1.423 ; 0.500        ; 1.923          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ;
+; -1.423 ; 0.500        ; 1.923          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg6 ;
+; -1.423 ; 0.500        ; 1.923          ; High Pulse Width ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ;
+; -1.423 ; 0.500        ; 1.923          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; sin_gen:dev_sin_gen|sin_rom:sine|altsyncram:altsyncram_component|altsyncram_1781:auto_generated|ram_block1a0~porta_address_reg7 ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; gen_sample_clk ; Rise       ; dev_sin_gen|sine|altsyncram_component|auto_generated|ram_block1a0|clk0                                                          ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; dev_sin_gen|sine|altsyncram_component|auto_generated|ram_block1a0|clk0                                                          ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; gen_sample_clk ; Rise       ; gen_sample_clk|regout                                                                                                           ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; gen_sample_clk|regout                                                                                                           ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; gen_sample_clk ; Rise       ; gen_sample_clk~clkctrl|inclk[0]                                                                                                 ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; gen_sample_clk~clkctrl|inclk[0]                                                                                                 ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; gen_sample_clk ; Rise       ; gen_sample_clk~clkctrl|outclk                                                                                                   ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; gen_sample_clk ; Rise       ; gen_sample_clk~clkctrl|outclk                                                                                                   ;
++--------+--------------+----------------+------------------+----------------+------------+---------------------------------------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Minimum Pulse Width: 'clk'                                                                                    ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                                  ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; clk   ; Rise       ; clk                                     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; analog_mux_chn_q[1]                     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; analog_mux_chn_q[1]                     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[0]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[0]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[1]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[1]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[2]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[2]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[3]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[3]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[4]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[4]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[5]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[5]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; clock_div_counter[6]                    ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; clock_div_counter[6]                    ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cs_dac_reg_q.CS_DAC_REG_DAC             ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cs_dac_reg_q.CS_DAC_REG_DAC             ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cs_dac_reg_q.CS_DAC_REG_REG             ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cs_dac_reg_q.CS_DAC_REG_REG             ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; dac_reg_start_q                         ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; dac_reg_start_q                         ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[0]                      ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[0]                      ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[1]                      ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[1]                      ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[2]                      ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[2]                      ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[3]                      ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[3]                      ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[4]                      ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[4]                      ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[5]                      ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[5]                      ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[6]                      ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[6]                      ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; delay_counter_q[7]                      ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; delay_counter_q[7]                      ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; gen_enable_q                            ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; gen_enable_q                            ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; gen_sample_clk                          ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; gen_sample_clk                          ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; keys_q[0]                               ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; keys_q[0]                               ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; keys_q[1]                               ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; keys_q[1]                               ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; keys_q[2]                               ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; keys_q[2]                               ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; mode_reg_q[0]                           ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; mode_reg_q[0]                           ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; mode_reg_q[1]                           ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; mode_reg_q[1]                           ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; mode_reg_q[2]                           ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; mode_reg_q[2]                           ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[0]              ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[0]              ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[1]              ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[1]              ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[2]              ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[2]              ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[3]              ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[3]              ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[4]              ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[4]              ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[5]              ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[5]              ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[6]              ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[6]              ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[7]              ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|cnt[7]              ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|data_ready          ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|data_ready          ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[0]           ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[0]           ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[1]           ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[1]           ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[2]           ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; sin_gen:dev_sin_gen|sample[2]           ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[0]  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[0]  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[1]  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[1]  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[2]  ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|ctr_q[2]  ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[0] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[0] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[1] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[1] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[2] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[2] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[3] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[3] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[4] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[4] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[5] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[5] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[6] ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[6] ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; spi_master:dac_reg_spi_master|data_q[7] ;
++--------+--------------+----------------+------------------+-------+------------+-----------------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Setup Times                                                           ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; enable    ; clk        ; 3.082 ; 3.082 ; Rise       ; clk             ;
+; rst       ; clk        ; 0.607 ; 0.607 ; Rise       ; clk             ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; enable    ; clk        ; -2.411 ; -2.411 ; Rise       ; clk             ;
+; rst       ; clk        ; 0.424  ; 0.424  ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++--------------------------------------------------------------------------------+
+; Clock to Output Times                                                          ;
++--------------------+------------+-------+-------+------------+-----------------+
+; Data Port          ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------------+------------+-------+-------+------------+-----------------+
+; analog_mux_chn[*]  ; clk        ; 3.682 ; 3.682 ; Rise       ; clk             ;
+;  analog_mux_chn[1] ; clk        ; 3.682 ; 3.682 ; Rise       ; clk             ;
+; cs_dac_reg[*]      ; clk        ; 4.198 ; 4.198 ; Rise       ; clk             ;
+;  cs_dac_reg[0]     ; clk        ; 3.933 ; 3.933 ; Rise       ; clk             ;
+;  cs_dac_reg[1]     ; clk        ; 4.198 ; 4.198 ; Rise       ; clk             ;
+; dac_reg_mosi       ; clk        ; 3.945 ; 3.945 ; Rise       ; clk             ;
+; dac_reg_sck        ; clk        ; 4.551 ; 4.551 ; Rise       ; clk             ;
+; sample_clk         ; clk        ; 3.814 ; 3.814 ; Rise       ; clk             ;
++--------------------+------------+-------+-------+------------+-----------------+
+
+
++--------------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                                  ;
++--------------------+------------+-------+-------+------------+-----------------+
+; Data Port          ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------------+------------+-------+-------+------------+-----------------+
+; analog_mux_chn[*]  ; clk        ; 3.682 ; 3.682 ; Rise       ; clk             ;
+;  analog_mux_chn[1] ; clk        ; 3.682 ; 3.682 ; Rise       ; clk             ;
+; cs_dac_reg[*]      ; clk        ; 3.933 ; 3.933 ; Rise       ; clk             ;
+;  cs_dac_reg[0]     ; clk        ; 3.933 ; 3.933 ; Rise       ; clk             ;
+;  cs_dac_reg[1]     ; clk        ; 4.198 ; 4.198 ; Rise       ; clk             ;
+; dac_reg_mosi       ; clk        ; 3.945 ; 3.945 ; Rise       ; clk             ;
+; dac_reg_sck        ; clk        ; 4.159 ; 4.159 ; Rise       ; clk             ;
+; sample_clk         ; clk        ; 3.814 ; 3.814 ; Rise       ; clk             ;
++--------------------+------------+-------+-------+------------+-----------------+
+
+
++---------------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                             ;
++------------------+----------+--------+----------+---------+---------------------+
+; Clock            ; Setup    ; Hold   ; Recovery ; Removal ; Minimum Pulse Width ;
++------------------+----------+--------+----------+---------+---------------------+
+; Worst-case Slack ; -7.676   ; -2.548 ; N/A      ; N/A     ; -2.277              ;
+;  clk             ; -7.676   ; -2.548 ; N/A      ; N/A     ; -1.941              ;
+;  gen_sample_clk  ; 0.211    ; 0.265  ; N/A      ; N/A     ; -2.277              ;
+; Design-wide TNS  ; -199.266 ; -4.368 ; 0.0      ; 0.0     ; -143.737            ;
+;  clk             ; -199.266 ; -4.368 ; N/A      ; N/A     ; -107.305            ;
+;  gen_sample_clk  ; 0.000    ; 0.000  ; N/A      ; N/A     ; -36.432             ;
++------------------+----------+--------+----------+---------+---------------------+
+
+
++-----------------------------------------------------------------------+
+; Setup Times                                                           ;
++-----------+------------+-------+-------+------------+-----------------+
+; Data Port ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------+------------+-------+-------+------------+-----------------+
+; enable    ; clk        ; 7.687 ; 7.687 ; Rise       ; clk             ;
+; rst       ; clk        ; 2.667 ; 2.667 ; Rise       ; clk             ;
++-----------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------+
+; Hold Times                                                              ;
++-----------+------------+--------+--------+------------+-----------------+
+; Data Port ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++-----------+------------+--------+--------+------------+-----------------+
+; enable    ; clk        ; -2.411 ; -2.411 ; Rise       ; clk             ;
+; rst       ; clk        ; 0.424  ; 0.424  ; Rise       ; clk             ;
++-----------+------------+--------+--------+------------+-----------------+
+
+
++----------------------------------------------------------------------------------+
+; Clock to Output Times                                                            ;
++--------------------+------------+--------+--------+------------+-----------------+
+; Data Port          ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++--------------------+------------+--------+--------+------------+-----------------+
+; analog_mux_chn[*]  ; clk        ; 8.263  ; 8.263  ; Rise       ; clk             ;
+;  analog_mux_chn[1] ; clk        ; 8.263  ; 8.263  ; Rise       ; clk             ;
+; cs_dac_reg[*]      ; clk        ; 9.405  ; 9.405  ; Rise       ; clk             ;
+;  cs_dac_reg[0]     ; clk        ; 8.785  ; 8.785  ; Rise       ; clk             ;
+;  cs_dac_reg[1]     ; clk        ; 9.405  ; 9.405  ; Rise       ; clk             ;
+; dac_reg_mosi       ; clk        ; 8.800  ; 8.800  ; Rise       ; clk             ;
+; dac_reg_sck        ; clk        ; 10.502 ; 10.502 ; Rise       ; clk             ;
+; sample_clk         ; clk        ; 8.418  ; 8.418  ; Rise       ; clk             ;
++--------------------+------------+--------+--------+------------+-----------------+
+
+
++--------------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                                  ;
++--------------------+------------+-------+-------+------------+-----------------+
+; Data Port          ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------------+------------+-------+-------+------------+-----------------+
+; analog_mux_chn[*]  ; clk        ; 3.682 ; 3.682 ; Rise       ; clk             ;
+;  analog_mux_chn[1] ; clk        ; 3.682 ; 3.682 ; Rise       ; clk             ;
+; cs_dac_reg[*]      ; clk        ; 3.933 ; 3.933 ; Rise       ; clk             ;
+;  cs_dac_reg[0]     ; clk        ; 3.933 ; 3.933 ; Rise       ; clk             ;
+;  cs_dac_reg[1]     ; clk        ; 4.198 ; 4.198 ; Rise       ; clk             ;
+; dac_reg_mosi       ; clk        ; 3.945 ; 3.945 ; Rise       ; clk             ;
+; dac_reg_sck        ; clk        ; 4.159 ; 4.159 ; Rise       ; clk             ;
+; sample_clk         ; clk        ; 3.814 ; 3.814 ; Rise       ; clk             ;
++--------------------+------------+-------+-------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------+
+; Setup Transfers                                                             ;
++----------------+----------------+----------+----------+----------+----------+
+; From Clock     ; To Clock       ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++----------------+----------------+----------+----------+----------+----------+
+; clk            ; clk            ; 669      ; 0        ; 0        ; 0        ;
+; gen_sample_clk ; clk            ; 66       ; 2        ; 0        ; 0        ;
+; clk            ; gen_sample_clk ; 8        ; 0        ; 0        ; 0        ;
++----------------+----------------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-----------------------------------------------------------------------------+
+; Hold Transfers                                                              ;
++----------------+----------------+----------+----------+----------+----------+
+; From Clock     ; To Clock       ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++----------------+----------------+----------+----------+----------+----------+
+; clk            ; clk            ; 669      ; 0        ; 0        ; 0        ;
+; gen_sample_clk ; clk            ; 66       ; 2        ; 0        ; 0        ;
+; clk            ; gen_sample_clk ; 8        ; 0        ; 0        ; 0        ;
++----------------+----------------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
+---------------
+; Report TCCS ;
+---------------
+No dedicated SERDES Transmitter circuitry present in device or used in design
+
+
+---------------
+; Report RSKM ;
+---------------
+No dedicated SERDES Receiver circuitry present in device or used in design
+
+
++------------------------------------------------+
+; Unconstrained Paths                            ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 2     ; 2    ;
+; Unconstrained Input Port Paths  ; 75    ; 75   ;
+; Unconstrained Output Ports      ; 6     ; 6    ;
+; Unconstrained Output Port Paths ; 7     ; 7    ;
++---------------------------------+-------+------+
+
+
++------------------------------------+
+; TimeQuest Timing Analyzer Messages ;
++------------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II TimeQuest Timing Analyzer
+    Info: Version 10.1 Build 153 11/29/2010 SJ Full Version
+    Info: Processing started: Wed Aug 31 16:38:00 2016
+Info: Command: quartus_sta singen -c singen
+Info: qsta_default_script.tcl version: #1
+Info: Only one processor detected - disabling parallel compilation
+Info: Low junction temperature is 0 degrees C
+Info: High junction temperature is 85 degrees C
+Critical Warning: Synopsys Design Constraints File file not found: 'singen.sdc'. A Synopsys Design Constraints File is required by the TimeQuest Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Info: No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
+Info: Deriving Clocks
+    Info: create_clock -period 1.000 -name clk clk
+    Info: create_clock -period 1.000 -name gen_sample_clk gen_sample_clk
+Info: Analyzing Slow Model
+Critical Warning: Timing requirements not met
+Info: Worst-case setup slack is -7.676
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:    -7.676      -199.266 clk 
+    Info:     0.211         0.000 gen_sample_clk 
+Info: Worst-case hold slack is -2.548
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:    -2.548        -4.368 clk 
+    Info:     0.407         0.000 gen_sample_clk 
+Info: No Recovery paths to report
+Info: No Removal paths to report
+Info: Worst-case minimum pulse width slack is -2.277
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:    -2.277       -36.432 gen_sample_clk 
+    Info:    -1.941      -107.305 clk 
+Info: The selected device family is not supported by the report_metastability command.
+Info: Analyzing Fast Model
+Info: Started post-fitting delay annotation
+Warning: Found 35 output pins without output pin load capacitance assignment
+    Info: Pin "adc_cnv" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "analog_mux_chn[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "analog_mux_chn[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "analog_mux_chn[2]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "adc_sck" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "dac_reg_mosi" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "dac_reg_sck" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "cs_dac_reg[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "cs_dac_reg[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[2]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[3]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[4]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[5]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[6]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[7]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[8]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[9]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[10]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[11]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[12]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[13]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[14]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[15]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[16]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[17]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[18]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[19]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[20]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[21]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[22]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_data_out[23]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "fifo_empty" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "sample_clk" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+Info: Delay annotation completed successfully
+Critical Warning: Timing requirements not met
+Info: Worst-case setup slack is -2.377
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:    -2.377       -30.046 clk 
+    Info:     0.554         0.000 gen_sample_clk 
+Info: Worst-case hold slack is -1.358
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:    -1.358        -2.552 clk 
+    Info:     0.265         0.000 gen_sample_clk 
+Info: No Recovery paths to report
+Info: No Removal paths to report
+Info: Worst-case minimum pulse width slack is -1.423
+    Info:     Slack End Point TNS Clock 
+    Info: ========= ============= =====================
+    Info:    -1.423       -22.768 gen_sample_clk 
+    Info:    -1.380       -72.380 clk 
+Info: The selected device family is not supported by the report_metastability command.
+Info: Design is not fully constrained for setup requirements
+Info: Design is not fully constrained for hold requirements
+Info: Quartus II TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
+    Info: Peak virtual memory: 188 megabytes
+    Info: Processing ended: Wed Aug 31 16:38:04 2016
+    Info: Elapsed time: 00:00:04
+    Info: Total CPU time (on all processors): 00:00:03
+
+

@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Wed Aug 31 16:37:50 2016
+Quartus II Version : 10.1 Build 153 11/29/2010 SJ Full Version
+Revision Name : singen
+Top-level Entity Name : logic
+Family : Cyclone II
+Total logic elements : 126
+    Total combinational functions : 125
+    Dedicated logic registers : 71
+Total registers : 71
+Total pins : 42
+Total virtual pins : 0
+Total memory bits : 2,048
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

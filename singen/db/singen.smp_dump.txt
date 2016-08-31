@@ -1,0 +1,29 @@
+
+State Machine - |logic|cs_dac_reg_q
+Name cs_dac_reg_q.CS_DAC_REG_NONE cs_dac_reg_q.CS_DAC_REG_DAC cs_dac_reg_q.CS_DAC_REG_REG 
+cs_dac_reg_q.CS_DAC_REG_NONE 0 0 0 
+cs_dac_reg_q.CS_DAC_REG_REG 1 0 1 
+cs_dac_reg_q.CS_DAC_REG_DAC 1 1 0 
+
+State Machine - |logic|state_q
+Name state_q.MEASURE_MODE_DETERMINATE_DIAPASON state_q.DONE state_q.MEASURE_MODE_END state_q.MEASURE_MODE_MULTIPLEXOR_OFF state_q.MEASURE_MODE_GENERATOR_OFF state_q.MEASURE_MODE_SET_DELAY_1 state_q.MEASURE_MODE_SET_MULTIPLEXOR state_q.MEASURE_MODE_GENERATOR_ON state_q.MEASURE_MODE_WAIT_SPI state_q.MEASURE_MODE_START_SET_DIAP_KEYS state_q.MEASURE_MODE_START state_q.MEASURE_MODE_DIAPASON state_q.START_CYCLE state_q.IDLE 
+state_q.IDLE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state_q.START_CYCLE 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state_q.MEASURE_MODE_DIAPASON 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state_q.MEASURE_MODE_START 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state_q.MEASURE_MODE_START_SET_DIAP_KEYS 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state_q.MEASURE_MODE_WAIT_SPI 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state_q.MEASURE_MODE_GENERATOR_ON 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state_q.MEASURE_MODE_SET_MULTIPLEXOR 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state_q.MEASURE_MODE_SET_DELAY_1 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state_q.MEASURE_MODE_GENERATOR_OFF 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state_q.MEASURE_MODE_MULTIPLEXOR_OFF 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state_q.MEASURE_MODE_END 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state_q.DONE 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state_q.MEASURE_MODE_DETERMINATE_DIAPASON 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |logic|spi_master:dac_reg_spi_master|state_q
+Name state_q.IDLE state_q.TRANSFER state_q.WAIT_HALF 
+state_q.IDLE 0 0 0 
+state_q.WAIT_HALF 1 0 1 
+state_q.TRANSFER 1 1 0 

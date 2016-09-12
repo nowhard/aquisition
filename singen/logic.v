@@ -117,12 +117,12 @@ localparam [23:0]
 			DIAP2_MARGIN				= 1,
 			DIAP3_MARGIN				= 2;
 			
-localparam WAIT_PERIODS	= 128;
+localparam WAIT_PERIODS	= 16;
 //---generator 5000 Hz--------------
 reg 	gen_sample_clk;	
 assign sample_clk=dac_reg_new_data;
 wire 	[7:0]gen_out;	
-assign gen_out_test=state_q;	
+
 wire 	gen_new_period;
 wire 	gen_start_conv;	
 reg 	gen_enable_d, gen_enable_q;
@@ -133,18 +133,7 @@ wire gen_data_ready;
 sin_gen dev_sin_gen(.clk(clk),.sample_clk(gen_sample_clk),.rst(rst),.enable(gen_enable),.out(gen_out),.ready(gen_data_ready),.new_period(gen_new_period),.start_conv(gen_start_conv),.halfcycle(gen_halfcycle));	
 			
 
-//------------ADC read----------------
-localparam ADC_OUTPUT_DATA_WIDTH = 24;
-reg 	adc_read_diapason;
-reg 	adc_start_cycle_conv_d, adc_start_cycle_conv_q;
-wire 	adc_cycle_complete;
-wire 	[ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_1;
-wire 	[ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_2;
 
-reg	[ADC_OUTPUT_DATA_WIDTH-1:0] diap_current, diap_potential;
-
-//adc_read  #(.OUTPUT_DATA_WIDTH(ADC_OUTPUT_DATA_WIDTH))dev_adc_read(.clk(clk),.rst(rst),.sample_adc(gen_start_conv),.start_cycle_conv(adc_start_cycle_conv_q),.halfcycle(gen_halfcycle),.read_diapason(adc_read_diapason),.complete(adc_cycle_complete),.data_out_1(adc_data_out_1),.data_out_2(adc_data_out_2),.cnv(adc_cnv),.adc_busy(adc_busy),.miso(adc_miso),.sck(adc_sck));
-//------------------------------------	
 reg 	[1:0] sample_clk_r;
 wire 	sig_sample_clk=(sample_clk_r[1]!=sample_clk_r[0])&sample_clk_r[0];	
 
@@ -163,7 +152,7 @@ wire 	fifo_wr_en=fifo_wr_en_q;
 //wire 	fifo_rd_en=fifo_rd_en_q;
 
 
-//dc_fifo dev_dc_fifo (.data(fifo_data_in),.rdclk(rdclk),.rdreq(fifo_rd_en),.wrclk(clk),.wrreq(fifo_wr_en),.q(fifo_data_out),.rdempty(fifo_empty),.wrfull(fifo_full));
+dc_fifo dev_dc_fifo (.data(fifo_data_in),.rdclk(rdclk),.rdreq(fifo_rd_en),.wrclk(clk),.wrreq(fifo_wr_en),.q(fifo_data_out),.rdempty(fifo_empty),.wrfull(fifo_full));
 
 wire  	[7:0] dac_reg_data_out=(cs_dac_reg_q==CS_DAC_REG_REG)?({diap_q,keys_q}):((cs_dac_reg_q==CS_DAC_REG_DAC)?(gen_out):(8'b0)); 
 wire     adc_start_conv=((cs_dac_reg_q==CS_DAC_REG_DAC)&&(gen_start_conv))?(dac_reg_new_data) :(1'b0) ;
@@ -173,6 +162,20 @@ localparam SPI_DAC_REG_DATA_WIDTH=8;
 
 spi_master #(.CLK_DIV(SPI_DAC_REG_CLK_DIV),.DATA_WIDTH(SPI_DAC_REG_DATA_WIDTH)) dac_reg_spi_master(.clk(clk),.rst(rst),.miso(dac_reg_miso),.mosi(dac_reg_mosi),.sck(dac_reg_sck),.start(dac_reg_start),.data_in(dac_reg_data_out),.data_out(dac_reg_data_in),.busy(dac_reg_busy),.new_data(dac_reg_new_data));
 //-------------------------------------
+
+//------------ADC read----------------
+localparam ADC_OUTPUT_DATA_WIDTH = 24;
+reg 	adc_read_diapason;
+reg 	adc_start_cycle_conv_d, adc_start_cycle_conv_q;
+wire 	adc_cycle_complete;
+wire 	[ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_1;
+wire 	[ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_2;
+
+reg	[ADC_OUTPUT_DATA_WIDTH-1:0] diap_current, diap_potential;
+
+adc_read  #(.OUTPUT_DATA_WIDTH(ADC_OUTPUT_DATA_WIDTH))dev_adc_read(.clk(clk),.rst(rst),.sample_adc(adc_start_conv),.start_cycle_conv(adc_start_cycle_conv_q),.halfcycle(gen_halfcycle),.read_diapason(adc_read_diapason),.complete(adc_cycle_complete),.data_out_1(adc_data_out_1),.data_out_2(adc_data_out_2),.cnv(adc_cnv),.adc_busy(adc_busy),.miso(adc_miso),.sck(adc_sck));
+//------------------------------------	
+
 localparam CLOCK_DIVIDER	= 39;
 reg [6:0]clock_div_counter;
 always @(posedge clk) begin//clock divider
@@ -329,13 +332,13 @@ always @ (*) begin	//FSM
 					end
 					else 
 					begin
-						//state_d<=MEASURE_MODE_START_MEASURE;
-						state_d<=MEASURE_MODE_GENERATOR_OFF;
+						state_d<=MEASURE_MODE_START_MEASURE;
+						//state_d<=MEASURE_MODE_GENERATOR_OFF;
 					end
 				end
 			end
 
-		/*	MEASURE_MODE_START_MEASURE:
+			MEASURE_MODE_START_MEASURE:
 			begin
 				if(mode_reg_q==MEASURE_MODE_DIAP)//???
 				begin
@@ -387,9 +390,9 @@ always @ (*) begin	//FSM
 				begin
 					state_d<=MEASURE_MODE_SET_MULTIPLEXOR_2;
 				end				
-			end*/
+			end
 
-		/*	MEASURE_MODE_SET_MULTIPLEXOR_2:
+			MEASURE_MODE_SET_MULTIPLEXOR_2:
 			begin		
 				analog_mux_chn_d<=MUX_MN_NM;//???
 				delay_counter_d<=WAIT_PERIODS;
@@ -446,7 +449,7 @@ always @ (*) begin	//FSM
 				fifo_data_in=adc_data_out_2;
 				fifo_wr_en_d<=1'b1;
 				state_d<=MEASURE_MODE_GENERATOR_OFF;
-			end*/
+			end
 		
 			MEASURE_MODE_GENERATOR_OFF:
 			begin
@@ -597,7 +600,7 @@ module logic_tb();
 		adc_busy<=0;
 	 end
 	
-	 always @(posedge adc_sck) begin
+	 always @(negedge adc_sck) begin
 		adc_miso<=adc_shift_reg[35];
 		adc_shift_reg[35:0]<={adc_shift_reg[34:0],1'b0};
 	 end

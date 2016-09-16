@@ -45,7 +45,7 @@ module adc_read #(parameter OUTPUT_DATA_WIDTH = 18)(
   localparam STATE_SIZE = 4;
   localparam MEASURE_COUNT_WIDTH = 11;
   
-  localparam ADC_SHIFT_REF_VAL=1000000;
+  localparam ADC_SHIFT_REF_VAL=18'b0;
   
 
   

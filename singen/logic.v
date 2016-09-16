@@ -165,7 +165,7 @@ spi_master #(.CLK_DIV(SPI_DAC_REG_CLK_DIV),.DATA_WIDTH(SPI_DAC_REG_DATA_WIDTH)) 
 
 //------------ADC read----------------
 localparam ADC_OUTPUT_DATA_WIDTH = 24;
-reg 	adc_read_diapason;
+reg 	adc_read_diapason; // read diapason flag
 reg 	adc_start_cycle_conv_d, adc_start_cycle_conv_q;
 wire 	adc_cycle_complete;
 wire 	[ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_1;
@@ -222,8 +222,8 @@ always @ (*) begin	//FSM
 	 mode_reg_d=mode_reg_q;
 	 adc_start_cycle_conv_d=adc_start_cycle_conv_q;
 	 
-	 fifo_wr_en_d=1'b0;
-	 fifo_rd_en_d=1'b0;
+	 fifo_wr_en_d=fifo_wr_en_q;
+	 fifo_rd_en_d=fifo_rd_en_q;
 	 
 		case (state_q)
 			IDLE:
@@ -237,14 +237,15 @@ always @ (*) begin	//FSM
 //------------------------------------------------						
 			START_CYCLE:
 			begin
-				state_d<=MEASURE_MODE_DIAPASON;
+				//state_d<=MEASURE_MODE_DIAPASON;
+				state_d<=MEASURE_MODE_START;
 				mode_reg_d<=MEASURE_MODE_DIAP;
 			end
 //------------------------------------------------			
-			MEASURE_MODE_DIAPASON://???
-			begin
-				state_d<=MEASURE_MODE_DETERMINATE_DIAPASON;
-			end
+//			MEASURE_MODE_DIAPASON://???
+//			begin
+//				state_d<=MEASURE_MODE_DETERMINATE_DIAPASON;
+//			end
 			
 		   MEASURE_MODE_DETERMINATE_DIAPASON://???
 			begin			
@@ -366,6 +367,7 @@ always @ (*) begin	//FSM
 					else
 					begin
 						state_d<=MEASURE_MODE_SEND_TO_FIFO_1;
+						fifo_wr_en_d<=1'b1;
 					end
 					
 				end
@@ -373,15 +375,15 @@ always @ (*) begin	//FSM
 			
 			MEASURE_MODE_SEND_TO_FIFO_1:
 			begin
-				fifo_data_in=adc_data_out_1;
-				fifo_wr_en_d<=1'b1;
+				fifo_data_in<=adc_data_out_1;
+				//fifo_wr_en_d<=1'b1;
 				state_d<=MEASURE_MODE_SEND_TO_FIFO_2;
 			end
 			
 			MEASURE_MODE_SEND_TO_FIFO_2: 
 			begin
-				fifo_data_in=adc_data_out_2;
-				fifo_wr_en_d<=1'b1;
+				fifo_data_in<=adc_data_out_2;
+				fifo_wr_en_d<=1'b0;
 				if(mode_reg_q==MEASURE_MODE_1)
 				begin
 					state_d<=MEASURE_MODE_GENERATOR_OFF;
@@ -433,6 +435,7 @@ always @ (*) begin	//FSM
 					else
 					begin
 						state_d<=MEASURE_MODE_SEND_TO_FIFO_3;
+						fifo_wr_en_d<=1'b1;
 					end
 				end
 			end			
@@ -440,14 +443,14 @@ always @ (*) begin	//FSM
 			MEASURE_MODE_SEND_TO_FIFO_3:
 			begin
 				fifo_data_in=adc_data_out_1;
-				fifo_wr_en_d<=1'b1;
+				//fifo_wr_en_d<=1'b1;
 				state_d<=MEASURE_MODE_SEND_TO_FIFO_4;
 			end
 			
 			MEASURE_MODE_SEND_TO_FIFO_4: 
 			begin
 				fifo_data_in=adc_data_out_2;
-				fifo_wr_en_d<=1'b1;
+				fifo_wr_en_d<=1'b0;
 				state_d<=MEASURE_MODE_GENERATOR_OFF;
 			end
 		
@@ -550,7 +553,7 @@ module logic_tb();
 	wire [2:0]analog_mux_chn;
 	
 	//---ADC SPI signals---	 	
-	reg  adc_miso;
+	wire  adc_miso;
 	wire adc_sck;
 	//---DAC & comm SPI----
 	wire  dac_reg_mosi;
@@ -568,7 +571,7 @@ module logic_tb();
 	 //-------adc emul---
 	 reg [35:0] adc_shift_reg;
 	 //-------------------------
-	
+	assign adc_miso=adc_shift_reg[35];
 	logic test_logic(.clk(clk),.rst(rst),.adc_cnv(adc_cnv),.adc_busy(adc_busy),.analog_mux_chn(analog_mux_chn),.adc_miso(adc_miso),.adc_sck(adc_sck),.dac_reg_mosi(dac_reg_mosi),.dac_reg_sck(dac_reg_sck),.cs_dac_reg(cs_dac_reg),.enable(enable),.fifo_data_out(fifo_data_out),.fifo_empty(fifo_empty),.fifo_rd_en(fifo_rd_en),.rdclk(rdclk));
 	
 	 initial
@@ -577,9 +580,9 @@ module logic_tb();
 		rst<=0;
 		enable<=1;
 		adc_busy<=0;
-		#100
+		#50
 		rst=1;
-		#100
+		#50
 		rst=0;
 	 end
 	 
@@ -595,13 +598,13 @@ module logic_tb();
 	 
 	 always @(posedge adc_cnv) begin
 		adc_busy<=1;
-		adc_shift_reg=36'b1;
+		adc_shift_reg=36'b000000000000000001000000000000000001;
 		#100
 		adc_busy<=0;
 	 end
 	
 	 always @(negedge adc_sck) begin
-		adc_miso<=adc_shift_reg[35];
+		//adc_miso<=adc_shift_reg[35];
 		adc_shift_reg[35:0]<={adc_shift_reg[34:0],1'b0};
 	 end
 	 

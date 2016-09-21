@@ -20,6 +20,7 @@ module diap #(parameter DATA_WIDTH = 18)(
 localparam [STATE_SIZE-1:0]  	
 				IDLE 										= 1, 
 				START_CYCLE								= 2,
+				
 				DONE										= 3;
 				
 //Diap	
@@ -74,3 +75,46 @@ localparam R_MARGIN_2	=	10;//Ohm
 	
  end
  
+ 
+ module diap_tb();
+
+   parameter DATA_WIDTH = 18;
+	reg clk;
+	reg rst;
+	reg start;
+	
+	reg [DATA_WIDTH-1:0]current;
+	reg [DATA_WIDTH-1:0]voltage;
+	
+	wire ready;
+	wire [2:0]diap;
+	
+	diap ( .DATA_WIDTH(DATA_WIDTH))(.clk(clk),.rst(rst),.current(current),.voltage(voltage),.start(start),.ready(ready),.diap(diap));
+    initial
+	 begin
+		clk<=0;
+		rst<=0;
+
+		#50
+		rst=1;
+		#50
+		rst=0;
+		
+		current<=100;
+		voltage<=1000;
+		
+		start<=1'b1;
+		#10
+		start<=1'b0;
+	 end
+	 
+//	 always @(posedge clk) 
+//	 begin
+//
+//	 end
+	
+	
+	always 
+		#5  clk =  ! clk;   
+ 
+endmodule 

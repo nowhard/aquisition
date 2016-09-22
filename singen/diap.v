@@ -5,9 +5,9 @@ module diap #(parameter DATA_WIDTH = 18)(
 	 input [DATA_WIDTH-1:0]voltage,
 	 input start,
 	 output ready,
-	 output [2:0]diap
+	 output [2:0]diap_result
   );
- begin
+ 
  
  localparam R_SHUNT =   10; //Ohm
 
@@ -73,9 +73,10 @@ localparam R_MARGIN_2	=	10;//Ohm
 	end
 
 	
- end
+ endmodule 
  
- 
+ //-----------------------testbench----------------------------
+`timescale 1 ps/ 1 ps
  module diap_tb();
 
    parameter DATA_WIDTH = 18;
@@ -87,9 +88,9 @@ localparam R_MARGIN_2	=	10;//Ohm
 	reg [DATA_WIDTH-1:0]voltage;
 	
 	wire ready;
-	wire [2:0]diap;
+	wire [2:0]diap_result;
 	
-	diap ( .DATA_WIDTH(DATA_WIDTH))(.clk(clk),.rst(rst),.current(current),.voltage(voltage),.start(start),.ready(ready),.diap(diap));
+	diap #( .DATA_WIDTH(DATA_WIDTH)) test_diap(.clk(clk),.rst(rst),.current(current),.voltage(voltage),.start(start),.ready(ready),.diap_result(diap_result));
     initial
 	 begin
 		clk<=0;

@@ -82,7 +82,10 @@ localparam [STATE_SIZE-1:0]
 				MEASURE_MODE_MULTIPLEXOR_OFF		= 21,
 				MEASURE_MODE_END						= 22,
 				DONE										= 23,
-				MEASURE_MODE_DETERMINATE_DIAPASON = 24;
+				MEASURE_MODE_START_DETERMINATE_DIAPASON = 24,
+				MEASURE_MODE_WAIT_FOR_DETERMINATE_DIAPASON=25,
+				MEASURE_MODE_DIAP_TO_FIFO			=26;
+				
 				
 // Measure mode
   localparam [2:0] 
@@ -142,7 +145,7 @@ wire 	sig_sample_clk=(sample_clk_r[1]!=sample_clk_r[0])&sample_clk_r[0];
 //wire 	[23:0]fifo_data_out;
 wire 	fifo_full;
 //wire 	fifo_empty;
-reg  	[23:0]fifo_data_in;
+reg  	[23:0]fifo_data_in_d, fifo_data_in_q;
 
 
 reg  	fifo_wr_en_d, fifo_wr_en_q;
@@ -171,15 +174,17 @@ wire 	adc_cycle_complete;
 wire 	[ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_1;
 wire 	[ADC_OUTPUT_DATA_WIDTH-1:0]adc_data_out_2;
 
-reg	[ADC_OUTPUT_DATA_WIDTH-1:0] diap_current, diap_potential;
+reg	[ADC_OUTPUT_DATA_WIDTH-1:0] diap_current, diap_voltage;
 
 adc_read  #(.OUTPUT_DATA_WIDTH(ADC_OUTPUT_DATA_WIDTH))dev_adc_read(.clk(clk),.rst(rst),.sample_adc(adc_start_conv),.start_cycle_conv(adc_start_cycle_conv_q),.halfcycle(gen_halfcycle),.read_diapason(adc_read_diapason),.complete(adc_cycle_complete),.data_out_1(adc_data_out_1),.data_out_2(adc_data_out_2),.cnv(adc_cnv),.adc_busy(adc_busy),.miso(adc_miso),.sck(adc_sck));
 
 //------------------------------------
 reg [5:0] fifo_cycle_index_d, fifo_cycle_index_q;//for index of elements fifo
-//------------------------------------	
-
- diap #(.DATA_WIDTH(18)) dev_diap(.clk(clk),.rst(rst),.current(),.voltage(),.start(),.ready(),.diap());
+//---------------DIAPASON-------------	
+reg  diap_start_d, diap_start_q;
+wire diap_ready;
+wire [2:0]diap_result;
+ diap #(.DATA_WIDTH(18)) dev_diap(.clk(clk),.rst(rst),.current(diap_current),.voltage(diap_voltage),.start(diap_start_q),.ready(diap_ready),.diap_result(diap_result));
 //------------------------------------
 
 localparam CLOCK_DIVIDER	= 39;
@@ -233,6 +238,10 @@ always @ (*) begin	//FSM
 	 
 	 fifo_cycle_index_d=fifo_cycle_index_q;
 	 
+	 diap_start_d=1'b0;
+	 
+	 fifo_data_in_d=fifo_data_in_q;
+	 
 		case (state_q)
 			IDLE:
 			begin
@@ -256,18 +265,26 @@ always @ (*) begin	//FSM
 //				state_d<=MEASURE_MODE_DETERMINATE_DIAPASON;
 //			end
 			
-		   MEASURE_MODE_START_DETERMINATE_DIAPASON://???
+		   MEASURE_MODE_START_DETERMINATE_DIAPASON:
 			begin			
-				state_d<=MEASURE_MODE_WAIT_FOR_DETERMINATE_DIAPASON;//???
+				diap_start_d<=1'b1;
+				state_d<=MEASURE_MODE_WAIT_FOR_DETERMINATE_DIAPASON;
 			end
 			
-			MEASURE_MODE_WAIT_FOR_DETERMINATE_DIAPASON://???
-			begin			
-				state_d<=MEASURE_MODE_DIAP_TO_FIFO;//???
+			MEASURE_MODE_WAIT_FOR_DETERMINATE_DIAPASON:
+			begin		
+				if(diap_ready)
+				begin	
+					state_d<=MEASURE_MODE_DIAP_TO_FIFO;
+					fifo_data_in_d<={fifo_cycle_index_q[5:0],{15{1'b0}},diap_result[2:0]};
+					fifo_wr_en_d<=1'b1;
+				end
 			end
 			
 			MEASURE_MODE_DIAP_TO_FIFO://???
-			begin			
+			begin						
+				fifo_cycle_index_d<=fifo_cycle_index_d+1;
+				fifo_wr_en_d<=1'b0;
 				state_d<=MEASURE_MODE_START;//???
 			end
 //------------------------------------------------			
@@ -386,6 +403,7 @@ always @ (*) begin	//FSM
 					else
 					begin
 						state_d<=MEASURE_MODE_SEND_TO_FIFO_1;
+						fifo_data_in_d<={fifo_cycle_index_q[5:0],adc_data_out_1[17:0]};
 						fifo_wr_en_d<=1'b1;
 					end
 					
@@ -394,15 +412,16 @@ always @ (*) begin	//FSM
 			
 			MEASURE_MODE_SEND_TO_FIFO_1:
 			begin
-				fifo_data_in<={fifo_cycle_index_q[5:0],adc_data_out_1[17:0]};
+				//fifo_data_in<={fifo_cycle_index_q[5:0],adc_data_out_1[17:0]};
 				//fifo_wr_en_d<=1'b1;
 				fifo_cycle_index_d<=fifo_cycle_index_d+1;
 				state_d<=MEASURE_MODE_SEND_TO_FIFO_2;
+				fifo_data_in_d<={fifo_cycle_index_q[5:0],adc_data_out_2[17:0]};
 			end
 			
-			MEASURE_MODE_SEND_TO_FIFO_2: 
+			MEASURE_MODE_SEND_TO_FIFO_2: //??????????????????
 			begin
-				fifo_data_in<={fifo_cycle_index_q[5:0],adc_data_out_2[17:0]};
+				//fifo_data_in<={fifo_cycle_index_q[5:0],adc_data_out_2[17:0]};
 				fifo_cycle_index_d<=fifo_cycle_index_d+1;
 				fifo_wr_en_d<=1'b0;
 				if(mode_reg_q==MEASURE_MODE_1)
@@ -450,28 +469,30 @@ always @ (*) begin	//FSM
 				begin
 					if(mode_reg_q==MEASURE_MODE_DIAP)//???
 					begin
-						diap_potential<=adc_data_out_1;
+						diap_voltage<=adc_data_out_1;
 						state_d<=MEASURE_MODE_GENERATOR_OFF;						
 					end
 					else
 					begin
 						state_d<=MEASURE_MODE_SEND_TO_FIFO_3;
 						fifo_wr_en_d<=1'b1;
+						fifo_data_in_d<={fifo_cycle_index_q[5:0],adc_data_out_1[17:0]};
 					end
 				end
 			end			
 						
 			MEASURE_MODE_SEND_TO_FIFO_3:
 			begin
-				fifo_data_in<={fifo_cycle_index_q[5:0],adc_data_out_1[17:0]};
+				//fifo_data_in<={fifo_cycle_index_q[5:0],adc_data_out_1[17:0]};
 				fifo_cycle_index_d<=fifo_cycle_index_d+1;
 				//fifo_wr_en_d<=1'b1;
 				state_d<=MEASURE_MODE_SEND_TO_FIFO_4;
+				fifo_data_in_d<={fifo_cycle_index_q[5:0],adc_data_out_2[17:0]};
 			end
 			
 			MEASURE_MODE_SEND_TO_FIFO_4: 
 			begin
-				fifo_data_in<={fifo_cycle_index_q[5:0],adc_data_out_2[17:0]};
+				//fifo_data_in<={fifo_cycle_index_q[5:0],adc_data_out_2[17:0]};
 				fifo_cycle_index_d<=fifo_cycle_index_d+1;
 				fifo_wr_en_d<=1'b0;
 				state_d<=MEASURE_MODE_GENERATOR_OFF;
@@ -499,7 +520,7 @@ always @ (*) begin	//FSM
 				else if(mode_reg_q==MEASURE_MODE_DIAP)
 				begin
 					mode_reg_d<=mode_reg_q+1;
-					state_d<=MEASURE_MODE_DETERMINATE_DIAPASON;
+					state_d<=MEASURE_MODE_START_DETERMINATE_DIAPASON;
 				end
 				else
 				begin
@@ -542,6 +563,10 @@ always @ (*) begin	//FSM
 		 
 		 adc_start_cycle_conv_q<=1'b0;
 		 fifo_cycle_index_q<=6'b0;
+		 
+		 diap_start_q<=1'b0;
+		 
+		 fifo_data_in_q<=24'b0;
     end 
 	 else 
 	 begin
@@ -561,6 +586,10 @@ always @ (*) begin	//FSM
 		 fifo_rd_en_q<=fifo_rd_en_d;	
 		 
 		 fifo_cycle_index_q<=fifo_cycle_index_d;
+		 
+		 diap_start_q<=diap_start_d;
+		 
+		 fifo_data_in_q<=fifo_data_in_d;
     end
 	end			
 

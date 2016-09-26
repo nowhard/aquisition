@@ -5,7 +5,7 @@ module diap #(parameter DATA_WIDTH = 18)(
 	 input [DATA_WIDTH-1:0]voltage,
 	 input start,
 	 output ready,
-	 output [2:0]diap_result
+	 output [1:0]diap_result
   );
  
  
@@ -16,6 +16,9 @@ module diap #(parameter DATA_WIDTH = 18)(
  reg  ready_d, ready_q;
  assign ready=ready_q;
  
+ reg [1:0] diap_result_d, diap_result_q;
+ assign diap_result=diap_result_q;
+ 
  //FSM	 state coding	
 localparam [STATE_SIZE-1:0]  	
 				IDLE 										= 1, 
@@ -25,9 +28,9 @@ localparam [STATE_SIZE-1:0]
 				
 //Diap	
 localparam [2:0]
-			DIAP_1V			=3'b001,
-			DIAP_5V			=3'b010,
-			DIAP_20V			=3'b100;
+			DIAP_1V			=0,
+			DIAP_5V			=1,
+			DIAP_20V			=2;
 			
 localparam R_MARGIN_1	=	3;//Ohm
 localparam R_MARGIN_2	=	10;//Ohm
@@ -35,6 +38,7 @@ localparam R_MARGIN_2	=	10;//Ohm
 	always @ (*) begin	//FSM	 
 		state_d=state_q;
 		ready_d=1'b0;
+		diap_result_d=diap_result_q;
 		
 		case (state_q)
 			IDLE:
@@ -64,11 +68,13 @@ localparam R_MARGIN_2	=	10;//Ohm
 	 begin
 		 state_q<=IDLE;
 		 ready_q<=1'b0;
+		 diap_result_q<=DIAP_1V;
     end 
 	 else 
 	 begin
 		 state_q<=state_d;
 		 ready_q<=ready_d;
+		 diap_result_q<=diap_result_d;
     end
 	end
 
@@ -86,9 +92,10 @@ localparam R_MARGIN_2	=	10;//Ohm
 	
 	reg [DATA_WIDTH-1:0]current;
 	reg [DATA_WIDTH-1:0]voltage;
+	reg [1:0] diap_prev;
 	
 	wire ready;
-	wire [2:0]diap_result;
+	wire [1:0]diap_result;
 	
 	diap #( .DATA_WIDTH(DATA_WIDTH)) test_diap(.clk(clk),.rst(rst),.current(current),.voltage(voltage),.start(start),.ready(ready),.diap_result(diap_result));
     initial
